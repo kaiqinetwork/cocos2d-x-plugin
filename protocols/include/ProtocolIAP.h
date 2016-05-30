@@ -31,7 +31,6 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
-typedef std::map<std::string, std::string> TIAPDeveloperInfo;
 typedef std::map<std::string, std::string> TProductInfo;
 typedef std::vector<TProductInfo> TProductList;
 typedef enum 
@@ -40,6 +39,12 @@ typedef enum
     kPayFail,
     kPayCancel,
     kPayTimeOut,
+	kPayNetworkError,
+	kPayProductionInforIncomplete,
+	kPayInitSuccess,
+	kPayInitFail,
+	kPayNowPaying,
+	kPayRechargeSuccess,
 } PayResultCode;
     
 typedef enum {
@@ -62,15 +67,6 @@ public:
 	virtual ~ProtocolIAP();
 
 	typedef std::function<void(int, std::string&)> ProtocolIAPCallback;
-
-    /**
-    @brief config the developer info
-    @param devInfo This parameter is the info of developer,
-           different plugin have different format
-    @warning Must invoke this interface before other interfaces.
-             And invoked only once.
-    */
-    void configDeveloperInfo(TIAPDeveloperInfo devInfo);
 
     /**
     @brief pay for product
@@ -121,6 +117,16 @@ public:
     {
     	return _callback;
     }
+
+	/**
+	@brief change the state of paying
+	@param the state
+	*/
+	static void resetPayState()
+	{
+		_paying = false;
+	}
+
 protected:
     static bool _paying;
 

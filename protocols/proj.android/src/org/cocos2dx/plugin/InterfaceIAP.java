@@ -28,9 +28,10 @@ import java.util.Hashtable;
 public interface InterfaceIAP {
 	public final int PluginType = 3;
 
-	public void configDeveloperInfo(Hashtable<String, String> cpInfo);
+	public void configDeveloperInfo(Hashtable<String, String> devInfo);
 	public void payForProduct(Hashtable<String, String> cpInfo);
 	public void setDebugMode(boolean debug);
 	public String getSDKVersion();
 	public String getPluginVersion();
+	public String getPluginName();
 }

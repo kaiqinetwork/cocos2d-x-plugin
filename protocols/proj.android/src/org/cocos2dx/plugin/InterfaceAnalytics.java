@@ -29,6 +29,7 @@ public interface InterfaceAnalytics {
 
 	public final int PluginType = 2;
 
+	public void configDeveloperInfo(Hashtable<String, String> devInfo);
 	public void startSession(String appKey);
 	public void stopSession();
 	public void setSessionContinueMillis(int millis);
@@ -41,4 +42,5 @@ public interface InterfaceAnalytics {
 	public void logTimedEventEnd(String eventId);
 	public String getSDKVersion();
 	public String getPluginVersion();
+	public String getPluginName();
 }

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\AgentManager.h" />
+    <ClInclude Include="..\include\FacebookAgent.h" />
+    <ClInclude Include="..\include\iOSIAPAgent.h" />
+    <ClInclude Include="..\include\PluginFactory.h" />
+    <ClInclude Include="..\include\PluginManager.h" />
+    <ClInclude Include="..\include\PluginParam.h" />
+    <ClInclude Include="..\include\PluginProtocol.h" />
+    <ClInclude Include="..\include\ProtocolAds.h" />
+    <ClInclude Include="..\include\ProtocolAnalytics.h" />
+    <ClInclude Include="..\include\ProtocolIAP.h" />
+    <ClInclude Include="..\include\ProtocolShare.h" />
+    <ClInclude Include="..\include\ProtocolSocial.h" />
+    <ClInclude Include="..\include\ProtocolUser.h" />
+    <ClInclude Include="..\platform\android\PluginJavaData.h" />
+    <ClInclude Include="..\platform\android\PluginJniHelper.h" />
+    <ClInclude Include="..\platform\android\PluginJniMacros.h" />
+    <ClInclude Include="..\platform\android\PluginUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\platform\android\AgentManager.cpp" />
+    <ClCompile Include="..\platform\android\FacebookAgent.cpp" />
+    <ClCompile Include="..\platform\android\PluginFactory.cpp" />
+    <ClCompile Include="..\platform\android\PluginJniHelper.cpp" />
+    <ClCompile Include="..\platform\android\PluginProtocol.cpp" />
+    <ClCompile Include="..\platform\android\PluginUtils.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolAds.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolAnalytics.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolIAP.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolShare.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolSocial.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolUser.cpp" />
+    <ClCompile Include="..\PluginManager.cpp" />
+    <ClCompile Include="..\PluginParam.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CD134B83-144F-4DCD-A8F1-5A2D625A2103}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PluginProtocol</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

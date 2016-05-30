@@ -31,7 +31,6 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
-typedef std::map<std::string, std::string> TShareDeveloperInfo;
 typedef std::map<std::string, std::string> TShareInfo;
 
 typedef enum 
@@ -55,15 +54,6 @@ public:
 	virtual ~ProtocolShare();
     
     typedef std::function<void(int, std::string&)> ProtocolShareCallback;
-
-    /**
-    @brief config the share developer info
-    @param devInfo This parameter is the info of developer,
-           different plugin have different format
-    @warning Must invoke this interface before other interfaces.
-             And invoked only once.
-    */
-    void configDeveloperInfo(TShareDeveloperInfo devInfo);
 
     /**
     @brief share information

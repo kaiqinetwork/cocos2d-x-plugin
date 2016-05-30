@@ -23,12 +23,24 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.plugin;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.Vector;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,22 +51,26 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Xml;
 
 
 public class PluginWrapper {
 
-    protected static Context sContext = null;
+	private static final String TAG = "PluginWrapper";
+	protected static Context sContext = null;
     protected static GLSurfaceView sGLSurfaceView = null; 
     protected static Handler sMainThreadHandler = null;
     protected static Handler sGLThreadHandler = null;
     protected static Set<PluginListener> sListeners = new LinkedHashSet<PluginListener>();
-    private static final String TAG = "PluginWrapper";
+    private static Hashtable<String, String> sPluginParams = new Hashtable<String, String>();
+    private static Vector<String> sSupportPlugins = new Vector<String>();
     
     public static void init(Context context) {
         sContext = context;
         if (null == sMainThreadHandler) {
             sMainThreadHandler = new Handler();
         }
+        PluginWrapper.analysisDeveloperInfo();
     }
 
     public static void setGLSurfaceView(GLSurfaceView value) {
@@ -63,10 +79,6 @@ public class PluginWrapper {
     
     protected static void initFromNativeActivity(Activity act) {
         sContext = act;
-        // @warning These lines will cause crash.
-//        if (null == sGLThreadHandler) {
-//            sGLThreadHandler = new Handler();
-//        }
     }
     
     public static void onResume() {
@@ -99,6 +111,24 @@ public class PluginWrapper {
         
         return result;
     }
+    
+    public static void onNewIntent(Intent intent) { 
+    	for (PluginListener listener : sListeners) {
+    		listener.onNewIntent(intent);
+    	}
+	} 
+    
+    public static void onStop() {
+    	for (PluginListener listener : sListeners) {
+    		listener.onStop();
+    	}
+    }
+    
+    public static void onRestart() { 
+    	for (PluginListener listener : sListeners) {
+    		listener.onRestart();
+    	}
+  	} 
     
     public static void addListener(PluginListener listener) {
     	sListeners.add(listener);
@@ -174,25 +204,60 @@ public class PluginWrapper {
         }
     }
     
-    private static String[] arrPlugins = {"PluginUser", "PluginShare", "PluginSocial", "PluginAds", "PluginAnalytics", "PluginIAP"};
-    
-    public static Hashtable<String, String> getPluginConfigure()
-    {
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        try {
-            ApplicationInfo ai = sContext.getPackageManager().getApplicationInfo(sContext.getPackageName(), PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
-            
-            for(int i = 0; i < arrPlugins.length; ++i)
-            {
-                String pluginName = bundle.getString(arrPlugins[i]);
-                if(null != pluginName && !"".equals(pluginName))
-                    ht.put(arrPlugins[i], pluginName);
+    public static void analysisDeveloperInfo() {
+    	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    	try {
+    		sSupportPlugins = new Vector<String>();
+    		sPluginParams = new Hashtable<String, String>();
+        	String fileName = "plugins/DeveloperInfo.xml";
+        	DocumentBuilder builder = factory.newDocumentBuilder();
+            Document dom = builder.parse(sContext.getAssets().open(fileName));
+            Element root = dom.getDocumentElement();
+            NodeList items = root.getElementsByTagName("PluginList");
+            if (items != null) {
+            	NodeList childItems = ((Element)items.item(0)).getElementsByTagName("Plugin");
+            	if (childItems != null) {
+            		for (int i = 0; i < childItems.getLength(); i++) {
+            			Node node = childItems.item(i).getAttributes().getNamedItem("className");
+            			if (node != null) {
+            				sSupportPlugins.add(node.getNodeValue());
+            			}
+            		}
+            	}
             }
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
+            items = root.getElementsByTagName("ParamList");
+            if (items != null) {
+            	NodeList childItems = ((Element)items.item(0)).getElementsByTagName("Param");
+            	if (childItems != null) {
+            		for (int i = 0; i < childItems.getLength(); i++) {
+            			NamedNodeMap nodes = childItems.item(i).getAttributes();
+            			Node nameNode = nodes.getNamedItem("name");
+            			Node valueNode = nodes.getNamedItem("value");
+            			if (nameNode != null && valueNode != null) {
+            				sPluginParams.put(nameNode.getNodeValue(), valueNode.getNodeValue());
+            			}
+            		}
+            	}
+            }
+            
+        } catch (Exception e) {
+    		e.printStackTrace();
         }
-
-        return ht;
+    }
+    
+    public static Hashtable<String, String> getDeveloperInfo()
+    {
+        if(sPluginParams == null)
+            return new Hashtable<String, String>();
+        else
+            return sPluginParams;
+    }
+    
+    public static Vector<String> getSupportPlugins()
+    {
+        if(sSupportPlugins == null)
+            return new Vector<String>();
+        else
+            return sSupportPlugins;
     }
 }

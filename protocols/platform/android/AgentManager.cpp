@@ -26,32 +26,34 @@
 
 #include "AgentManager.h"
 #include "PluginManager.h"
-#include "ProtocolUser.h"
-#include "ProtocolAnalytics.h"
 #include "PluginUtils.h"
 
 namespace cocos2d{ namespace plugin{
 
 static AgentManager* s_AgentManager = nullptr;
 
-AgentManager::AgentManager():pUser(nullptr), pShare(nullptr), pSocial(nullptr), pAds(nullptr), pAnalytics(nullptr), pIAP(nullptr)
+AgentManager::AgentManager(): _pUser(nullptr), _pShare(nullptr), _pSocial(nullptr), _pAds(nullptr), _pAnalytics(nullptr)
 {
 
 }
 
 AgentManager::~AgentManager()
 {
-	this->purge();
+	this->unloadAllPlugins();
 }
 
-void AgentManager::purge()
+void AgentManager::unloadAllPlugins()
 {
-	delete pUser;
-	delete pShare;
-	delete pSocial;
-	delete pAds;
-	delete pAnalytics;
-	delete pIAP;
+	delete _pUser;
+	delete _pShare;
+	delete _pSocial;
+	delete _pAds;
+	delete _pAnalytics;
+	for(std::map<std::string, ProtocolIAP*>::iterator iter = _pluginsIAPMap.begin(); iter != _pluginsIAPMap.end(); ++iter)
+	{
+		delete iter->second;
+	}
+	_pluginsIAPMap.clear();
 }
 
 AgentManager* AgentManager::getInstance()
@@ -64,7 +66,7 @@ AgentManager* AgentManager::getInstance()
 	return s_AgentManager;
 }
 
-void AgentManager::destroyInstance()
+void AgentManager::end()
 {
 	if(s_AgentManager)
 	{
@@ -73,86 +75,125 @@ void AgentManager::destroyInstance()
 	}
 }
 
-bool AgentManager::initWithConfigureFile()
+bool AgentManager::loadAllPlugins()
 {
-	std::map<std::string, std::string> conf = getPluginConfigure();
-	return init(conf);
+	std::vector<std::string> plugins = getSupportPlugins();
+	return loadPlugins(plugins);	
 }
 
-bool AgentManager::init(std::map<std::string, std::string>& conf)
+bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
 {
-	if(conf.empty())
-		return false;
-
-	for(std::map<std::string, std::string>::iterator iter = conf.begin(); iter != conf.end(); ++iter)
+	PluginProtocol* protocol;
+	ProtocolUser* pUser;
+	ProtocolShare* pShare;
+	ProtocolSocial* pSocial;
+	ProtocolAds* pAds;
+	ProtocolAnalytics* pAnalytics;
+	ProtocolIAP* pIAP;
+	for (int i = 0; i < plugins.size(); ++i)
 	{
-		std::string pluginName = iter->first;
-		if("PluginUser" == pluginName)
+		protocol = dynamic_cast<PluginProtocol *>(PluginManager::getInstance()->loadPlugin(plugins[i].c_str()));
+		pUser = dynamic_cast<ProtocolUser *>(protocol);
+		if (pUser)
 		{
-			pUser = dynamic_cast<ProtocolUser *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			if (_pUser)
+			{
+				delete _pUser;
+			}
+			_pUser = pUser;
 		}
-		else if("PluginShare" == pluginName)
+		pShare = dynamic_cast<ProtocolShare *>(protocol);
+		if (pShare)
 		{
-			pShare = dynamic_cast<ProtocolShare *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			if (_pShare)
+			{
+				delete _pShare;
+			}
+			_pShare = pShare;
 		}
-		else if("PluginSocial" == pluginName)
+		pSocial = dynamic_cast<ProtocolSocial *>(protocol);
+		if (pSocial)
 		{
-			pSocial = dynamic_cast<ProtocolSocial *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			if (_pSocial)
+			{
+				delete _pSocial;
+			}
+			_pSocial = pSocial;
 		}
-		else if("PluginAds" == pluginName)
+		pAds = dynamic_cast<ProtocolAds *>(protocol);
+		if (pAds)
 		{
-			pAds = dynamic_cast<ProtocolAds *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			if (_pAds)
+			{
+				delete _pAds;
+			}
+			_pAds = pAds;
 		}
-		else if("PluginAnalytics" == pluginName)
+		pAnalytics = dynamic_cast<ProtocolAnalytics *>(protocol);
+		if (pAnalytics)
 		{
-			pAnalytics = dynamic_cast<ProtocolAnalytics *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			if (_pAnalytics)
+			{
+				delete _pAnalytics;
+			}
+			_pAnalytics = pAnalytics;
 		}
-		else if("PluginIAP" == pluginName)
+		pIAP = dynamic_cast<ProtocolIAP *>(protocol);
+		if (pIAP)
 		{
-			pIAP = dynamic_cast<ProtocolIAP *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
+			ProtocolIAP*& dummy = _pluginsIAPMap[pIAP->getPluginName()];
+			if (dummy)
+			{
+				delete dummy;
+			}
+			dummy = pIAP;
 		}
 	}
 
 	return true;
 }
 
-static std::vector<std::string> s_plugins = {"PluginUser", "PluginShare", "PluginSocial", "PluginAds", "PluginAnalytics", "PluginIAP"};
-
-std::map<std::string, std::string> AgentManager::getPluginConfigure()
+std::vector<std::string> AgentManager::getSupportPlugins()
 {
-	std::map<std::string, std::string> configure;
+	std::vector<std::string> plugins;
 
 	PluginJniMethodInfo t;
 	JNIEnv* env = PluginUtils::getEnv();
 
-	if(PluginJniHelper::getStaticMethodInfo(t, "org/cocos2dx/plugin/PluginWrapper", "getPluginConfigure", "()Ljava/util/Hashtable;"))
+	if(PluginJniHelper::getStaticMethodInfo(t, "org/cocos2dx/plugin/PluginWrapper", "getSupportPlugins", "()Ljava/util/Vector;"))
 	{
-		jobject jhashtable = t.env->CallStaticObjectMethod(t.classID, t.methodID);
+		jobject jvector = t.env->CallStaticObjectMethod(t.classID, t.methodID);
+		PluginJniMethodInfo tSizeMethod;
 		PluginJniMethodInfo tGetMethod;
-		if(PluginJniHelper::getMethodInfo(tGetMethod, "java/util/Hashtable", "get", "(Ljava/lang/Object;)Ljava/lang/Object;"))
+		if (PluginJniHelper::getMethodInfo(tGetMethod, "java/util/Vector", "get", "(I)Ljava/lang/Object;"))
 		{
-			jstring jKey;
-			jstring jValue;
+			jint jSize = 0;
+			jstring jValue; 
 			std::string stdValue;
 
-			for(std::vector<std::string>::iterator iter = s_plugins.begin(); iter != s_plugins.end(); ++iter)
+			if (PluginJniHelper::getMethodInfo(tSizeMethod, "java/util/Vector", "size", "()I"))
 			{
-				jKey = env->NewStringUTF((*iter).c_str());
-				jValue = (jstring) (env->CallObjectMethod(jhashtable,tGetMethod.methodID,jKey));
-				stdValue = PluginJniHelper::jstring2string(jValue);
-				if(!stdValue.empty())
-					configure.insert(std::make_pair(*iter, stdValue));
+				jSize = env->CallIntMethod(jvector, tSizeMethod.methodID);
+
+				env->DeleteLocalRef(tSizeMethod.classID);
 			}
 
-			tGetMethod.env->DeleteLocalRef(jKey);
-			tGetMethod.env->DeleteLocalRef(jValue);
+			for (int i = 0; i < jSize; i++)
+			{
+				jValue = (jstring)(env->CallObjectMethod(jvector, tGetMethod.methodID, (jint)i));
+				stdValue = PluginJniHelper::jstring2string(jValue);
+				if (!stdValue.empty())
+					plugins.push_back(stdValue);
+			}
 
+			tGetMethod.env->DeleteLocalRef(jValue);
+			env->DeleteLocalRef(tGetMethod.classID);
 		}
-		env->DeleteLocalRef(jhashtable);
-		env->DeleteLocalRef(tGetMethod.classID);
+		env->DeleteLocalRef(jvector);
+		env->DeleteLocalRef(t.classID);
 	}
-	env->DeleteLocalRef(t.classID);
-	return configure;
+	
+	return plugins;
 }
 
 }}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo>
+    <PluginList>
+        <Plugin className="umeng/AnalyticsAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="UmengAppKey" value="" />
+        <Param name="UmengChannelKey" value="" />
+        <Param name="UmengScenarioType" value="" />
+        <Param name="UmengEnableCrashCatch" value="" />
+        <Param name="UmengDebugMode" value="" />
+    </ParamList>
+</DeveloperInfo>

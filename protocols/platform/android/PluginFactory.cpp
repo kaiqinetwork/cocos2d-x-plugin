@@ -145,7 +145,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 
 		if (pRet != NULL)
 		{
-			pRet->setPluginName(name);
 			PluginUtils::initJavaPlugin(pRet, jObj, jClassName.c_str());
 		}
 	} while(0);

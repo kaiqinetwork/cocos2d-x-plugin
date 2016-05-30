@@ -37,6 +37,8 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
+typedef std::map<std::string, std::string> TPluginDeveloperInfo;
+
 /**
 	The super class for all plugins.
 */
@@ -49,9 +51,18 @@ public:
     /**
     @brief plug-in info methods(name, version, SDK version)
     */
-    inline const char* getPluginName() { return _pluginName.c_str(); }
+	std::string getPluginName();
     std::string getPluginVersion();
     std::string getSDKVersion();
+
+    /**
+    @brief config the application info
+    @param devInfo This parameter is the info of aplication,
+            different plugin have different format
+    @warning Must invoke this interface before other interfaces.
+                And invoked only once.
+    */
+    void configDeveloperInfo(TPluginDeveloperInfo devInfo);
 
     /**
     @brief switch debug plug-in on/off
@@ -81,10 +92,6 @@ protected:
 
 private:
     friend class PluginFactory;
-    inline void setPluginName(const char* name) {
-    	_pluginName = name;
-    }
-    std::string _pluginName;
 };
 
 }} //namespace cocos2d { namespace plugin {

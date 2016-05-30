@@ -57,15 +57,6 @@ public:
     typedef std::function<void(int, std::string&)> ProtocolUserCallback;
 
     /**
-    @brief config the application info
-    @param devInfo This parameter is the info of aplication,
-           different plugin have different format
-    @warning Must invoke this interface before other interfaces.
-             And invoked only once.
-    */
-    void configDeveloperInfo(TUserDeveloperInfo devInfo);
-
-    /**
      @brief User login
      */
     void login();

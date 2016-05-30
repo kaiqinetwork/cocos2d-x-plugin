@@ -34,61 +34,59 @@
 #include "ProtocolIAP.h"
 #include "ProtocolAds.h"
 #include "ProtocolUser.h"
+#include "ProtocolAnalytics.h"
 
 namespace cocos2d{namespace plugin{
-
-class ProtocolUser;
-class ProtocolAnalytics;
 
 class AgentManager{
 public:
 	virtual ~AgentManager();
 	static AgentManager* getInstance();
-	static void destroyInstance();
-	virtual bool initWithConfigureFile();
-	virtual bool init(std::map<std::string, std::string>& conf);
-	virtual void purge();
+	static void end();
+	virtual bool loadPlugins(const std::vector<std::string>& plugins);
+	virtual bool loadAllPlugins();
+	virtual void unloadAllPlugins();
 
 	inline ProtocolUser* getUserPlugin()
 	{
-		return pUser;
+		return _pUser;
 	}
 
 	inline ProtocolShare* getSharePlugin()
 	{
-		return pShare;
+		return _pShare;
 	}
 
 	inline ProtocolSocial* getSocialPlugin()
 	{
-		return pSocial;
+		return _pSocial;
 	}
 
 	inline ProtocolAds* getAdsPlugin()
 	{
-		return pAds;
+		return _pAds;
 	}
 
 	inline ProtocolAnalytics* getAnalyticsPlugin()
 	{
-		return pAnalytics;
+		return _pAnalytics;
 	}
 
-	inline ProtocolIAP* getIAPPlugin()
+	inline std::map<std::string, ProtocolIAP*>* getIAPPlugin()
 	{
-		return pIAP;
+		return &_pluginsIAPMap;
 	}
 
 protected:
 	AgentManager();
-	std::map<std::string, std::string> getPluginConfigure();
+	std::vector<std::string> getSupportPlugins();
 
-	ProtocolUser *pUser;
-	ProtocolShare *pShare;
-	ProtocolSocial *pSocial;
-	ProtocolAds *pAds;
-	ProtocolAnalytics *pAnalytics;
-	ProtocolIAP *pIAP;
+	ProtocolUser* _pUser;
+	ProtocolShare* _pShare;
+	ProtocolSocial* _pSocial;
+	ProtocolAds* _pAds;
+	ProtocolAnalytics* _pAnalytics;
+	std::map<std::string, ProtocolIAP*> _pluginsIAPMap;
 };
 }}
 #endif

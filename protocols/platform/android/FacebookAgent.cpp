@@ -93,14 +93,14 @@ void FacebookAgent::destroyInstance()
 FacebookAgent::FacebookAgent()
 {
 	agentManager = AgentManager::getInstance();
-	std::map<std::string, std::string> facebook = {{"PluginUser", "UserFacebook"}, {"PluginShare", "ShareFacebook"}};
-	agentManager->init(facebook);
+	std::vector<std::string> plugins = { "UserFacebook", "ShareFacebook" };
+	agentManager->loadPlugins(plugins);
 }
 
 FacebookAgent::~FacebookAgent()
 {
     requestCallbacks.clear();
-	AgentManager::destroyInstance();
+	AgentManager::end();
 }
 
 void FacebookAgent::login(FBCallback cb)

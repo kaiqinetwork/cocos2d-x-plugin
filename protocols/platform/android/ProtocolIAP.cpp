@@ -38,7 +38,7 @@ extern "C" {
 		PluginUtils::outputLog("ProtocolIAP", "nativeOnPayResult(), Get plugin ptr : %p", pPlugin);
 		if (pPlugin != NULL)
 		{
-			PluginUtils::outputLog("ProtocolIAP", "nativeOnPayResult(), Get plugin name : %s", pPlugin->getPluginName());
+			PluginUtils::outputLog("ProtocolIAP", "nativeOnPayResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
 			ProtocolIAP* pIAP = dynamic_cast<ProtocolIAP*>(pPlugin);
 			if (pIAP != NULL)
 			{
@@ -64,33 +64,6 @@ ProtocolIAP::ProtocolIAP()
 
 ProtocolIAP::~ProtocolIAP()
 {
-}
-
-void ProtocolIAP::configDeveloperInfo(TIAPDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtils::outputLog("ProtocolIAP", "The developer info is empty!");
-        return;
-    }
-    else
-    {
-        PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
-    	PluginJniMethodInfo t;
-        if (PluginJniHelper::getMethodInfo(t
-    		, pData->jclassName.c_str()
-    		, "configDeveloperInfo"
-    		, "(Ljava/util/Hashtable;)V"))
-    	{
-        	// generate the hashtable from map
-        	jobject obj_Map = PluginUtils::createJavaMapObject(&devInfo);
-
-            // invoke java method
-            t.env->CallVoidMethod(pData->jobj, t.methodID, obj_Map);
-            t.env->DeleteLocalRef(obj_Map);
-            t.env->DeleteLocalRef(t.classID);
-        }
-    }
 }
 
 void ProtocolIAP::payForProduct(TProductInfo info)

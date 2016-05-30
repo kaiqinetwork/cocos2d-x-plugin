@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo>
+    <PluginList>
+        <Plugin className="alipay/IAPAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="AlipayPartner" value="" />
+        <Param name="AlipaySellerId" value="" />
+        <Param name="AlipayPrivateKey" value="" />
+        <Param name="AlipayPublicKey" value="" />
+        <Param name="AlipayPrivateNotifyUrl" value="" />
+    </ParamList>
+</DeveloperInfo>

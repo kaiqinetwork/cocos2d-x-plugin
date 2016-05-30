@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="android">
+      <UniqueIdentifier>{2294a1a7-fdd0-43b9-8c97-ffa20ddab884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{204f9dc2-d7b0-4469-9b62-57ad2c43e6e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\AgentManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FacebookAgent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\iOSIAPAgent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PluginFactory.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PluginManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PluginParam.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PluginProtocol.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolAds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolAnalytics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolIAP.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolShare.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolSocial.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProtocolUser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform\android\PluginJavaData.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform\android\PluginJniHelper.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform\android\PluginJniMacros.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform\android\PluginUtils.h">
+      <Filter>android</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\platform\android\AgentManager.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\FacebookAgent.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\PluginFactory.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\PluginJniHelper.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\PluginProtocol.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\PluginUtils.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolAds.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolAnalytics.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolIAP.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolShare.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolSocial.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolUser.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PluginManager.cpp" />
+    <ClCompile Include="..\PluginParam.cpp" />
+  </ItemGroup>
+</Project>

@@ -91,7 +91,7 @@ return call##retCode##FuncWithParam(funcName, allParams);    \
 retType ret = defaultRet;                                                                                     \
 PluginJavaData* pData = PluginUtils::getPluginJavaData(this);                                                 \
 if (NULL == pData) {                                                                                          \
-    PluginUtils::outputLog("PluginProtocol", "Can't find java data for plugin : %s", this->getPluginName());  \
+    PluginUtils::outputLog("PluginProtocol", "Can't find java data for plugin : %s", this->getPluginName().c_str());  \
     return ret;                                                                                               \
 }                                                                                                             \
                                                                                                               \

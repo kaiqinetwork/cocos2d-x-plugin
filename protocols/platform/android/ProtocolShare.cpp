@@ -38,7 +38,7 @@ extern "C" {
         PluginUtils::outputLog("ProtocolShare", "nativeOnShareResult(), Get plugin ptr : %p", pPlugin);
         if (pPlugin != NULL)
         {
-            PluginUtils::outputLog("ProtocolShare", "nativeOnShareResult(), Get plugin name : %s", pPlugin->getPluginName());
+            PluginUtils::outputLog("ProtocolShare", "nativeOnShareResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
             ProtocolShare* pShare = dynamic_cast<ProtocolShare*>(pPlugin);
             if (pShare != NULL)
             {
@@ -53,7 +53,7 @@ extern "C" {
                 	if(callback)
                 		callback(ret, strMsg);
                 	else
-                		PluginUtils::outputLog("ProtocolShare", "Can't find the listener of plugin %s", pPlugin->getPluginName());
+                		PluginUtils::outputLog("ProtocolShare", "Can't find the listener of plugin %s", pPlugin->getPluginName().c_str());
                 }
             }
 
@@ -69,33 +69,6 @@ ProtocolShare::ProtocolShare()
 
 ProtocolShare::~ProtocolShare()
 {
-}
-
-void ProtocolShare::configDeveloperInfo(TShareDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtils::outputLog("ProtocolShare", "The developer info is empty!");
-        return;
-    }
-    else
-    {
-        PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
-    	PluginJniMethodInfo t;
-        if (PluginJniHelper::getMethodInfo(t
-    		, pData->jclassName.c_str()
-    		, "configDeveloperInfo"
-    		, "(Ljava/util/Hashtable;)V"))
-    	{
-        	// generate the hashtable from map
-        	jobject obj_Map = PluginUtils::createJavaMapObject(&devInfo);
-
-            // invoke java method
-            t.env->CallVoidMethod(pData->jobj, t.methodID, obj_Map);
-            t.env->DeleteLocalRef(obj_Map);
-            t.env->DeleteLocalRef(t.classID);
-        }
-    }
 }
 
 void ProtocolShare::share(TShareInfo info)

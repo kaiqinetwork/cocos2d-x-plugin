@@ -33,6 +33,11 @@ PluginProtocol::~PluginProtocol()
     PluginUtils::erasePluginJavaData(this);
 }
 
+std::string PluginProtocol::getPluginName()
+{
+	return PluginUtils::callJavaStringFuncWithName(this, "getPluginName");
+}
+
 std::string PluginProtocol::getPluginVersion()
 {
     return PluginUtils::callJavaStringFuncWithName(this, "getPluginVersion");
@@ -41,6 +46,33 @@ std::string PluginProtocol::getPluginVersion()
 std::string PluginProtocol::getSDKVersion()
 {
     return PluginUtils::callJavaStringFuncWithName(this, "getSDKVersion");
+}
+
+void PluginProtocol::configDeveloperInfo(TPluginDeveloperInfo devInfo)
+{
+	if (devInfo.empty())
+	{
+		PluginUtils::outputLog("ProtocolSocial", "The developer info is empty!");
+		return;
+	}
+	else
+	{
+		PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
+		PluginJniMethodInfo t;
+		if (PluginJniHelper::getMethodInfo(t
+			, pData->jclassName.c_str()
+			, "configDeveloperInfo"
+			, "(Ljava/util/Hashtable;)V"))
+		{
+			// generate the hashtable from map
+			jobject obj_Map = PluginUtils::createJavaMapObject(&devInfo);
+
+			// invoke java method
+			t.env->CallVoidMethod(pData->jobj, t.methodID, obj_Map);
+			t.env->DeleteLocalRef(obj_Map);
+			t.env->DeleteLocalRef(t.classID);
+		}
+	}
 }
 
 void PluginProtocol::setDebugMode(bool isDebugMode)
@@ -76,7 +108,7 @@ void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginP
 {
     PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
     if (NULL == pData) {
-        PluginUtils::outputLog(LOG_TAG, "Can't find java data for plugin : %s", this->getPluginName());
+        PluginUtils::outputLog(LOG_TAG, "Can't find java data for plugin : %s", this->getPluginName().c_str());
         return;
     }
 
@@ -186,5 +218,7 @@ float PluginProtocol::callFloatFuncWithParam(const char* funcName, std::vector<P
 {
     CALL_JAVA_FUNC(float, Float, 0.0f, "F")
 }
+
+
 
 }} //namespace cocos2d { namespace plugin {
