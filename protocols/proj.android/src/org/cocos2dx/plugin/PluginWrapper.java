@@ -25,11 +25,14 @@ package org.cocos2dx.plugin;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -64,6 +67,7 @@ public class PluginWrapper {
     protected static Set<PluginListener> sListeners = new LinkedHashSet<PluginListener>();
     private static Hashtable<String, String> sPluginParams = new Hashtable<String, String>();
     private static Vector<String> sSupportPlugins = new Vector<String>();
+    protected static String sAppChannel = null;
     
     public static void init(Context context) {
         sContext = context;
@@ -259,5 +263,49 @@ public class PluginWrapper {
             return new Vector<String>();
         else
             return sSupportPlugins;
+    }
+    
+    public static String getAppChannel()
+    {
+        if(sAppChannel != null)
+            return sAppChannel;
+        
+        ApplicationInfo appInfo = sContext.getApplicationInfo();
+		String sourceDir = appInfo.sourceDir;
+		String v = "";
+		
+        ZipFile zipfile = null;
+        try {
+            zipfile = new ZipFile(sourceDir);
+            Enumeration<?> entries = zipfile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = ((ZipEntry) entries.nextElement());
+                String entryName = entry.getName();
+                if (entryName.startsWith("AppChannel")) {
+                    v = entryName;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (zipfile != null) {
+                try {
+                    zipfile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        String[] split = v.split("_");
+        if (split != null && split.length >= 2) {
+            sAppChannel = v.substring(split[0].length() + 1);
+
+        } else {
+        	sAppChannel = appInfo.metaData.getString("APP_CHANNEL");
+        }
+
+		return sAppChannel;
     }
 }

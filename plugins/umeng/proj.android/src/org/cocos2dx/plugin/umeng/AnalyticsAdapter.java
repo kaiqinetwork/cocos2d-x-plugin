@@ -74,7 +74,9 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     @Override
     public void configDeveloperInfo(Hashtable<String, String> devInfo) {
     	String appkey = devInfo.get("UmengAppKey");
-    	String channelKey = devInfo.get("UmengChannelKey") == null ? "release" : devInfo.get("UmengChannelKey");
+    	String channelKey = PluginWrapper.getAppChannel() == null ? 
+    			(devInfo.get("UmengChannelKey") == null ? "release" : devInfo.get("UmengChannelKey")) :
+    			PluginWrapper.getAppChannel();
     	MobclickAgent.EScenarioType scenarioType = devInfo.get("UmengScenarioType") == null ? 
     			MobclickAgent.EScenarioType.E_UM_GAME : MobclickAgent.EScenarioType.values()[Integer.parseInt(devInfo.get("UmengScenarioType"))]; 
     	Boolean enableCrashCatch = devInfo.get("UmengEnableCrashCatch") == null ? 
