@@ -303,7 +303,13 @@ public class PluginWrapper {
             sAppChannel = v.substring(split[0].length() + 1);
 
         } else {
-        	sAppChannel = appInfo.metaData.getString("APP_CHANNEL");
+        	try {
+				appInfo = sContext.getPackageManager()
+			        .getApplicationInfo(sContext.getPackageName(), PackageManager.GET_META_DATA);
+				sAppChannel = appInfo.metaData.getString("APP_CHANNEL");  
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
         }
 
 		return sAppChannel;
