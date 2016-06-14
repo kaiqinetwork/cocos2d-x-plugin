@@ -23,7 +23,9 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.plugin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -272,7 +274,6 @@ public class PluginWrapper {
         
         ApplicationInfo appInfo = sContext.getApplicationInfo();
 		String sourceDir = appInfo.sourceDir;
-		String v = "";
 		
         ZipFile zipfile = null;
         try {
@@ -281,8 +282,11 @@ public class PluginWrapper {
             while (entries.hasMoreElements()) {
                 ZipEntry entry = ((ZipEntry) entries.nextElement());
                 String entryName = entry.getName();
-                if (entryName.startsWith("AppChannel")) {
-                    v = entryName;
+                if (entryName.equalsIgnoreCase("META-INF/AppChannel") && 
+                	entry.getSize() > 0) {
+            	    BufferedReader br = new BufferedReader( new InputStreamReader(zipfile.getInputStream(entry)));
+            	    sAppChannel = br.readLine();
+                    br.close();
                     break;
                 }
             }
@@ -298,12 +302,8 @@ public class PluginWrapper {
             }
         }
 
-        String[] split = v.split("_");
-        if (split != null && split.length >= 2) {
-            sAppChannel = v.substring(split[0].length() + 1);
-
-        } else {
-        	try {
+        if (sAppChannel == null || sAppChannel.equals("")) {
+            try {
 				appInfo = sContext.getPackageManager()
 			        .getApplicationInfo(sContext.getPackageName(), PackageManager.GET_META_DATA);
 				sAppChannel = appInfo.metaData.getString("APP_CHANNEL");  
@@ -311,7 +311,12 @@ public class PluginWrapper {
 				e.printStackTrace();
 			}
         }
+        
+        if (sAppChannel == null || sAppChannel.equals("")) {
+        	sAppChannel = "release";
+        }
 
+        Log.i(TAG, "AppChannel: " + sAppChannel);
 		return sAppChannel;
     }
 }

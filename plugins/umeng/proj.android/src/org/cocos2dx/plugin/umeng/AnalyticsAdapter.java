@@ -84,6 +84,8 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     	Boolean debugMode = devInfo.get("UmengDebugMode") == null ? 
     			true : Boolean.parseBoolean(devInfo.get("UmengDebugMode"));
     	
+    	Log.i(TAG, "ChannelKey: " + channelKey);
+    	
     	if (appkey != null) {
     		UMAnalyticsConfig cfg = new MobclickAgent.UMAnalyticsConfig(mContext, appkey, channelKey, scenarioType);
         	MobclickAgent.startWithConfigure(cfg);
