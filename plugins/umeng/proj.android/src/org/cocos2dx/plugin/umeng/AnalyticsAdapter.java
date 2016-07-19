@@ -28,6 +28,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.cocos2dx.plugin.InterfaceAnalytics;
+import org.cocos2dx.plugin.PluginHelper;
 import org.cocos2dx.plugin.PluginListener;
 import org.cocos2dx.plugin.PluginWrapper;
 import org.json.JSONObject;
@@ -42,19 +43,24 @@ import com.umeng.analytics.MobclickAgent.UMAnalyticsConfig;
 
 public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     
-	protected static String TAG = "umeng.AnalyticsAdapter";
+	protected static String LOG_TAG = "umeng.AnalyticsAdapter";
+	private static final String PLUGIN_NAME = "Umeng";
+    private static final String PLUGIN_VERSION = "1.0.0";
+    private static final String SDK_VERSION = "6.0.0";
+    
     private Context mContext = null;
     private static boolean mDebug = false;
 
-    protected static void LogE(String msg, Exception e) {
-        Log.e(TAG, msg, e);
-        e.printStackTrace();
+    protected static void logE(String msg, Exception e) {
+    	PluginHelper.logE(LOG_TAG, msg, e);
     }
 
-    protected static void LogD(String msg) {
-        if (mDebug) {
-            Log.d(TAG, msg);
-        }
+    protected static void logD(String msg) {
+    	PluginHelper.logD(LOG_TAG, msg);
+    }
+    
+    protected static void logI(String msg) {
+    	PluginHelper.logI(LOG_TAG, msg);
     }
 
     public AnalyticsAdapter(Context context) {
@@ -84,7 +90,7 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     	Boolean debugMode = devInfo.get("UmengDebugMode") == null ? 
     			true : Boolean.parseBoolean(devInfo.get("UmengDebugMode"));
     	
-    	Log.i(TAG, "ChannelKey: " + channelKey);
+    	logI("ChannelKey: " + channelKey);
     	
     	if (appkey != null) {
     		UMAnalyticsConfig cfg = new MobclickAgent.UMAnalyticsConfig(mContext, appkey, channelKey, scenarioType);
@@ -98,25 +104,25 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     
     @Override
     public void startSession(String appKey) {
-        LogD("startSession invoked!");
+        logD("startSession invoked!");
         MobclickAgent.onResume(mContext);
     }
 
     @Override
     public void stopSession() {
-        LogD("stopSession invoked!");
+        logD("stopSession invoked!");
         MobclickAgent.onPause(mContext);
     }
 
     @Override
     public void setSessionContinueMillis(int millis) {
-        LogD("setSessionContinueMillis invoked!");
+        logD("setSessionContinueMillis invoked!");
         MobclickAgent.setSessionContinueMillis(millis);
     }
 
     @Override
     public void setCaptureUncaughtException(boolean enable) {
-        LogD("setCaptureUncaughtException invoked!");
+        logD("setCaptureUncaughtException invoked!");
         MobclickAgent.setCatchUncaughtExceptions(enable);
     }
 
@@ -128,19 +134,19 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
     @Override
     public void logError(String errorId, String message) {
-        LogD("logError invoked!");
+        logD("logError invoked!");
         MobclickAgent.reportError(mContext, message);
     }
 
     @Override
     public void logEvent(String eventId) {
-        LogD("logEvent(" + eventId + ") invoked!");
+        logD("logEvent(" + eventId + ") invoked!");
         MobclickAgent.onEvent(mContext, eventId);
     }
 
     @Override
     public void logEvent(String eventId, Hashtable<String, String> paramMap) {
-        LogD("logEvent(" + eventId + "," + paramMap.toString() + ") invoked!");
+        logD("logEvent(" + eventId + "," + paramMap.toString() + ") invoked!");
         HashMap<String, String> curParam = changeTableToMap(paramMap);
         if (curParam.isEmpty()) {
         	MobclickAgent.onEvent(mContext, eventId);
@@ -152,36 +158,35 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
     @Override
     public void logTimedEventBegin(String eventId) {
-        LogD("logTimedEventBegin(" + eventId + ") invoked!");
+        logD("logTimedEventBegin(" + eventId + ") invoked!");
         //MobclickAgent.onEventBegin(mContext, eventId);
     }
 
     @Override
     public void logTimedEventEnd(String eventId) {
-        LogD("logTimedEventEnd(" + eventId + ") invoked!");
+        logD("logTimedEventEnd(" + eventId + ") invoked!");
         //MobclickAgent.onEventEnd(mContext, eventId);
     }
 
     @Override
     public String getSDKVersion() {
-        LogD("getSDKVersion invoked!");
-        return "UMeng no version info";
+        return SDK_VERSION;
     }
 
     protected void logEventWithLabel(JSONObject eventInfo) {
-        LogD("logEventWithLabel invoked! event : " + eventInfo.toString());
+        logD("logEventWithLabel invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
             String label = eventInfo.getString("Param2");
             MobclickAgent.onEvent(mContext, eventId, label);
         } catch(Exception e){
-            LogE("Exception in logEventWithLabel", e);
+            logE("Exception in logEventWithLabel", e);
         }
     }
     
     protected void logEventWithDurationLabel(JSONObject eventInfo) {
-        LogD("logEventWithDurationLabel invoked! event : " + eventInfo.toString());
+        logD("logEventWithDurationLabel invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try {
             String eventId = eventInfo.getString("Param1");
@@ -193,12 +198,12 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
                 //MobclickAgent.onEventDuration(mContext, eventId, duration);
             }
         } catch (Exception e) {
-            LogE("Exception in logEventWithDurationLabel", e);
+            logE("Exception in logEventWithDurationLabel", e);
         }
     }
 
     protected void logEventWithDurationParams(JSONObject eventInfo) {
-        LogD("logEventWithDurationParams invoked! event : " + eventInfo.toString());
+        logD("logEventWithDurationParams invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try {
             String eventId = eventInfo.getString("Param1");
@@ -211,48 +216,48 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
                 //MobclickAgent.onEventDuration(mContext, eventId, duration);
             }
         } catch (Exception e) {
-            LogE("Exception in logEventWithDurationParams", e);
+            logE("Exception in logEventWithDurationParams", e);
         }
     }
 
     protected void logEventWithDuration(JSONObject eventInfo) {
-        LogD("logEventWithDuration invoked! event : " + eventInfo.toString());
+        logD("logEventWithDuration invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
             int duration = eventInfo.getInt("Param2");
             //MobclickAgent.onEventDuration(mContext, eventId, duration);
         } catch(Exception e){
-            LogE("Exception in logEventWithDuration", e);
+            logE("Exception in logEventWithDuration", e);
         }
     }
 
     protected void logTimedEventWithLabelBegin(JSONObject eventInfo) {
-        LogD("logTimedEventWithLabelBegin invoked! event : " + eventInfo.toString());
+        logD("logTimedEventWithLabelBegin invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
             String label = eventInfo.getString("Param2");
             //MobclickAgent.onEventBegin(mContext, eventId, label);
         } catch(Exception e){
-            LogE("Exception in logTimedEventWithLabelBegin", e);
+            logE("Exception in logTimedEventWithLabelBegin", e);
         }
     }
     
     protected void logTimedEventWithLabelEnd(JSONObject eventInfo) {
-        LogD("logTimedEventWithLabelEnd invoked! event : " + eventInfo.toString());
+        logD("logTimedEventWithLabelEnd invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
             String label = eventInfo.getString("Param2");
             //MobclickAgent.onEventEnd(mContext, eventId, label);
         } catch(Exception e){
-            LogE("Exception in logTimedEventWithLabelEnd", e);
+            logE("Exception in logTimedEventWithLabelEnd", e);
         }
     }
     
     protected void logTimedKVEventBegin(JSONObject eventInfo) {
-        LogD("logTimedKVEventBegin invoked! event : " + eventInfo.toString());
+        logD("logTimedKVEventBegin invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
@@ -264,19 +269,19 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
                 //MobclickAgent.onKVEventBegin(mContext, eventId, curMap, label);
             }
         } catch(Exception e){
-            LogE("Exception in logTimedKVEventBegin", e);
+            logE("Exception in logTimedKVEventBegin", e);
         }
     }
     
     protected void logTimedKVEventEnd(JSONObject eventInfo) {
-        LogD("logTimedKVEventEnd invoked! event : " + eventInfo.toString());
+        logD("logTimedKVEventEnd invoked! event : " + eventInfo.toString());
         if (!isValid()) return;
         try{
             String eventId = eventInfo.getString("Param1");
             String label = eventInfo.getString("Param2");
             //MobclickAgent.onKVEventEnd(mContext, eventId, label);
         } catch(Exception e){
-            LogE("Exception in logTimedKVEventEnd", e);
+            logE("Exception in logTimedKVEventEnd", e);
         }
     }
 
@@ -303,7 +308,7 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
                 curMap.put(key, value);
             }
         } catch (Exception e) {
-            LogE("Error when get HashMap from JSONObject", e);
+            logE("Error when get HashMap from JSONObject", e);
         }
 
         return curMap;
@@ -311,12 +316,12 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
     @Override
     public String getPluginVersion() {
-        return "0.2.0";
+        return PLUGIN_VERSION;
     }
     
     @Override
     public String getPluginName() {
-        return "Umeng";
+        return PLUGIN_NAME;
     }
     
     @Override
@@ -335,8 +340,7 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
     }
     
     @Override
-	public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-    	return false;
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
     
     @Override
