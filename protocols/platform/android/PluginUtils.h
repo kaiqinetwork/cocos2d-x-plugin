@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "PluginParam.h"
 #include "PluginJniMacros.h"
 #include <android_native_app_glue.h>
+#include <android/log.h>
 
 namespace cocos2d { namespace plugin {
 
@@ -161,7 +162,7 @@ public:
         CALL_BASERET_JAVA_FUNC(bool, "()Z", Boolean, false)
     }
 
-    static void outputLog(const char* logTag, const char* pFormat, ...);
+    static void outputLog(int level, const char* logTag, const char* pFormat, ...);
 };
 
 }} // namespace cocos2d { namespace plugin {

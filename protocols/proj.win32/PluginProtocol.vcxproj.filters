@@ -16,12 +16,6 @@
     <ClInclude Include="..\include\AgentManager.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\FacebookAgent.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\iOSIAPAgent.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\PluginFactory.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -64,12 +58,12 @@
     <ClInclude Include="..\platform\android\PluginUtils.h">
       <Filter>android</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ProtocolCrash.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\platform\android\AgentManager.cpp">
-      <Filter>android</Filter>
-    </ClCompile>
-    <ClCompile Include="..\platform\android\FacebookAgent.cpp">
       <Filter>android</Filter>
     </ClCompile>
     <ClCompile Include="..\platform\android\PluginFactory.cpp">
@@ -104,5 +98,8 @@
     </ClCompile>
     <ClCompile Include="..\PluginManager.cpp" />
     <ClCompile Include="..\PluginParam.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolCrash.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

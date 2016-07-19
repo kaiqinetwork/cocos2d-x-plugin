@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "PluginUtils.h"
-#include <android/log.h>
 #include <map>
 
 #define MAX_LOG_LEN			256
@@ -39,7 +38,7 @@ void PluginUtils::initPluginWrapper(android_app* app)
         , "initFromNativeActivity"
         , "(Landroid/app/Activity;)V"))
     {
-        outputLog("PluginUtils", "Failed to init context of plugin");
+        outputLog(ANDROID_LOG_DEBUG, "PluginUtils", "Failed to init context of plugin");
         return;
     }
 
@@ -85,13 +84,13 @@ JNIEnv* PluginUtils::getEnv()
     {
         if (JAVAVM->GetEnv((void**)&env, JNI_VERSION_1_4) != JNI_OK)
         {
-        	outputLog("PluginUtils", "Failed to get the environment using GetEnv()");
+        	outputLog(ANDROID_LOG_DEBUG, "PluginUtils", "Failed to get the environment using GetEnv()");
             break;
         }
 
         if (JAVAVM->AttachCurrentThread(&env, 0) < 0)
         {
-            outputLog("PluginUtils", "Failed to get the environment using AttachCurrentThread()");
+            outputLog(ANDROID_LOG_DEBUG, "PluginUtils", "Failed to get the environment using AttachCurrentThread()");
             break;
         }
 
@@ -156,7 +155,7 @@ void PluginUtils::erasePluginJavaData(PluginProtocol* pKeyObj)
             }
 
             JNIEnv* pEnv = getEnv();
-            outputLog("PluginUtils", "Delete global reference.");
+            outputLog(ANDROID_LOG_DEBUG, "PluginUtils", "Delete global reference.");
             pEnv->DeleteGlobalRef(jobj);
             delete pData;
         }
@@ -164,7 +163,7 @@ void PluginUtils::erasePluginJavaData(PluginProtocol* pKeyObj)
     }
 }
 
-void PluginUtils::outputLog(const char* logTag, const char* pFormat, ...)
+void PluginUtils::outputLog(int level, const char* logTag, const char* pFormat, ...)
 {
 	char buf[MAX_LOG_LEN + 1];
 
@@ -173,7 +172,7 @@ void PluginUtils::outputLog(const char* logTag, const char* pFormat, ...)
 	vsnprintf(buf, MAX_LOG_LEN, pFormat, args);
 	va_end(args);
 
-	__android_log_print(ANDROID_LOG_DEBUG, logTag, "%s", buf);
+	__android_log_print(level, logTag, "%s", buf);
 }
 
 jobject PluginUtils::getJObjFromParam(PluginParam* param)

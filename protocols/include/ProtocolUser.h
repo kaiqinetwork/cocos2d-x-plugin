@@ -35,18 +35,26 @@ typedef std::map<std::string, std::string> TUserDeveloperInfo;
 
 typedef enum
 {
-    kLoginSucceed = 0,
-    kLoginFailed,
-
-    kLogoutSucceed,
+	kInitSuccess = 0,/**< enum value is callback of succeeding in initing sdk. */
+	kInitFail,/**< enum  value is callback of failing to init sdk. */
+	kLoginSuccess,/**< enum value is callback of succeeding in login.*/
+	kLoginNetworkError,/**< enum value is callback of network error*/
+	kLoginNoNeed,/**< enum value is callback of no need login.*/
+	kLoginFail,/**< enum value is callback of failing to login. */
+	kLoginCancel,/**< enum value is callback of canceling to login. */
+	kLogoutSuccess,/**< enum value is callback of succeeding in logout. */
+	kLogoutFail,/**< enum value is callback of failing to logout. */
+	kPlatformEnter,/**< enum value is callback after enter platform. */
+	kPlatformBack,/**< enum value is callback after exit antiAddiction. */
+	kPausePage,/**< enum value is callback after exit pause page. */
+	kExitPage,/**< enum value is callback after exit exit page. */
+	kAntiAddictionQuery,/**< enum value is callback after querying antiAddiction. */
+	kRealNameRegister,/**< enum value is callback after registering realname. */
+	kAccountSwitchSuccess,/**< enum value is callback of succeeding in switching account. */
+	kAccountSwitchFail,/**< enum value is callback of failing to switch account. */
+	kOpenShop,/**< enum value is callback of open the shop. */
+	kUserExtension = 50000 /**< enum value is  extension code . */
 } UserActionResultCode;
-
-class ProtocolUser;
-class UserActionListener
-{
-public:
-    virtual void onActionResult(ProtocolUser* pPlugin, UserActionResultCode code, const char* msg) = 0;
-};
 
 class ProtocolUser : public PluginProtocol
 {
@@ -60,48 +68,27 @@ public:
      @brief User login
      */
     void login();
-    void login(ProtocolUserCallback &cb);
-
+    
     /**
      @brief User logout
      */
     void logout();
-    void logout(ProtocolUserCallback &cb);
-
+    
     /**
      @brief Check whether the user logined or not
      */
-    CC_DEPRECATED_ATTRIBUTE bool isLogined() {return isLoggedIn();}
-
     bool isLoggedIn();
     /**
-     @brief Get session ID
-     @return If user logined, return value is session ID;
+     @brief Get user ID
+     @return If user logined, return value is user ID;
              else return value is empty string.
      */
-    std::string getSessionID();
+    std::string getUserId();
     
     /**
      @brief get Access Token
      */
     std::string getAccessToken();
-
-    /*
-     @deprecated
-     @brief set login callback function
-     */
-    CC_DEPRECATED_ATTRIBUTE inline void setActionListener(UserActionListener* listener)
-    {
-        _listener = listener;
-    }
-    /*
-     @deprecated
-     @brief get login callback function
-     */
-    CC_DEPRECATED_ATTRIBUTE inline UserActionListener* getActionListener()
-    {
-        return _listener;
-    }
 
     /**
      @brief set login callback function
@@ -120,7 +107,6 @@ public:
     }
 
 protected:
-    UserActionListener* _listener;
     ProtocolUserCallback _callback;
 };
 

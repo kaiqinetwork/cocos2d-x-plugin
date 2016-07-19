@@ -52,7 +52,7 @@ void PluginProtocol::configDeveloperInfo(TPluginDeveloperInfo devInfo)
 {
 	if (devInfo.empty())
 	{
-		PluginUtils::outputLog("ProtocolSocial", "The developer info is empty!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolSocial", "The developer info is empty!");
 		return;
 	}
 	else
@@ -108,7 +108,7 @@ void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginP
 {
     PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
     if (NULL == pData) {
-        PluginUtils::outputLog(LOG_TAG, "Can't find java data for plugin : %s", this->getPluginName().c_str());
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, LOG_TAG, "Can't find java data for plugin : %s", this->getPluginName().c_str());
         return;
     }
 
@@ -217,6 +217,11 @@ float PluginProtocol::callFloatFuncWithParam(const char* funcName, PluginParam* 
 float PluginProtocol::callFloatFuncWithParam(const char* funcName, std::vector<PluginParam*> params)
 {
     CALL_JAVA_FUNC(float, Float, 0.0f, "F")
+}
+
+bool PluginProtocol::isFunctionSupported(const char* funcName)
+{
+	return PluginUtils::callJavaBoolFuncWithName_oneParam(this, "isFunctionSupported", "(Ljava/lang/String;)Z", funcName);
 }
 
 

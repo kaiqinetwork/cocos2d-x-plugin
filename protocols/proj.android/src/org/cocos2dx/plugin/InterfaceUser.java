@@ -31,8 +31,10 @@ public interface InterfaceUser {
 	public void configDeveloperInfo(Hashtable<String, String> devInfo);
 	public void login();
 	public void logout();
-	public boolean isLogined();
-	public String getSessionID();
+	public boolean isLoggedIn();
+	public String getUserId();
+	public String getAccessToken();
+	public boolean isSupportFunction(String funcName);
 	public void setDebugMode(boolean debug);
 	public String getSDKVersion();
 	public String getPluginVersion();

@@ -35,10 +35,10 @@ extern "C" {
 		std::string strMsg = PluginJniHelper::jstring2string(msg);
 		std::string strClassName = PluginJniHelper::jstring2string(className);
 		PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-		PluginUtils::outputLog("ProtocolIAP", "nativeOnPayResult(), Get plugin ptr : %p", pPlugin);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "nativeOnPayResult(), Get plugin ptr : %p", pPlugin);
 		if (pPlugin != NULL)
 		{
-			PluginUtils::outputLog("ProtocolIAP", "nativeOnPayResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "nativeOnPayResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
 			ProtocolIAP* pIAP = dynamic_cast<ProtocolIAP*>(pPlugin);
 			if (pIAP != NULL)
 			{
@@ -70,7 +70,7 @@ void ProtocolIAP::payForProduct(TProductInfo info)
 {
     if (_paying)
     {
-        PluginUtils::outputLog("ProtocolIAP", "Now is paying");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "Now is paying");
         return;
     }
 
@@ -80,7 +80,7 @@ void ProtocolIAP::payForProduct(TProductInfo info)
         {
             onPayResult(kPayFail, "Product info error");
         }
-        PluginUtils::outputLog("ProtocolIAP", "The product info is empty!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "The product info is empty!");
         return;
     }
     else
@@ -126,10 +126,10 @@ void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
     }
     else
     {
-        PluginUtils::outputLog("ProtocolIAP", "Result listener is null!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "Result listener is null!");
     }
     _curInfo.clear();
-    PluginUtils::outputLog("ProtocolIAP", "Pay result is : %d(%s)", (int) ret, msg);
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "Pay result is : %d(%s)", (int)ret, msg);
 }
 
 }} // namespace cocos2d { namespace plugin {

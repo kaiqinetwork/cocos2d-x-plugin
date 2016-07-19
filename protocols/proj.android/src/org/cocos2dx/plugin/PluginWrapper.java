@@ -107,15 +107,10 @@ public class PluginWrapper {
     	}
     }
 
-    public static boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-    	boolean result = true;
-    	
-        for (PluginListener listener : sListeners) {
-            boolean activityResult = listener.onActivityResult(requestCode, resultCode, data);
-            result = result && activityResult;
+    public static void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	for (PluginListener listener : sListeners) {
+            listener.onActivityResult(requestCode, resultCode, data);
         }
-        
-        return result;
     }
     
     public static void onNewIntent(Intent intent) { 

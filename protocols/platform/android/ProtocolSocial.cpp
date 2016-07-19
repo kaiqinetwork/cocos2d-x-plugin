@@ -35,10 +35,10 @@ extern "C" {
         std::string strMsg = PluginJniHelper::jstring2string(msg);
         std::string strClassName = PluginJniHelper::jstring2string(className);
         PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-        PluginUtils::outputLog("ProtocolSocial", "nativeOnSocialResult(), Get plugin ptr : %p", pPlugin);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolSocial", "nativeOnSocialResult(), Get plugin ptr : %p", pPlugin);
         if (pPlugin != NULL)
         {
-            PluginUtils::outputLog("ProtocolSocial", "nativeOnSocialResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolSocial", "nativeOnSocialResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
             ProtocolSocial* pSocial = dynamic_cast<ProtocolSocial*>(pPlugin);
             if (pSocial != NULL)
             {
@@ -116,7 +116,7 @@ void ProtocolSocial::unlockAchievement(TAchievementInfo achInfo)
 {
     if (achInfo.empty())
     {
-        PluginUtils::outputLog("ProtocolSocial", "The achievement info is empty!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolSocial", "The achievement info is empty!");
         return;
     }
     else

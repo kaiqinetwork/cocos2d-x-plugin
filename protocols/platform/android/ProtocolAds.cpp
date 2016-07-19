@@ -34,10 +34,10 @@ extern "C" {
 		std::string strMsg = PluginJniHelper::jstring2string(msg);
 		std::string strClassName = PluginJniHelper::jstring2string(className);
 		PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-		PluginUtils::outputLog("ProtocolAds", "nativeOnAdsResult(), Get plugin ptr : %p", pPlugin);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "nativeOnAdsResult(), Get plugin ptr : %p", pPlugin);
 		if (pPlugin != NULL)
 		{
-			PluginUtils::outputLog("ProtocolAds", "nativeOnAdsResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "nativeOnAdsResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
 			ProtocolAds* pAds = dynamic_cast<ProtocolAds*>(pPlugin);
 			if (pAds != NULL)
 			{
@@ -61,10 +61,10 @@ extern "C" {
 	JNIEXPORT void JNICALL Java_org_cocos2dx_plugin_AdsWrapper_nativeOnPlayerGetPoints(JNIEnv*  env, jobject thiz, jstring className, jint points) {
 		std::string strClassName = PluginJniHelper::jstring2string(className);
 		PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-		PluginUtils::outputLog("ProtocolAds", "nativeOnPlayerGetPoints(), Get plugin ptr : %p", pPlugin);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "nativeOnPlayerGetPoints(), Get plugin ptr : %p", pPlugin);
 		if (pPlugin != NULL)
 		{
-			PluginUtils::outputLog("ProtocolAds", "nativeOnPlayerGetPoints(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "nativeOnPlayerGetPoints(), Get plugin name : %s", pPlugin->getPluginName().c_str());
 			ProtocolAds* pAds = dynamic_cast<ProtocolAds*>(pPlugin);
 			if (pAds != NULL)
 			{
@@ -92,7 +92,7 @@ void ProtocolAds::showAds(TAdsInfo info, AdsPos pos)
 	PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
 	PluginJniMethodInfo t;
 
-	PluginUtils::outputLog("ProtocolAds", "Class name : %s", pData->jclassName.c_str());
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "Class name : %s", pData->jclassName.c_str());
 	if (PluginJniHelper::getMethodInfo(t
 		, pData->jclassName.c_str()
 		, "showAds"
@@ -110,7 +110,7 @@ void ProtocolAds::hideAds(TAdsInfo info)
     PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
     PluginJniMethodInfo t;
 
-    PluginUtils::outputLog("ProtocolAds", "Class name : %s", pData->jclassName.c_str());
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "Class name : %s", pData->jclassName.c_str());
     if (PluginJniHelper::getMethodInfo(t
         , pData->jclassName.c_str()
         , "hideAds"

@@ -35,6 +35,7 @@
 #include "ProtocolAds.h"
 #include "ProtocolUser.h"
 #include "ProtocolAnalytics.h"
+#include "ProtocolCrash.h"
 
 namespace cocos2d{namespace plugin{
 
@@ -72,6 +73,11 @@ public:
 		return _pAnalytics;
 	}
 
+	inline ProtocolCrash* getCrashPlugin()
+	{
+		return _pCrash;
+	}
+
 	inline std::map<std::string, ProtocolIAP*>* getIAPPlugin()
 	{
 		return &_pluginsIAPMap;
@@ -86,6 +92,7 @@ protected:
 	ProtocolSocial* _pSocial;
 	ProtocolAds* _pAds;
 	ProtocolAnalytics* _pAnalytics;
+	ProtocolCrash* _pCrash;
 	std::map<std::string, ProtocolIAP*> _pluginsIAPMap;
 };
 }}

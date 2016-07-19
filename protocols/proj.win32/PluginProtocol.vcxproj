@@ -12,14 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\AgentManager.h" />
-    <ClInclude Include="..\include\FacebookAgent.h" />
-    <ClInclude Include="..\include\iOSIAPAgent.h" />
     <ClInclude Include="..\include\PluginFactory.h" />
     <ClInclude Include="..\include\PluginManager.h" />
     <ClInclude Include="..\include\PluginParam.h" />
     <ClInclude Include="..\include\PluginProtocol.h" />
     <ClInclude Include="..\include\ProtocolAds.h" />
     <ClInclude Include="..\include\ProtocolAnalytics.h" />
+    <ClInclude Include="..\include\ProtocolCrash.h" />
     <ClInclude Include="..\include\ProtocolIAP.h" />
     <ClInclude Include="..\include\ProtocolShare.h" />
     <ClInclude Include="..\include\ProtocolSocial.h" />
@@ -31,13 +30,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\platform\android\AgentManager.cpp" />
-    <ClCompile Include="..\platform\android\FacebookAgent.cpp" />
     <ClCompile Include="..\platform\android\PluginFactory.cpp" />
     <ClCompile Include="..\platform\android\PluginJniHelper.cpp" />
     <ClCompile Include="..\platform\android\PluginProtocol.cpp" />
     <ClCompile Include="..\platform\android\PluginUtils.cpp" />
     <ClCompile Include="..\platform\android\ProtocolAds.cpp" />
     <ClCompile Include="..\platform\android\ProtocolAnalytics.cpp" />
+    <ClCompile Include="..\platform\android\ProtocolCrash.cpp" />
     <ClCompile Include="..\platform\android\ProtocolIAP.cpp" />
     <ClCompile Include="..\platform\android\ProtocolShare.cpp" />
     <ClCompile Include="..\platform\android\ProtocolSocial.cpp" />

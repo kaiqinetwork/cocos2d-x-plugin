@@ -85,7 +85,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 
 		std::string jClassName = ANDROID_PLUGIN_PACKAGE_PREFIX;
 		jClassName.append(name);
-		PluginUtils::outputLog("PluginFactory", "Java class name of plugin %s is : %s", name, jClassName.c_str());
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "PluginFactory", "Java class name of plugin %s is : %s", name, jClassName.c_str());
 
 		PluginJniMethodInfo t;
 		if (! PluginJniHelper::getStaticMethodInfo(t
@@ -93,7 +93,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 			, "initPlugin"
 			, "(Ljava/lang/String;)Ljava/lang/Object;"))
 		{
-			PluginUtils::outputLog("PluginFactory", "Can't find method initPlugin in class org.cocos2dx.plugin.PluginWrapper");
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "PluginFactory", "Can't find method initPlugin in class org.cocos2dx.plugin.PluginWrapper");
 			break;
 		}
 
@@ -103,7 +103,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 		t.env->DeleteLocalRef(t.classID);
 		if (jObj == NULL)
 		{
-			PluginUtils::outputLog("PluginFactory", "Can't find java class %s", jClassName.c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "PluginFactory", "Can't find java class %s", jClassName.c_str());
 			break;
 		}
 
@@ -112,12 +112,12 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 			, "getPluginType"
 			, "(Ljava/lang/Object;)I"))
 		{
-			PluginUtils::outputLog("PluginFactory", "Can't find method getPluginType in class org.cocos2dx.plugin.PluginWrapper");
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "PluginFactory", "Can't find method getPluginType in class org.cocos2dx.plugin.PluginWrapper");
 			break;
 		}
 		int curType = t.env->CallStaticIntMethod(t.classID, t.methodID, jObj);
 		t.env->DeleteLocalRef(t.classID);
-		PluginUtils::outputLog("PluginFactory", "The type of plugin %s is : %d", name, curType);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "PluginFactory", "The type of plugin %s is : %d", name, curType);
 
 		switch (curType)
 		{

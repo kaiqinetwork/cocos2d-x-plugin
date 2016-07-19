@@ -87,6 +87,7 @@ public:
     float callFloatFuncWithParam(const char* funcName, PluginParam* param, ...);
     float callFloatFuncWithParam(const char* funcName, std::vector<PluginParam*> params);
 
+    virtual bool isFunctionSupported(const char* funcName);
 protected:
     PluginProtocol() {}
 

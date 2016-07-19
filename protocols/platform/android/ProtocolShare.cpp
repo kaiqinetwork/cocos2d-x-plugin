@@ -35,10 +35,10 @@ extern "C" {
         std::string strMsg = PluginJniHelper::jstring2string(msg);
         std::string strClassName = PluginJniHelper::jstring2string(className);
         PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-        PluginUtils::outputLog("ProtocolShare", "nativeOnShareResult(), Get plugin ptr : %p", pPlugin);
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "nativeOnShareResult(), Get plugin ptr : %p", pPlugin);
         if (pPlugin != NULL)
         {
-            PluginUtils::outputLog("ProtocolShare", "nativeOnShareResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "nativeOnShareResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
             ProtocolShare* pShare = dynamic_cast<ProtocolShare*>(pPlugin);
             if (pShare != NULL)
             {
@@ -53,7 +53,7 @@ extern "C" {
                 	if(callback)
                 		callback(ret, strMsg);
                 	else
-                		PluginUtils::outputLog("ProtocolShare", "Can't find the listener of plugin %s", pPlugin->getPluginName().c_str());
+						PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "Can't find the listener of plugin %s", pPlugin->getPluginName().c_str());
                 }
             }
 
@@ -79,7 +79,7 @@ void ProtocolShare::share(TShareInfo info)
         {
             onShareResult(kShareFail, "Share info error");
         }
-        PluginUtils::outputLog("ProtocolShare", "The Share info is empty!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "The Share info is empty!");
         return;
     }
     else
@@ -126,9 +126,9 @@ void ProtocolShare::onShareResult(ShareResultCode ret, const char* msg)
     }
     else
     {
-        PluginUtils::outputLog("ProtocolShare", "Result listener is null!");
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "Result listener is null!");
     }
-    PluginUtils::outputLog("ProtocolShare", "Share result is : %d(%s)", (int) ret, msg);
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolShare", "Share result is : %d(%s)", (int)ret, msg);
 }
 
 }} // namespace cocos2d { namespace plugin {

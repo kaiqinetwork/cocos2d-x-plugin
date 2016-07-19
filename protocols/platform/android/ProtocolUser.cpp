@@ -35,30 +35,22 @@ JNIEXPORT void JNICALL Java_org_cocos2dx_plugin_UserWrapper_nativeOnActionResult
     std::string strMsg = PluginJniHelper::jstring2string(msg);
     std::string strClassName = PluginJniHelper::jstring2string(className);
     PluginProtocol* pPlugin = PluginUtils::getPluginPtr(strClassName);
-    PluginUtils::outputLog("ProtocolUser", "nativeOnActionResult(), Get plugin ptr : %p", pPlugin);
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolUser", "nativeOnActionResult(), Get plugin ptr : %p", pPlugin);
     if (pPlugin != NULL)
     {
-		PluginUtils::outputLog("ProtocolUser", "nativeOnActionResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolUser", "nativeOnActionResult(), Get plugin name : %s", pPlugin->getPluginName().c_str());
         ProtocolUser* pUser = dynamic_cast<ProtocolUser*>(pPlugin);
         if (pUser != NULL)
         {
-            UserActionListener* listener = pUser->getActionListener();
-            if (NULL != listener)
-            {
-                listener->onActionResult(pUser, (UserActionResultCode) ret, strMsg.c_str());
-            }
-            else
-            {
-            	ProtocolUser::ProtocolUserCallback callback = pUser->getCallback();
-            	if(callback)
-				{
-					callback(ret, strMsg);
-				}
-				else
-				{
-					PluginUtils::outputLog("Listener of plugin %s not set correctly", pPlugin->getPluginName().c_str());
-				}
-            }
+            ProtocolUser::ProtocolUserCallback callback = pUser->getCallback();
+            if(callback)
+			{
+				callback(ret, strMsg);
+			}
+			else
+			{
+				PluginUtils::outputLog(ANDROID_LOG_DEBUG, "Listener of plugin %s not set correctly", pPlugin->getPluginName().c_str());
+			}
         }
     }
 }
@@ -66,7 +58,6 @@ JNIEXPORT void JNICALL Java_org_cocos2dx_plugin_UserWrapper_nativeOnActionResult
 }
 
 ProtocolUser::ProtocolUser()
-: _listener(NULL)
 {
 }
 
@@ -79,31 +70,19 @@ void ProtocolUser::login()
     PluginUtils::callJavaFunctionWithName(this, "login");
 }
 
-void ProtocolUser::login(ProtocolUserCallback &cb)
-{
-	_callback = cb;
-	ProtocolUser::login();
-}
-
 void ProtocolUser::logout()
 {
     PluginUtils::callJavaFunctionWithName(this, "logout");
 }
 
-void ProtocolUser::logout(ProtocolUserCallback &cb)
-{
-	_callback = cb;
-	ProtocolUser::logout();
-}
-
 bool ProtocolUser::isLoggedIn()
 {
-    return PluginUtils::callJavaBoolFuncWithName(this, "isLogined");
+    return PluginUtils::callJavaBoolFuncWithName(this, "isLoggedIn");
 }
 
-std::string ProtocolUser::getSessionID()
+std::string ProtocolUser::getUserId()
 {
-    return PluginUtils::callJavaStringFuncWithName(this, "getSessionID");
+    return PluginUtils::callJavaStringFuncWithName(this, "getUserId");
 }
 
 std::string ProtocolUser::getAccessToken()
