@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo>
+    <PluginList>
+        <Plugin className="sharesdk/ShareAdapter" />
+    </PluginList>
+    <ParamList>
+    </ParamList>
+</DeveloperInfo>
