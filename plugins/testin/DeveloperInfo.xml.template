@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo>
+    <PluginList>
+        <Plugin className="testin/CrashAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="TestinAppKey" value="" />
+        <Param name="TestinCollectNDKCrash" value="" />
+        <Param name="TestinOpenCrash" value="" />
+        <Param name="TestinReportOnlyWifi" value="" />
+        <Param name="TestinReportOnBack" value="" />
+        <Param name="TestinErrorActivity" value="" />
+        <Param name="TestinChannelKey" value="" />
+    </ParamList>
+</DeveloperInfo>
