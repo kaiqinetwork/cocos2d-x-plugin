@@ -31,21 +31,22 @@ import java.util.Hashtable;
 
 import org.cocos2dx.plugin.IAPWrapper;
 import org.cocos2dx.plugin.InterfaceIAP;
+import org.cocos2dx.plugin.PluginHelper;
 import org.cocos2dx.plugin.PluginWrapper;
 
 import com.alipay.sdk.app.PayTask;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 public class IAPAdapter implements InterfaceIAP {
 
 	private static final String LOG_TAG = "alipay.IAPAdapter";
+	private static final String PLUGIN_NAME = "Alipay";
+    private static final String PLUGIN_VERSION = "1.0.0";
+    private static final String SDK_VERSION = "20160428";
 	private static final int SDK_PAY_FLAG = 1;
 	
 	private static Activity mContext = null;
@@ -55,7 +56,7 @@ public class IAPAdapter implements InterfaceIAP {
 	private static Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			try {
-				LogD("handle msg : " + msg.toString());
+				logD("handle msg : " + msg.toString());
 
 				switch (msg.what) {
 				case SDK_PAY_FLAG: {
@@ -85,15 +86,12 @@ public class IAPAdapter implements InterfaceIAP {
 		}
 	};
 	
-	protected static void LogE(String msg, Exception e) {
-		Log.e(LOG_TAG, msg, e);
-		e.printStackTrace();
+	protected static void logE(String msg, Exception e) {
+		PluginHelper.logE(LOG_TAG, msg, e);
 	}
 
-	protected static void LogD(String msg) {
-		if (mDebug) {
-			Log.d(LOG_TAG, msg);
-		}
+	protected static void logD(String msg) {
+		PluginHelper.logD(LOG_TAG, msg);
 	}
 
 	public IAPAdapter(Context context) {
@@ -104,7 +102,7 @@ public class IAPAdapter implements InterfaceIAP {
 
 	@Override
 	public void configDeveloperInfo(Hashtable<String, String> devInfo) {
-		LogD("initDeveloperInfo invoked " + devInfo.toString());
+		logD("initDeveloperInfo invoked " + devInfo.toString());
 		try {
 			AlipayConfig.PARTNER = devInfo.get("AlipayPartner");
 			AlipayConfig.SELLER_ID = devInfo.get("AlipaySeller");
@@ -112,14 +110,14 @@ public class IAPAdapter implements InterfaceIAP {
 			AlipayConfig.RSA_ALIPAY_PUBLIC = devInfo.get("AlipayPublic");
 			AlipayConfig.NOTIFY_URL = ((null == devInfo.get("AlipayNotifyUrl")) ? "" : devInfo.get("AlipayNotifyUrl"));
 		} catch (Exception e) {
-			LogE("Developer info is wrong!", e);
+			logE("Developer info is wrong!", e);
 		}
 	}
 
 	@Override
 	public void payForProduct(Hashtable<String, String> info) {
-		LogD("payForProduct invoked " + info.toString());
-		if (! networkReachable()) {
+		logD("payForProduct invoked " + info.toString());
+		if (!PluginHelper.networkReachable(mContext)) {
 			payResult(IAPWrapper.PAYRESULT_FAIL, "网络不可用");
 			return;
 		}
@@ -186,7 +184,7 @@ public class IAPAdapter implements InterfaceIAP {
 
 	@Override
 	public String getSDKVersion() {
-		return "Unknown version";
+		return SDK_VERSION;
 	}
 
 	/**
@@ -222,10 +220,10 @@ public class IAPAdapter implements InterfaceIAP {
 					+ "&total_fee=\"" + price + "\""
 					;
 		} catch (Exception e) {
-			LogE("Product info parse error", e);
+			logE("Product info parse error", e);
 		}
 
-		LogD("order info : " + strRet);
+		logD("order info : " + strRet);
 		return strRet;
 	}
 
@@ -269,31 +267,18 @@ public class IAPAdapter implements InterfaceIAP {
 		return "RSA";
 	}
 
-	private boolean networkReachable() {
-		boolean bRet = false;
-		try {
-			ConnectivityManager conn = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo netInfo = conn.getActiveNetworkInfo();
-			bRet = (null == netInfo) ? false : netInfo.isAvailable();
-		} catch (Exception e) {
-			LogE("Fail to check network status", e);
-		}
-		LogD("NetWork reachable : " + bRet);
-		return bRet;
-	}
-
 	private static void payResult(int ret, String msg) {
 		IAPWrapper.onPayResult(mAdapter, ret, msg);
-		LogD("Alipay result : " + ret + " msg : " + msg);
+		logD("Alipay result : " + ret + " msg : " + msg);
 	}
 
 	@Override
 	public String getPluginVersion() {
-		return "0.2.0";
+		return PLUGIN_VERSION;
 	}
 	
 	@Override
 	public String getPluginName() {
-		return "Alipay";
+		return PLUGIN_NAME;
 	}
 }
