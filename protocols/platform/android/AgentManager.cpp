@@ -195,9 +195,9 @@ std::vector<std::string> AgentManager::getSupportPlugins()
 				stdValue = PluginJniHelper::jstring2string(jValue);
 				if (!stdValue.empty())
 					plugins.push_back(stdValue);
+				tGetMethod.env->DeleteLocalRef(jValue);
 			}
 
-			tGetMethod.env->DeleteLocalRef(jValue);
 			env->DeleteLocalRef(tGetMethod.classID);
 		}
 		env->DeleteLocalRef(jvector);
