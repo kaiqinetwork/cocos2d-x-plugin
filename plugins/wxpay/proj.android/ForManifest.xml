@@ -3,7 +3,7 @@
 
     <!-- 添加第三方SDK会有要求在AndroidManifest.xml中添加sdk的activity、service、 receiver、权限等 -->
 
-    <applicationCfg keyword="org.cocos2dx.plugin.wxpay.wxapi.WXEntryActivity" >
+    <applicationCfg>
 
         <!-- applicationCfg子节点里面是第三方SDK需要的activity、service、 receiver等所有配置 -->
 
