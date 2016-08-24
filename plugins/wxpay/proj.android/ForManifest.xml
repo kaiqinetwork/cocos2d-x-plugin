@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifestConfig xmlns:android="http://schemas.android.com/apk/res/android">
+<manifestConfig xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 添加第三方SDK会有要求在AndroidManifest.xml中添加sdk的activity、service、 receiver、权限等 -->
+
+    <applicationCfg keyword="org.cocos2dx.plugin.wxpay.wxapi.WXEntryActivity" >
+
+        <!-- applicationCfg子节点里面是第三方SDK需要的activity、service、 receiver等所有配置 -->
+
+       <activity
+            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            
+    </applicationCfg>
+
     <permissionCfg>
+
+        <!-- permissionCfg子节点里面是第三方SDK需要的所有应用权限配置 -->
+
         <uses-permission android:name="android.permission.INTERNET" />
+
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
         <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <!-- 在SDCard中创建与删除文件权限 -->
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <!-- 往SDCard写入数据权限 -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <!-- 从SDCard读取数据权限 -->
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     </permissionCfg>
-</manifestConfig> 
+
+</manifestConfig>

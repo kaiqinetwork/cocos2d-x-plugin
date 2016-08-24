@@ -26,6 +26,7 @@ package org.cocos2dx.plugin.wxpay;
 import java.util.Hashtable;
 
 import org.cocos2dx.plugin.IAPWrapper;
+import org.cocos2dx.plugin.ILoginCallback;
 import org.cocos2dx.plugin.InterfaceIAP;
 import org.cocos2dx.plugin.PluginHelper;
 import org.cocos2dx.plugin.PluginWrapper;
@@ -40,16 +41,10 @@ import android.content.Context;
 public class IAPAdapter implements InterfaceIAP {
 
 	private static final String LOG_TAG = "wxpay.IAPAdapter";
-	private static final String PLUGIN_NAME = "Wxpay";
-    private static final String PLUGIN_VERSION = "1.0.0";
-    private static final String SDK_VERSION = "3.1.1";
 	
     private static boolean mDebug = false;
 	private static IAPAdapter mInstance = null;
 	private Context mContext = null;
-	
-	private IWXAPI mWxApi;
-	private boolean mInited;
 	
 	protected static void logE(String msg, Exception e) {
 		PluginHelper.logE(LOG_TAG, msg, e);
@@ -63,7 +58,6 @@ public class IAPAdapter implements InterfaceIAP {
 		mContext = (Activity) context;
 		mInstance = this;
 		mDebug = false;
-		mInited = false;
 		configDeveloperInfo(PluginWrapper.getDeveloperInfo());
 	}
 
@@ -72,10 +66,17 @@ public class IAPAdapter implements InterfaceIAP {
 		logD("configDeveloperInfo invoked " + devInfo.toString());
 		PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
-            	WxpayConfig.APP_ID = devInfo.get("WxpayAppId");
-            	mWxApi = WXAPIFactory.createWXAPI(mContext, WxpayConfig.APP_ID);
-            	mWxApi.registerApp(WxpayConfig.APP_ID);
-                payResult(IAPWrapper.PAYRESULT_INIT_SUCCESS, "init success");
+            	if (!SDKWrapper.getInstance().initSDK(mContext, devInfo, mInstance, new ILoginCallback() {
+                    public void onFailed(int code, String msg) {
+                        payResult(IAPWrapper.PAYRESULT_INIT_FAIL, msg);
+                    }
+
+                    public void onSuccessed(int code, String msg) {
+                        payResult(IAPWrapper.PAYRESULT_INIT_SUCCESS, msg);
+                    }
+                })) {
+                    payResult(IAPWrapper.PAYRESULT_INIT_FAIL, "initSDK false");
+                }
             }
         });
 	}
@@ -87,7 +88,7 @@ public class IAPAdapter implements InterfaceIAP {
 		PluginWrapper.runOnMainThread(new Runnable() {
 			@Override
 			public void run() {
-				if (!mInited) {
+				if (!SDKWrapper.getInstance().isInited()) {
 	                payResult(IAPWrapper.PAYRESULT_INIT_FAIL, "init fail");
 	            } else if (!PluginHelper.networkReachable(mContext)) {
 	                payResult(IAPWrapper.PAYRESULT_TIMEOUT, "Network not available!");
@@ -100,13 +101,18 @@ public class IAPAdapter implements InterfaceIAP {
                     req.timeStamp = productInfo.get("timestamp");
                     req.packageValue = productInfo.get("package");
                     req.sign = productInfo.get("sign");
-                    mWxApi.sendReq(req);
+                    SDKWrapper.getInstance().getApi().sendReq(req);
 	            } else {
 	                payResult(IAPWrapper.PAYRESULT_FAIL, "Wechat client has not installed");
 	            }
 			}
 		});
 	}
+	
+	private boolean isWXAppInstalledAndSupported() {
+		IWXAPI api = SDKWrapper.getInstance().getApi();
+        return api.isWXAppInstalled() && api.isWXAppSupportAPI();
+    }
 
 	@Override
 	public void setDebugMode(boolean debug) {
@@ -115,26 +121,21 @@ public class IAPAdapter implements InterfaceIAP {
 
 	@Override
 	public String getSDKVersion() {
-		return SDK_VERSION;
+		return SDKWrapper.getInstance().getSDKVersion();
 	}
 
-	private static void payResult(int ret, String msg) {
-		logD("Alipay result : " + ret + " msg : " + msg);
+	public static void payResult(int ret, String msg) {
+		logD("Pay result : " + ret + " msg : " + msg);
 		IAPWrapper.onPayResult(mInstance, ret, msg);		
 	}
 
 	@Override
 	public String getPluginVersion() {
-		return PLUGIN_VERSION;
+		return SDKWrapper.getInstance().getPluginVersion();
 	}
 	
 	@Override
 	public String getPluginName() {
-		return PLUGIN_NAME;
+		return SDKWrapper.getInstance().getPluginName();
 	}
-	
-	private boolean isWXAppInstalledAndSupported() {
-        return mWxApi.isWXAppInstalled() && mWxApi.isWXAppSupportAPI();
-    }
-
 }
