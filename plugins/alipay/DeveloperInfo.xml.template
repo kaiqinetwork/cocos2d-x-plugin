@@ -3,11 +3,14 @@
     <PluginList>
         <Plugin className="alipay/IAPAdapter" />
     </PluginList>
+    <!-- 联网版不需要配置参数 --> 
     <ParamList>
+        <!-- 合作商编号 --> 
         <Param name="AlipayPartner" value="" />
         <Param name="AlipaySellerId" value="" />
         <Param name="AlipayPrivateKey" value="" />
         <Param name="AlipayPublicKey" value="" />
+        <!-- 支付回调地址 --> 
         <Param name="AlipayPrivateNotifyUrl" value="" />
     </ParamList>
 </DeveloperInfo>
