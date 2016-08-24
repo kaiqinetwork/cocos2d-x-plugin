@@ -24,7 +24,7 @@ import android.app.Activity;
 import android.content.Context;
 
 public class UserAdapter implements InterfaceUser {
-	private static final String LOG_TAG = "BDGame.UserAdapter";
+	private static final String LOG_TAG = "bdgame.UserAdapter";
     private Activity mActivity;
     private UserAdapter mAdapter;
 
@@ -43,8 +43,8 @@ public class UserAdapter implements InterfaceUser {
 	public void login() {
 	    PluginWrapper.runOnMainThread(new Runnable() {
 	        public void run() {
-	            if (BDGameWrapper.getInstance().isInited()) {
-	            	BDGameWrapper.getInstance().userLogin(mActivity, new ILoginCallback() {
+	            if (SDKWrapper.getInstance().isInited()) {
+	            	SDKWrapper.getInstance().userLogin(mActivity, new ILoginCallback() {
 	                    public void onSuccessed(int code, String msg) {
 	                    	actionResult(UserWrapper.ACTION_RET_LOGIN_SUCCESS, msg);
 	                    }
@@ -65,7 +65,7 @@ public class UserAdapter implements InterfaceUser {
 		 PluginWrapper.runOnMainThread(new Runnable() {
 			public void run() {
 			    BDGameSDK.logout();
-			    BDGameWrapper.getInstance().setLoggedIn(false);
+			    SDKWrapper.getInstance().setLoggedIn(false);
 			    actionResult(UserWrapper.ACTION_RET_LOGOUT_SUCCESS, "logout success");
 			}
 		 });
@@ -74,7 +74,7 @@ public class UserAdapter implements InterfaceUser {
 	public void showToolBar(int position) {
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
-                if (BDGameWrapper.getInstance().isLoggedIn()) {
+                if (SDKWrapper.getInstance().isLoggedIn()) {
                     BDGameSDK.showFloatView(mActivity);
                 } else {
                 	logD("not login");
@@ -146,18 +146,18 @@ public class UserAdapter implements InterfaceUser {
 
 	@Override
 	public boolean isLoggedIn() {
-		return BDGameWrapper.getInstance().isLoggedIn();
+		return SDKWrapper.getInstance().isLoggedIn();
 
 	}
 
 	@Override
 	public String getUserId() {
-		return BDGameWrapper.getInstance().getUserId();
+		return SDKWrapper.getInstance().getUserId();
 	}
 	
 	@Override
 	public String getAccessToken() {
-		return BDGameWrapper.getInstance().getAccessToken();
+		return SDKWrapper.getInstance().getAccessToken();
 	}
 
 	@Override
@@ -167,17 +167,17 @@ public class UserAdapter implements InterfaceUser {
 
 	@Override
 	public String getSDKVersion() {
-		return BDGameWrapper.getInstance().getSDKVersion();
+		return SDKWrapper.getInstance().getSDKVersion();
 	}
 
 	@Override
 	public String getPluginVersion() {
-		return BDGameWrapper.getInstance().getPluginVersion();
+		return SDKWrapper.getInstance().getPluginVersion();
 	}
 
 	@Override
 	public String getPluginName() {
-		return BDGameWrapper.getInstance().getPluginName();
+		return SDKWrapper.getInstance().getPluginName();
 	}
 	
 	protected void logE(String msg, Exception e) {

@@ -14,7 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 
 public class IAPAdapter implements InterfaceIAP {
-	private static final String LOG_TAG = "BDGame.IAPAdapter";
+	private static final String LOG_TAG = "bdgame.IAPAdapter";
 	
 	private static boolean mDebug = false;
 	private static IAPAdapter mInstance = null;
@@ -32,7 +32,7 @@ public class IAPAdapter implements InterfaceIAP {
 		final Hashtable<String, String> curDevInfo = devInfo;
 		PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
-            	if (!BDGameWrapper.getInstance().initSDK(mActivity, curDevInfo, mInstance, new ILoginCallback() {
+            	if (!SDKWrapper.getInstance().initSDK(mActivity, curDevInfo, mInstance, new ILoginCallback() {
                     public void onSuccessed(int code, String msg) {
                         payResult(IAPWrapper.PAYRESULT_INIT_SUCCESS, msg);
                     }
@@ -41,7 +41,7 @@ public class IAPAdapter implements InterfaceIAP {
                         payResult(IAPWrapper.PAYRESULT_INIT_FAIL, "initSDK failed! " + msg);
                     }
                 })) {
-                    payResult(IAPWrapper.PAYRESULT_INIT_FAIL, "BDGameWrapper.getInstance().initSDK return false");
+                    payResult(IAPWrapper.PAYRESULT_INIT_FAIL, "SDKWrapper.getInstance().initSDK return false");
                 }
             }
         });
@@ -59,17 +59,17 @@ public class IAPAdapter implements InterfaceIAP {
 
 	@Override
 	public String getSDKVersion() {
-		return BDGameWrapper.getInstance().getSDKVersion();
+		return SDKWrapper.getInstance().getSDKVersion();
 	}
 	
 	@Override
 	public String getPluginVersion() {
-		return BDGameWrapper.getInstance().getPluginVersion();
+		return SDKWrapper.getInstance().getPluginVersion();
 	}
 	
 	@Override
 	public String getPluginName() {
-		return BDGameWrapper.getInstance().getPluginName();
+		return SDKWrapper.getInstance().getPluginName();
 	}
 	
 	protected static void logE(String msg, Exception e) {

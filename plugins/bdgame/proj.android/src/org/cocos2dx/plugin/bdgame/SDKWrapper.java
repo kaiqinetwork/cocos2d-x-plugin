@@ -26,13 +26,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-public class BDGameWrapper {
+public class SDKWrapper {
 	private static final String CHANNEL = "bdgame";
-    private static final String LOG_TAG = "BDGameWrapper";
+    private static final String LOG_TAG = "bdgame.SDKWrapper";
     private static final String PLUGIN_NAME = "BDGame";
     private static final String PLUGIN_VERSION = "1.0.0";
     private static final String SDK_VERSION = "3.7.1";
-    private static BDGameWrapper mInstance;
+    private static SDKWrapper mInstance;
     private String mBaiduGameAppId;
     private String mBaiduGameAppKey;
     private String mBaiduGameOrientation;
@@ -46,7 +46,7 @@ public class BDGameWrapper {
     private String mUid;
     private String mAccessToken;
 
-    public BDGameWrapper() {
+    public SDKWrapper() {
         this.mAccontSwitchListener = null;
         this.mActivity = null;
         this.mDebug = false;
@@ -58,9 +58,9 @@ public class BDGameWrapper {
         mInstance = null;
     }
 
-    public static BDGameWrapper getInstance() {
+    public static SDKWrapper getInstance() {
         if (mInstance == null) {
-            mInstance = new BDGameWrapper();
+            mInstance = new SDKWrapper();
         }
         return mInstance;
     }
