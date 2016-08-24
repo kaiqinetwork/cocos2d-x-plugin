@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DeveloperInfo>
     <PluginList>
-        <Plugin className="alipay/IAPAdapter" />
+        <Plugin className="wxpay/IAPAdapter" />
+        <Plugin className="wxpay/ShareAdapter" />
     </PluginList>
     <ParamList>
-        <Param name="WxpayAppId" value="" />
+        <Param name="WXAppId" value="" />
     </ParamList>
 </DeveloperInfo>
