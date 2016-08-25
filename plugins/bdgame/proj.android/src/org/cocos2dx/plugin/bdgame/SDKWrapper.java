@@ -196,7 +196,7 @@ public class SDKWrapper {
                     switch (resultCode) {
                         case PackageUtils.INSTALL_FAILED_MEDIA_UNAVAILABLE /*-20*/:
                         	mLoggedIn = false;
-                            listener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
+                        	mAccontSwitchListener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
                             break;
                         case HttpRouteDirector.COMPLETE /*0*/:
                             logD("\u5207\u6362\u8d26\u53f7 LOGIN_SUCCESS");
