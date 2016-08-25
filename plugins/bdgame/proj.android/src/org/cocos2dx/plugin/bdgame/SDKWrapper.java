@@ -106,9 +106,11 @@ public class SDKWrapper {
                             mUserAdapter.getAnnouncementInfo();
                         }
                         listener.onSuccessed(UserWrapper.ACTION_RET_INIT_SUCCESS, "INIT_SUCCESS");
+                        break;
                     default:
                         mInited = false;
                         listener.onFailed(UserWrapper.ACTION_RET_INIT_FAIL, "INIT_FAIL");
+                        break;
                 }
             }
 
@@ -193,13 +195,18 @@ public class SDKWrapper {
                 if (mAccontSwitchListener != null) {
                     switch (resultCode) {
                         case PackageUtils.INSTALL_FAILED_MEDIA_UNAVAILABLE /*-20*/:
+                        	mLoggedIn = false;
+                            listener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
+                            break;
                         case HttpRouteDirector.COMPLETE /*0*/:
                             logD("\u5207\u6362\u8d26\u53f7 LOGIN_SUCCESS");
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
+                            break;
                         default:
                             mLoggedIn = false;
                             mAccontSwitchListener.onFailed(UserWrapper.ACTION_RET_ACCOUNTSWITCH_FAIL, resultDesc);
+                            break;
                     }
                 }
             }
@@ -235,12 +242,15 @@ public class SDKWrapper {
                         case PackageUtils.INSTALL_FAILED_MEDIA_UNAVAILABLE /*-20*/:
                             mLoggedIn = false;
                             listener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
+                            break;
                         case HttpRouteDirector.COMPLETE /*0*/:
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
+                            break;
                         default:
                             mLoggedIn = false;
                             listener.onFailed(UserWrapper.ACTION_RET_LOGIN_FAIL, "login fail");
+                            break;
                     }
                 }
 
