@@ -3,6 +3,7 @@ package org.cocos2dx.plugin.bdgame;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
+import org.cocos2dx.plugin.IAPWrapper;
 import org.cocos2dx.plugin.ILoginCallback;
 import org.cocos2dx.plugin.InterfaceUser;
 import org.cocos2dx.plugin.PluginHelper;
@@ -26,18 +27,33 @@ import android.content.Context;
 public class UserAdapter implements InterfaceUser {
 	private static final String LOG_TAG = "bdgame.UserAdapter";
     private Activity mActivity;
-    private UserAdapter mAdapter;
+    private UserAdapter mInstance;
 
     public UserAdapter(Context context) {
         mActivity = (Activity)context;
-        mAdapter = this;
+        mInstance = this;
         configDeveloperInfo(PluginWrapper.getDeveloperInfo());
     }
 
 	@Override
 	public void configDeveloperInfo(Hashtable<String, String> devInfo) {
-		// TODO Auto-generated method stub
-		
+		logD("configDeveloperInfo invoked " + devInfo.toString());
+		final Hashtable<String, String> curDevInfo = devInfo;
+		PluginWrapper.runOnMainThread(new Runnable() {
+            public void run() {
+            	if (!SDKWrapper.getInstance().initSDK(mActivity, curDevInfo, mInstance, new ILoginCallback() {
+                    public void onSuccessed(int code, String msg) {
+                        actionResult(UserWrapper.ACTION_RET_INIT_SUCCESS, msg);
+                    }
+
+                    public void onFailed(int code, String msg) {
+                        actionResult(UserWrapper.ACTION_RET_INIT_FAIL, msg);
+                    }
+                })) {
+                    actionResult(UserWrapper.ACTION_RET_INIT_FAIL, "SDKWrapper.getInstance().initSDK return false");
+                }
+            }
+        });
 	}
 
 	public void login() {
@@ -141,7 +157,7 @@ public class UserAdapter implements InterfaceUser {
 
     public void actionResult(int code, String msg) {
         logD("actionResult code=" + code + " msg=" + msg);
-        UserWrapper.onActionResult(mAdapter, code, msg);
+        UserWrapper.onActionResult(mInstance, code, msg);
     }
 
 	@Override
