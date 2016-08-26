@@ -19,6 +19,7 @@ import com.baidu.gamesdk.BDGameSDKSetting;
 import com.baidu.gamesdk.BDGameSDKSetting.Domain;
 import com.baidu.gamesdk.BDGameSDKSetting.Orientation;
 import com.baidu.gamesdk.IResponse;
+import com.baidu.gamesdk.ResultCode;
 import com.duoku.platform.download.utils.PackageUtils;
 import com.duoku.platform.util.Constants;
 
@@ -99,7 +100,7 @@ public class SDKWrapper {
         BDGameSDK.init(act, bdGameSDKSetting, new IResponse<Void>() {
         	public void onResponse(int resultCode, String resultDesc, Void extraData) {
                 switch (resultCode) {
-                    case HttpRouteDirector.COMPLETE /*0*/:
+                    case ResultCode.INIT_SUCCESS:
                     	logI("isSupportScreenRecord=" + BDGameSDK.isSupportScreenRecord(mActivity));
                         mInited = true;
                         if (showAnnouncement) {
@@ -194,15 +195,17 @@ public class SDKWrapper {
                 logD("onResponse:resultDesc" + resultDesc);
                 if (mAccontSwitchListener != null) {
                     switch (resultCode) {
-                        case PackageUtils.INSTALL_FAILED_MEDIA_UNAVAILABLE /*-20*/:
+                    	case ResultCode.LOGIN_CANCEL:
                         	mLoggedIn = false;
                         	mAccontSwitchListener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
                             break;
-                        case HttpRouteDirector.COMPLETE /*0*/:
+                    	case ResultCode.LOGIN_SUCCESS:
                             logD("\u5207\u6362\u8d26\u53f7 LOGIN_SUCCESS");
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
+                            mAccontSwitchListener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, "login success");
                             break;
+                        case ResultCode.LOGIN_FAIL:
                         default:
                             mLoggedIn = false;
                             mAccontSwitchListener.onFailed(UserWrapper.ACTION_RET_ACCOUNTSWITCH_FAIL, resultDesc);
@@ -239,14 +242,16 @@ public class SDKWrapper {
         		logD("resultCode:" + resultCode + "resultDesc:" + resultDesc);
                 if (listener != null) {
                     switch (resultCode) {
-                        case PackageUtils.INSTALL_FAILED_MEDIA_UNAVAILABLE /*-20*/:
+                        case ResultCode.LOGIN_CANCEL:
                             mLoggedIn = false;
                             listener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
                             break;
-                        case HttpRouteDirector.COMPLETE /*0*/:
+                        case ResultCode.LOGIN_SUCCESS:
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
+                            listener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, "login success");
                             break;
+                        case ResultCode.LOGIN_FAIL:
                         default:
                             mLoggedIn = false;
                             listener.onFailed(UserWrapper.ACTION_RET_LOGIN_FAIL, "login fail");
