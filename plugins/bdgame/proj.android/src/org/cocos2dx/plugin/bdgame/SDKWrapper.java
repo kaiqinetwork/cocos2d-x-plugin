@@ -85,7 +85,7 @@ public class SDKWrapper {
         mInited = true;
         final boolean showAnnouncement = Boolean.parseBoolean(devInfo.get("BDGameAnnouncement"));
         setDuoKuSDK(devInfo.get("BDGameDKAppId"), devInfo.get("BDGameDKAppKey"));
-        //mBaiduGameOrientation = PluginHelper.getApplicationOrientation();
+        mBaiduGameOrientation = devInfo.get("BDGameOrientation");
         BDGameSDKSetting bdGameSDKSetting = new BDGameSDKSetting();
         if ("landscape".equals(mBaiduGameOrientation)) {
         	bdGameSDKSetting.setOrientation(Orientation.LANDSCAPE);
