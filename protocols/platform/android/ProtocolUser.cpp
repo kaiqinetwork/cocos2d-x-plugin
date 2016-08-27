@@ -90,5 +90,16 @@ std::string ProtocolUser::getAccessToken()
 	return PluginUtils::callJavaStringFuncWithName(this, "getAccessToken");
 }
 
+void ProtocolUser::showToolbar(int position)
+{
+	PluginParam param(position);
+	callFuncWithParam("showToolbar", &param);
+}
+
+void ProtocolUser::hideToolbar()
+{
+	PluginUtils::callJavaStringFuncWithName(this, "hideToolbar");
+}
+
 }} // namespace cocos2d { namespace plugin {
 

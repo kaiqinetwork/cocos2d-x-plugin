@@ -56,6 +56,17 @@ typedef enum
 	kUserExtension = 50000 /**< enum value is  extension code . */
 } UserActionResultCode;
 
+/** @brief ToolBarPlace enum, with inline docs */
+typedef enum
+{
+    kToolBarTopLeft = 1,/**< enum the toolbar is at topleft. */
+    kToolBarTopRight,/**< enum the toolbar is at topright. */
+    kToolBarMidLeft,/**< enum the toolbar is at midleft. */
+    kToolBarMidRight,/**< enum the toolbar is at midright. */
+    kToolBarBottomLeft,/**< enum the toolbar is at bottomleft. */
+    kToolBarBottomRight,/**< enum the toolbar is at bottomright. */
+} ToolBarPlace;
+
 class ProtocolUser : public PluginProtocol
 {
 public:
@@ -89,6 +100,10 @@ public:
      @brief get Access Token
      */
     std::string getAccessToken();
+
+    void showToolbar(int position);
+
+    void hideToolbar();
 
     /**
      @brief set login callback function

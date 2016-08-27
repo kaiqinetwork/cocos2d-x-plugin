@@ -87,7 +87,8 @@ public class UserAdapter implements InterfaceUser {
 		 });
 	}
 	
-	public void showToolBar(int position) {
+	@Override
+	public void showToolbar(int position) {
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
                 if (SDKWrapper.getInstance().isLoggedIn()) {
@@ -99,7 +100,8 @@ public class UserAdapter implements InterfaceUser {
         });
     }
 
-    public void hideToolBar() {
+	@Override
+    public void hideToolbar() {
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
                 BDGameSDK.closeFloatView(mActivity);
