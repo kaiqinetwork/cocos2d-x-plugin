@@ -201,6 +201,7 @@ public class SDKWrapper {
                             break;
                     	case ResultCode.LOGIN_SUCCESS:
                             logD("\u5207\u6362\u8d26\u53f7 LOGIN_SUCCESS");
+                            mLoggedIn = true;
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
                             mAccontSwitchListener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, "login success");
@@ -247,6 +248,7 @@ public class SDKWrapper {
                             listener.onFailed(UserWrapper.ACTION_RET_LOGIN_CANCEL, "login cancel");
                             break;
                         case ResultCode.LOGIN_SUCCESS:
+                        	mLoggedIn = true;
                             mUid = BDGameSDK.getLoginUid();
                             mAccessToken = BDGameSDK.getLoginAccessToken();
                             listener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, "login success");
