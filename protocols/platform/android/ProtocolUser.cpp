@@ -93,7 +93,7 @@ std::string ProtocolUser::getAccessToken()
 void ProtocolUser::showToolbar(int position)
 {
 	PluginParam param(position);
-	callFuncWithParam("showToolbar", &param);
+	callFuncWithParam("showToolbar", &param, NULL);
 }
 
 void ProtocolUser::hideToolbar()

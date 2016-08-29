@@ -95,7 +95,7 @@ void PluginProtocol::callFuncWithParam(const char* funcName, PluginParam* param,
             pArg = va_arg(argp, PluginParam*);
             if (pArg == NULL)
                 break;
-
+			
             allParams.push_back(pArg);
         }
         va_end(argp);
@@ -121,9 +121,11 @@ void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginP
         PluginParam* pRetParam = NULL;
         bool needDel = false;
         if (nParamNum == 1) {
-            pRetParam = params[0];
-        } else {
-            std::map<std::string, PluginParam*> allParams;
+			pRetParam = params[0];
+		}
+		else 
+		{
+			std::map<std::string, PluginParam*> allParams;
             for (int i = 0; i < nParamNum; i++)
             {
                 PluginParam* pArg = params[i];
