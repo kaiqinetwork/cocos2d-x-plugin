@@ -34,11 +34,10 @@ public interface InterfaceUser {
 	public boolean isLoggedIn();
 	public String getUserId();
 	public String getAccessToken();
-	public void showToolbar(int position);
-	public void hideToolbar();
 	public boolean isSupportFunction(String funcName);
 	public void setDebugMode(boolean debug);
 	public String getSDKVersion();
 	public String getPluginVersion();
 	public String getPluginName();
+	public String getChannel();
 }

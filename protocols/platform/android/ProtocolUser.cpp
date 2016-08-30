@@ -92,13 +92,73 @@ std::string ProtocolUser::getAccessToken()
 
 void ProtocolUser::showToolbar(int position)
 {
+	if (!isFunctionSupported("showToolbar"))
+		return;
+	
 	PluginParam param(position);
 	callFuncWithParam("showToolbar", &param, NULL);
 }
 
 void ProtocolUser::hideToolbar()
 {
-	PluginUtils::callJavaStringFuncWithName(this, "hideToolbar");
+	if (!isFunctionSupported("hideToolbar"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "hideToolbar");
+}
+
+void ProtocolUser::enterPlatform()
+{
+	if (!isFunctionSupported("enterPlatform"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "enterPlatform");
+}
+
+void ProtocolUser::exit()
+{
+	if (!isFunctionSupported("exit"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "exit");
+}
+
+void ProtocolUser::accountSwitch()
+{
+	if (!isFunctionSupported("accountSwitch"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "accountSwitch");
+}
+
+void ProtocolUser::realNameRegister()
+{
+	if (!isFunctionSupported("realNameRegister"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "realNameRegister");
+}
+
+void ProtocolUser::antiAddictionQuery()
+{
+	if (!isFunctionSupported("antiAddictionQuery"))
+		return;
+
+	PluginUtils::callJavaFunctionWithName(this, "antiAddictionQuery");
+}
+
+void ProtocolUser::submitLoginGameRole(StringMap *data)
+{
+	if (data == NULL || !isFunctionSupported("submitLoginGameRole"))
+		return;
+
+	PluginParam param(data);
+	callFuncWithParam("submitLoginGameRole", &param, NULL);
+}
+
+std::string ProtocolUser::getChannel()
+{
+	return PluginUtils::callJavaStringFuncWithName(this, "getChannel");
 }
 
 }} // namespace cocos2d { namespace plugin {

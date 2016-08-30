@@ -75,6 +75,8 @@ public:
 
     typedef std::function<void(int, std::string&)> ProtocolUserCallback;
 
+	std::string getChannel();
+
     /**
      @brief User login
      */
@@ -101,9 +103,23 @@ public:
      */
     std::string getAccessToken();
 
+	void enterPlatform();
+
+	void accountSwitch();
+
+	void exit();
+
+	void pause();
+
     void showToolbar(int position);
 
     void hideToolbar();
+
+	void realNameRegister();
+
+	void antiAddictionQuery();
+
+	void submitLoginGameRole(StringMap *data);
 
     /**
      @brief set login callback function
