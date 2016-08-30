@@ -55,7 +55,8 @@ public class UserAdapter implements InterfaceUser {
             }
         });
 	}
-
+	
+	@Override
 	public void login() {
 	    PluginWrapper.runOnMainThread(new Runnable() {
 	        public void run() {
@@ -87,7 +88,6 @@ public class UserAdapter implements InterfaceUser {
 		 });
 	}
 	
-	@Override
 	public void showToolbar(int position) {
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
@@ -100,8 +100,7 @@ public class UserAdapter implements InterfaceUser {
         });
     }
 
-	@Override
-    public void hideToolbar() {
+	public void hideToolbar() {
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
                 BDGameSDK.closeFloatView(mActivity);
@@ -118,7 +117,7 @@ public class UserAdapter implements InterfaceUser {
     }
     
     public void exit() {
-       logD("exit() invoked!");
+    	logD("exit() invoked!");
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
                 BDGameSDK.gameExit(mActivity, new OnGameExitListener() {
@@ -129,9 +128,9 @@ public class UserAdapter implements InterfaceUser {
             }
         });
     }
-
+    
     public void antiAddictionQuery() {
-        PluginWrapper.runOnMainThread(new Runnable() {
+    	PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
                 BDGameSDK.queryLoginUserAuthenticateState(mActivity, new IResponse<Integer>() {
                     public void onResponse(int resultCode, String resultDesc, Integer extraData) {
@@ -223,5 +222,10 @@ public class UserAdapter implements InterfaceUser {
             }
         }
         return false;
+	}
+
+	@Override
+	public String getChannel() {
+		return SDKWrapper.getInstance().getChannel();
 	}
 }
