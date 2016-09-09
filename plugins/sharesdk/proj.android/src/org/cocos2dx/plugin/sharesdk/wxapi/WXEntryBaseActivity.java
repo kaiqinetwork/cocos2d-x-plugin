@@ -15,7 +15,7 @@ import cn.sharesdk.wechat.utils.WXMediaMessage;
 import cn.sharesdk.wechat.utils.WechatHandlerActivity;
 
 /** 微信客户端回调activity示例 */
-public class WXEntryActivity extends WechatHandlerActivity {
+public class WXEntryBaseActivity extends WechatHandlerActivity {
 
 	/**
 	 * 处理微信发出的向第三方应用请求app message

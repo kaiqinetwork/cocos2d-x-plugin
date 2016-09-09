@@ -103,7 +103,7 @@ public class ShareAdapter implements InterfaceShare {
 		PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
             	 if (cpInfo == null) {
-                     shareResult(1, "share param is null");
+                     shareResult(ShareWrapper.SHARERESULT_FAIL, "share param is null");
                  } else if (cpInfo.containsKey("title") && cpInfo.containsKey("titleUrl") && 
                 		 cpInfo.containsKey("site") && cpInfo.containsKey("siteUrl")) {
                      OnekeyShare oks = new OnekeyShare();
@@ -141,20 +141,20 @@ public class ShareAdapter implements InterfaceShare {
                      oks.disableSSOWhenAuthorize();
                      oks.setCallback(new PlatformActionListener() {
                          public void onError(Platform arg0, int arg1, Throwable arg2) {
-                             shareResult(1, arg2.getMessage());
+                             shareResult(ShareWrapper.SHARERESULT_FAIL, arg2.getMessage());
                          }
 
                          public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-                             shareResult(0, arg2.toString());
+                             shareResult(ShareWrapper.SHARERESULT_SUCCESS, arg2.toString());
                          }
 
                          public void onCancel(Platform arg0, int arg1) {
-                             shareResult(2, "shareSdk oncancel");
+                             shareResult(ShareWrapper.SHARERESULT_CANCEL, "shareSdk oncancel");
                          }
                      });
                      oks.show(mContext);
                  } else {
-                     shareResult(1, "share param is incomplete");
+                     shareResult(ShareWrapper.SHARERESULT_FAIL, "share param is incomplete");
                  }
             }
         });

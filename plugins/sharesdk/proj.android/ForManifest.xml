@@ -11,4 +11,13 @@
         <uses-permission android:name="android.permission.WRITE_SETTINGS" />
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     </permissionCfg>
+    
+    <applicationCfg>
+	    <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true" />
+    </applicationCfg>
 </manifestConfig> 
