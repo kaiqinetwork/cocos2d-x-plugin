@@ -46,6 +46,7 @@ public class SDKWrapper {
     private boolean mLoggedIn;
     private String mUid;
     private String mAccessToken;
+    private String mIAPDebugCallbackUrl;
 
     public SDKWrapper() {
         this.mAccontSwitchListener = null;
@@ -83,6 +84,7 @@ public class SDKWrapper {
             return false;
         }
         mInited = true;
+        mDebug = Boolean.parseBoolean(devInfo.get("BDGameDebugMode"));
         final boolean showAnnouncement = Boolean.parseBoolean(devInfo.get("BDGameAnnouncement"));
         setDuoKuSDK(devInfo.get("BDGameDKAppId"), devInfo.get("BDGameDKAppKey"));
         mBaiduGameOrientation = devInfo.get("BDGameOrientation");
@@ -96,6 +98,7 @@ public class SDKWrapper {
         bdGameSDKSetting.setAppKey(mBaiduGameAppKey);
         if (mDebug) {
             bdGameSDKSetting.setDomain(Domain.DEBUG);
+            mIAPDebugCallbackUrl = devInfo.get("BDGameIAPDebugCallbackUrl");
         }
         BDGameSDK.init(act, bdGameSDKSetting, new IResponse<Void>() {
         	public void onResponse(int resultCode, String resultDesc, Void extraData) {
@@ -279,6 +282,10 @@ public class SDKWrapper {
 
     public String getAccessToken() {
         return mAccessToken;
+    }
+    
+    public String getIAPDebugCallbackUrl() {
+    	return mIAPDebugCallbackUrl;
     }
 
     public String getSDKVersion() {

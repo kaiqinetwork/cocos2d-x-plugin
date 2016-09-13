@@ -11,5 +11,7 @@
         <Param name="BDGameOrientation" value="" />
         <Param name="BDGameDKAppId" value="" />
         <Param name="BDGameDKAppKey" value="" />
+        <Param name="BDGameDebugMode" value="" />
+        <Param name="BDGameIAPDebugCallbackUrl" value="" />
     </ParamList>
 </DeveloperInfo>
