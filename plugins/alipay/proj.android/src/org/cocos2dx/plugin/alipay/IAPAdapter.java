@@ -131,7 +131,13 @@ public class IAPAdapter implements InterfaceIAP {
 				/**
 				 * 特别注意，这里的签名逻辑需要放在服务端，切勿将私钥泄露在代码中！
 				 */
-				String sign = productInfo.get("sign");
+				String sign;
+				if (productInfo.get("Sign") != null) {
+					sign = productInfo.get("Sign");
+				}
+				else {
+					sign = productInfo.get("sign");
+				}
 				if (sign == null) {
 					sign = sign(orderInfo);
 				}
@@ -144,7 +150,13 @@ public class IAPAdapter implements InterfaceIAP {
 					e.printStackTrace();
 				}
 				
-				String signType = productInfo.get("sign_type");
+				String signType;
+				if (productInfo.get("SignType") != null) {
+					signType = productInfo.get("SignType");
+				}
+				else {
+					signType = productInfo.get("sign_type");
+				}
 				if (signType == null) {
 					signType = getSignType();
 				}
@@ -197,15 +209,80 @@ public class IAPAdapter implements InterfaceIAP {
 	private String getOrderInfo(Hashtable<String, String> info) {
 		String strRet = null;
 		try {
-			String price = info.get("total_fee") == null ? info.get("product_price") : info.get("total_fee");
-			String productName = info.get("subject") == null ? info.get("product_name") : info.get("subject");
-			String productDesc = info.get("body") == null ? info.get("product_desc") : info.get("body");
-			String outTradeNo = info.get("out_trade_no");
-			String partner = info.get("partner");
-			String sellerId = info.get("seller_id");
-			String notifyUrl = info.get("notify_url");
-			String inputCharset = info.get("_input_charset");
-			String itBPay = info.get("it_b_pay");
+			String productName;
+			String productDesc;
+			String totalFee;
+			String outTradeNo;
+			String partner;
+			String sellerId;
+			String notifyUrl;
+			String inputCharset;
+			String itBPay;
+			
+			if (info.get("subject") != null) {
+				productName = info.get("subject");
+			}
+			else if (info.get("Subject") != null) {
+				productName = info.get("Subject");
+			}
+			else {
+				productName = info.get("product_name");
+			}
+			if (info.get("body") != null) {
+				productDesc = info.get("body");
+			}
+			else if (info.get("Body") != null) {
+				productDesc = info.get("Body");
+			}
+			else {
+				productDesc = info.get("product_desc");
+			}
+			if (info.get("total_fee") != null) {
+				totalFee = info.get("total_fee");
+			}
+			else if (info.get("TotalFee") != null) {
+				totalFee = info.get("TotalFee");
+			}
+			else {
+				float totalPrice = Float.parseFloat((String) info.get("product_price")) * ((float) Integer.parseInt((String) info.get("product_count")));
+				totalFee = Float.toString(totalPrice);
+			}
+			if (info.get("OutTradeNo") != null) {
+				outTradeNo = info.get("OutTradeNo");
+			}
+			else {
+				outTradeNo = info.get("out_trade_no");
+			}
+			if (info.get("Partner") != null) {
+				partner = info.get("Partner");
+			}
+			else {
+				partner = info.get("partner");
+			}
+			if (info.get("SellerId") != null) {
+				sellerId = info.get("SellerId");
+			}
+			else {
+				sellerId = info.get("seller_id");
+			}
+			if (info.get("NotifyUrl") != null) {
+				notifyUrl = info.get("NotifyUrl");
+			}
+			else {
+				notifyUrl = info.get("notify_url");
+			}
+			if (info.get("InputCharset") != null) {
+				inputCharset = info.get("InputCharset");
+			}
+			else {
+				inputCharset = info.get("_input_charset");
+			}
+			if (info.get("ItBPay") != null) {
+				itBPay = info.get("ItBPay");
+			}
+			else {
+				itBPay = info.get("it_b_pay");
+			}
 
 			strRet = "_input_charset=\"" + (inputCharset == null ? "utf-8" : inputCharset) + "\""
 					+ "&body=\"" + productDesc + "\""
@@ -217,7 +294,7 @@ public class IAPAdapter implements InterfaceIAP {
 					+ "&seller_id=\"" + (sellerId == null ? AlipayConfig.SELLER_ID : sellerId) + "\""
 					+ "&service=\"mobile.securitypay.pay\""
 					+ "&subject=\"" + productName + "\""
-					+ "&total_fee=\"" + price + "\""
+					+ "&total_fee=\"" + totalFee + "\""
 					;
 		} catch (Exception e) {
 			logE("Product info parse error", e);
