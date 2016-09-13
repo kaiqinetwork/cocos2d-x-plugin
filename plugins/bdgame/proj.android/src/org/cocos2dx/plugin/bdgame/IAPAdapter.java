@@ -103,13 +103,18 @@ public class IAPAdapter implements InterfaceIAP {
                     switch (resultCode) {
                         case ResultCode.PAY_SUBMIT_ORDER /*-32*/:
                             payResult(IAPWrapper.PAYRESULT_SUCCESS, resultDesc);
+                            break;
                         case ResultCode.PAY_FAIL /*-31*/:
                             payResult(IAPWrapper.PAYRESULT_FAIL, resultDesc);
+                            break;
                         case ResultCode.PAY_CANCEL /*-30*/:
                             payResult(IAPWrapper.PAYRESULT_CANCEL, resultDesc);
+                            break;
                         case ResultCode.PAY_SUCCESS /*0*/:
                             payResult(IAPWrapper.PAYRESULT_SUCCESS, resultDesc);
+                            break;
                         default:
+                        	break;
                     }
                 }
             });
