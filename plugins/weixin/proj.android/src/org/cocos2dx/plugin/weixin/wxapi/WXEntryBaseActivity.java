@@ -1,4 +1,4 @@
-package org.cocos2dx.plugin.wxpay.wxapi;
+package org.cocos2dx.plugin.weixin.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.util.Log;
 
 import org.cocos2dx.plugin.ShareWrapper;
 import org.cocos2dx.plugin.UserWrapper;
-import org.cocos2dx.plugin.wxpay.SDKWrapper;
-import org.cocos2dx.plugin.wxpay.ShareAdapter;
+import org.cocos2dx.plugin.weixin.SDKWrapper;
+import org.cocos2dx.plugin.weixin.ShareAdapter;
 
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -21,13 +21,13 @@ import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.wxop.stat.StatAccount;
 
-public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-	private static final String TAG = "wxpay.wxapi.WXEntryActivity";
+public class WXEntryBaseActivity extends Activity implements IWXAPIEventHandler {
+	private static final String TAG = "weixin.wxapi.WXEntryActivity";
     private static final int TIMELINE_SUPPORTED_VERSION = 553779201;
     private IWXAPI mApi;
     BaseResp mResp;
 
-    public WXEntryActivity() {
+    public WXEntryBaseActivity() {
         mResp = null;
     }
 

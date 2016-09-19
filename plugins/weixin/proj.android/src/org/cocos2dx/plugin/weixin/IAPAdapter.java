@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-package org.cocos2dx.plugin.wxpay;
+package org.cocos2dx.plugin.weixin;
 
 import java.util.Hashtable;
 
@@ -40,7 +40,7 @@ import android.content.Context;
 
 public class IAPAdapter implements InterfaceIAP {
 
-	private static final String LOG_TAG = "wxpay.IAPAdapter";
+	private static final String LOG_TAG = "weixin.IAPAdapter";
 	
     private static boolean mDebug = false;
 	private static IAPAdapter mInstance = null;

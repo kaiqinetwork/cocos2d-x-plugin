@@ -8,14 +8,14 @@
         <!-- applicationCfg子节点里面是第三方SDK需要的activity、service、 receiver等所有配置 -->
 
        <activity
-            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXEntryActivity"
+            android:name="PACKAGE_NAME.wxapi.WXEntryActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXPayEntryActivity"
+            android:name="PACKAGE_NAME.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:launchMode="singleTop"

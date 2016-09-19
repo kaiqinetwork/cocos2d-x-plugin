@@ -1,4 +1,4 @@
-package org.cocos2dx.plugin.wxpay.wxapi;
+package org.cocos2dx.plugin.weixin.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,16 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 
 import org.cocos2dx.plugin.IAPWrapper;
-import org.cocos2dx.plugin.wxpay.IAPAdapter;
-import org.cocos2dx.plugin.wxpay.SDKWrapper;
+import org.cocos2dx.plugin.weixin.IAPAdapter;
+import org.cocos2dx.plugin.weixin.SDKWrapper;
+
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
-    private static final String TAG = "wxpay.wxapi.WXPayEntryActivity";
+public class WXPayEntryBaseActivity extends Activity implements IWXAPIEventHandler {
+    private static final String TAG = "weixin.wxapi.WXPayEntryActivity";
     private IWXAPI api;
 
     public void onCreate(Bundle savedInstanceState) {

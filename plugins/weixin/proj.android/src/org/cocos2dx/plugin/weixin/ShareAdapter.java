@@ -1,4 +1,4 @@
-package org.cocos2dx.plugin.wxpay;
+package org.cocos2dx.plugin.weixin;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -27,7 +27,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 
 public class ShareAdapter implements InterfaceShare {
-	private static final String LOG_TAG = "wxpay.ShareAdapter";
+	private static final String LOG_TAG = "weixin.ShareAdapter";
 	
     private static boolean mDebug = false;
 	private static ShareAdapter mInstance = null;

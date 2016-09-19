@@ -156,10 +156,5 @@ void ProtocolUser::submitLoginGameRole(StringMap *data)
 	callFuncWithParam("submitLoginGameRole", &param, NULL);
 }
 
-std::string ProtocolUser::getChannel()
-{
-	return PluginUtils::callJavaStringFuncWithName(this, "getChannel");
-}
-
 }} // namespace cocos2d { namespace plugin {
 

@@ -1,4 +1,4 @@
-package org.cocos2dx.plugin.wxpay;
+package org.cocos2dx.plugin.weixin;
 
 import java.util.Hashtable;
 
@@ -18,9 +18,8 @@ import android.app.Activity;
 import android.content.Context;
 
 public class SDKWrapper {
-	private static final String CHANNEL = "wxpay";
-    private static final String LOG_TAG = "wxpay.SDKWrapper";
-    private static final String PLUGIN_NAME = "Wxpay";
+	private static final String LOG_TAG = "weixin.SDKWrapper";
+    private static final String PLUGIN_NAME = "Weixin";
     private static final String PLUGIN_VERSION = "1.0.0";
     private static final String SDK_VERSION = "3.1.1";
     private static SDKWrapper mInstance;

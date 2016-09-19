@@ -1,4 +1,4 @@
-package org.cocos2dx.plugin.wxpay;
+package org.cocos2dx.plugin.weixin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,7 +49,7 @@ import android.util.Log;
 
 public class Util {
 	
-	private static final String TAG = "wxpay.Util";
+	private static final String TAG = "weixin.Util";
 	
 	public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();

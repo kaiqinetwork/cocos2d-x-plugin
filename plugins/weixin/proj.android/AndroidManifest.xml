@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.cocos2dx.plugin.wxpay"
+    package="org.cocos2dx.plugin.weixin"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -8,14 +8,14 @@
     <application>
         
         <activity
-            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXEntryActivity"
+            android:name="org.cocos2dx.plugin.weixin.wxapi.WXEntryBaseActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:name="org.cocos2dx.plugin.wxpay.wxapi.WXPayEntryActivity"
+            android:name="org.cocos2dx.plugin.weixin.wxapi.WXPayEntryBaseActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:launchMode="singleTop"

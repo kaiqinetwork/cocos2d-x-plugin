@@ -75,8 +75,6 @@ public:
 
     typedef std::function<void(int, std::string&)> ProtocolUserCallback;
 
-	std::string getChannel();
-
     /**
      @brief User login
      */

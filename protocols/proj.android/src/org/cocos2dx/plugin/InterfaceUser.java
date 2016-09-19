@@ -39,5 +39,4 @@ public interface InterfaceUser {
 	public String getSDKVersion();
 	public String getPluginVersion();
 	public String getPluginName();
-	public String getChannel();
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DeveloperInfo>
     <PluginList>
-        <Plugin className="wxpay/IAPAdapter" />
-        <Plugin className="wxpay/ShareAdapter" />
+        <Plugin className="weixin/IAPAdapter" />
+        <Plugin className="weixin/ShareAdapter" />
     </PluginList>
     <ParamList>
         <Param name="WXAppId" value="" />
