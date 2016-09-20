@@ -28,8 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class SDKWrapper {
-	private static final String CHANNEL = "BDGame";
-    private static final String LOG_TAG = "bdgame.SDKWrapper";
+	private static final String LOG_TAG = "bdgame.SDKWrapper";
     private static final String PLUGIN_NAME = "BDGame";
     private static final String PLUGIN_VERSION = "1.0.0";
     private static final String SDK_VERSION = "3.7.1";
@@ -300,10 +299,6 @@ public class SDKWrapper {
         return PLUGIN_NAME;
     }
     
-    public String getChannel() {
-        return CHANNEL;
-    }
-
     protected void logE(String msg, Exception e) {
         if (e == null) {
             PluginHelper.logE(LOG_TAG, msg);

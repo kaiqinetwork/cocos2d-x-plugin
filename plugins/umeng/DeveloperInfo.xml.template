@@ -5,9 +5,9 @@
     </PluginList>
     <ParamList>
         <Param name="UmengAppKey" value="" />
-        <Param name="UmengChannelKey" value="" />
-        <Param name="UmengScenarioType" value="" />
-        <Param name="UmengEnableCrashCatch" value="" />
-        <Param name="UmengDebugMode" value="" />
+        <Param name="UmengChannelKey" value="release" />
+        <Param name="UmengScenarioType" value="1" />
+        <Param name="UmengEnableCrashCatch" value="true" />
+        <Param name="UmengDebugMode" value="false" />
     </ParamList>
 </DeveloperInfo>

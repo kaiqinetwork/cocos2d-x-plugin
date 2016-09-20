@@ -223,9 +223,4 @@ public class UserAdapter implements InterfaceUser {
         }
         return false;
 	}
-
-	@Override
-	public String getChannel() {
-		return SDKWrapper.getInstance().getChannel();
-	}
 }
