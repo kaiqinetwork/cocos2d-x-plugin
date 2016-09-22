@@ -94,13 +94,13 @@ public class IAPAdapter implements InterfaceIAP {
 	                payResult(IAPWrapper.PAYRESULT_TIMEOUT, "Network not available!");
 	            } else if (isWXAppInstalledAndSupported()) {
                     PayReq req = new PayReq();
-                    req.appId = productInfo.get("app_id");
-                    req.partnerId = productInfo.get("partner_id");
-                    req.prepayId = productInfo.get("prepay_id");
-                    req.nonceStr = productInfo.get("nonce_str");
-                    req.timeStamp = productInfo.get("timestamp");
-                    req.packageValue = productInfo.get("package");
-                    req.sign = productInfo.get("sign");
+                    req.appId = productInfo.get("AppId");
+                    req.partnerId = productInfo.get("PartnerId");
+                    req.prepayId = productInfo.get("PrepayId");
+                    req.nonceStr = productInfo.get("NonceStr");
+                    req.timeStamp = productInfo.get("Timestamp");
+                    req.packageValue = productInfo.get("Package");
+                    req.sign = productInfo.get("Sign");
                     SDKWrapper.getInstance().getApi().sendReq(req);
 	            } else {
 	                payResult(IAPWrapper.PAYRESULT_FAIL, "Wechat client has not installed");
