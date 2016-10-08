@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo Orientation="" DebugMode="">
+    <PluginList>
+        <Plugin className="bdgamesingle/UserAdapter" />
+        <Plugin className="bdgamesingle/IAPAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="BDGameSingleAppId" value="" />
+        <Param name="BDGameSingleAppKey" value="" />
+        <Param name="BDGameSingleAppSecret" value="" />
+        <Param name="BDGameSingleAnnouncement" value="" />
+    </ParamList>
+</DeveloperInfo>
