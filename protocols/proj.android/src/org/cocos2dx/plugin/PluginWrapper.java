@@ -70,6 +70,7 @@ public class PluginWrapper {
     private static Hashtable<String, String> sPluginParams = new Hashtable<String, String>();
     private static Vector<String> sSupportPlugins = new Vector<String>();
     protected static String sAppChannel = null;
+    private static Hashtable<String, String> sAppInfo = new Hashtable<String, String>();
     
     public static void init(Context context) {
         sContext = context;
@@ -210,10 +211,16 @@ public class PluginWrapper {
     	try {
     		sSupportPlugins = new Vector<String>();
     		sPluginParams = new Hashtable<String, String>();
+    		sAppInfo = new Hashtable<String, String>();
         	String fileName = "plugins/DeveloperInfo.xml";
         	DocumentBuilder builder = factory.newDocumentBuilder();
             Document dom = builder.parse(sContext.getAssets().open(fileName));
             Element root = dom.getDocumentElement();
+            NamedNodeMap attributes = root.getAttributes();
+            if (attributes != null) {
+            	for(int i = 0; i < attributes.getLength(); i++)
+            		sAppInfo.put(attributes.item(i).getNodeName(), attributes.item(i).getNodeValue());
+            }
             NodeList items = root.getElementsByTagName("PluginList");
             if (items != null) {
             	NodeList childItems = ((Element)items.item(0)).getElementsByTagName("Plugin");
@@ -260,6 +267,14 @@ public class PluginWrapper {
             return new Vector<String>();
         else
             return sSupportPlugins;
+    }
+    
+    public static Hashtable<String, String> getAppInfo()
+    {
+        if(sAppInfo == null)
+            return new Hashtable<String, String>();
+        else
+            return sAppInfo;
     }
     
     public static String getAppChannel()

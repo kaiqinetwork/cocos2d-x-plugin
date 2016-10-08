@@ -10,6 +10,22 @@ public class PluginHelper {
     {
     }
 	
+	public static String getAppOrientation()
+    {
+        String orientation = PluginWrapper.getAppInfo().get("Orientation");
+        if (orientation == null)
+        	orientation = "auto";
+        return orientation;
+    }
+	
+	public static boolean getDebugMode()
+    {
+        String s = PluginWrapper.getAppInfo().get("DebugMode");
+        if (s != null && s.equals("true"))
+            return true;
+        return false;
+    }
+	
 	public static boolean networkReachable(Context context) {
 		boolean bRet = false;
 		try {
