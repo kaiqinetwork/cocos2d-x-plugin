@@ -84,10 +84,39 @@ public class IAPAdapter implements InterfaceIAP {
 	
 	private void payInSDK(Hashtable<String, String> payInfo) {
 		try {
-            final GamePropsInfo info = new GamePropsInfo(payInfo.get("PropsId"), 
-            		String.valueOf(Float.parseFloat(payInfo.get("product_price")) * ((float) Integer.parseInt((String) payInfo.get("TotalPrice")))), 
-            		payInfo.get("Title"), 
-            		payInfo.get("RechargeOrderId"));
+			String propsId;
+			if(payInfo.get("PropsId") != null){
+				propsId = (String) payInfo.get("PropsId");
+			}
+			else {
+				propsId = (String) payInfo.get("product_id");
+			}
+			
+			float totalPrice = 0.0f;
+            if (payInfo.get("TotalPrice") != null) {
+            	totalPrice = Float.parseFloat((String) payInfo.get("TotalPrice")) * 0.01f;
+            }
+            else {
+            	totalPrice = Float.parseFloat((String) payInfo.get("product_price")) * ((float) Integer.parseInt((String) payInfo.get("product_count")));
+            }
+            
+            String title;
+            if(payInfo.get("Title") != null){
+            	title = (String) payInfo.get("Title");
+            }
+            else{
+            	title = (String) payInfo.get("product_name");
+            }
+            
+            String rechargeOrderId;
+            if(payInfo.get("RechargeOrderId") != null){
+            	rechargeOrderId = (String) payInfo.get("RechargeOrderId");
+            }
+            else{
+            	rechargeOrderId = (String) SDKWrapper.getInstance().getUserId();
+            }
+			
+            final GamePropsInfo info = new GamePropsInfo(propsId, String.valueOf(totalPrice), title, rechargeOrderId);
             info.setThirdPay("qpfangshua");
             logD("pay params:" + info.toString());
             PluginWrapper.runOnMainThread(new Runnable() {
