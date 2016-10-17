@@ -94,7 +94,7 @@ public class IAPAdapter implements InterfaceIAP {
 			
 			float totalPrice = 0.0f;
             if (payInfo.get("TotalPrice") != null) {
-            	totalPrice = Float.parseFloat((String) payInfo.get("TotalPrice")) * 0.01f;
+            	totalPrice = Float.parseFloat((String) payInfo.get("TotalPrice"));
             }
             else {
             	totalPrice = Float.parseFloat((String) payInfo.get("product_price")) * ((float) Integer.parseInt((String) payInfo.get("product_count")));
