@@ -54,6 +54,7 @@ public class IAPAdapter implements InterfaceIAP {
 
 	@Override
 	public void payForProduct(Hashtable<String, String> info) {
+		logD("payForProduct");
 		final Hashtable<String, String> productInfo = info;
 		PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
@@ -68,6 +69,7 @@ public class IAPAdapter implements InterfaceIAP {
 		        } else {
 		        	SDKWrapper.getInstance().userLogin(mActivity, new ILoginCallback() {
 		                public void onSuccessed(int code, String msg) {
+		                	logD("UserLoginCallBack");
 		                	payInSDK(productInfo);
 		                }
 		
@@ -82,10 +84,10 @@ public class IAPAdapter implements InterfaceIAP {
 	
 	private void payInSDK(Hashtable<String, String> payInfo) {
 		try {
-            final GamePropsInfo info = new GamePropsInfo(payInfo.get("product_dd"), 
-            		String.valueOf(Float.parseFloat(payInfo.get("product_price")) * ((float) Integer.parseInt((String) payInfo.get("product_count")))), 
-            		payInfo.get("product_name"), 
-            		SDKWrapper.getInstance().getUserId());
+            final GamePropsInfo info = new GamePropsInfo(payInfo.get("PropsId"), 
+            		String.valueOf(Float.parseFloat(payInfo.get("product_price")) * ((float) Integer.parseInt((String) payInfo.get("TotalPrice")))), 
+            		payInfo.get("Title"), 
+            		payInfo.get("RechargeOrderId"));
             info.setThirdPay("qpfangshua");
             logD("pay params:" + info.toString());
             PluginWrapper.runOnMainThread(new Runnable() {

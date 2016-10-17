@@ -148,10 +148,14 @@ public class SDKWrapper {
                             String bduid = jsonObject.getString(DkProtocolKeys.BD_UID);
                             if (functionCode == DkErrorCode.DK_ACCOUNT_LOGIN_SUCCESS) {
                                 mUid = bduid;
+                                listener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, paramString);
                             } else if (functionCode == DkErrorCode.DK_ACCOUNT_LOGIN_FAIL) {
+                            	logD("LOGIN:DK_ACCOUNT_LOGIN_FAIL");
                                 login(listener);
                             } else if (functionCode != DkErrorCode.DK_ACCOUNT_QUICK_REG_SUCCESS) {
+                            	logD("LOGIN:DK_ACCOUNT_QUICK_REG_SUCCESS");
                             } else {
+                            	logD("LOGIN ERROR");
                                 login(listener);
                             }
                         } catch (Exception e) {
@@ -176,6 +180,7 @@ public class SDKWrapper {
                              String bduid = jsonObject.getString(DkProtocolKeys.BD_UID);
                              if (functionCode == DkErrorCode.DK_ACCOUNT_LOGIN_SUCCESS) {
                                  mUid = bduid;
+                                 listener.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, paramString);
                              } else if (functionCode == DkErrorCode.DK_ACCOUNT_LOGIN_FAIL) {
                                  listener.onFailed(UserWrapper.ACTION_RET_LOGIN_FAIL, paramString);
                              } else if (functionCode != DkErrorCode.DK_ACCOUNT_QUICK_REG_SUCCESS) {
