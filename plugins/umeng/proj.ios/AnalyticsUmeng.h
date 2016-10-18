@@ -45,11 +45,6 @@ THE SOFTWARE.
 - (NSString*) getSDKVersion;
 - (NSString*) getPluginVersion;
 
-/**
- interfaces of umeng SDK
- */
-- (void) updateOnlineConfig;
-- (NSString*) getConfigParams: (NSString*) key;
 
 /**
  @brief logEvent with label. 
@@ -117,15 +112,5 @@ THE SOFTWARE.
                  get label with key 'Param2' from dictionary
  */
 - (void) logTimedKVEventEnd: (NSMutableDictionary*) params;
-
-/**
- @brief start session with policy & channelId.
- @param params The dictionary include appKey & policy & channelId
-                 get appKey with key 'Param1' from dictionary
-                 get policy(NSNumber*) with key 'Param2' from dictionary
-                 get channelId with key 'Param3' from dictionary
- */
-- (void) startSessionWithParams: (NSMutableDictionary*) params;
-- (void) checkUpdate;
 
 @end

@@ -44,6 +44,7 @@ public:
 	virtual ~AgentManager();
 	static AgentManager* getInstance();
 	static void end();
+    void init();
 	virtual bool loadPlugins(const std::vector<std::string>& plugins);
 	virtual bool loadAllPlugins();
 	virtual void unloadAllPlugins();

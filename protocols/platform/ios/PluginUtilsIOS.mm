@@ -180,7 +180,7 @@ void PluginUtilsIOS::callOCFunctionWithName_oneParam(PluginProtocol* pPlugin, co
             outputLog("Can't find function '%s' in class '%s'", [strFuncName UTF8String], pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName().c_str());
     }
 }
     
@@ -200,7 +200,7 @@ void PluginUtilsIOS::callOCFunctionWithName(PluginProtocol* pPlugin, const char*
             outputLog("Can't find function '%s' in class '%s'", [strFuncName UTF8String], pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName().c_str());
     }
 }
 
@@ -301,7 +301,7 @@ id PluginUtilsIOS::callRetFunction(PluginProtocol* pPlugin, const char* funcName
             outputLog("Can't find function '%s' in class '%s'", [strFuncName UTF8String], pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName().c_str());
     }
     
     return ret;
@@ -325,7 +325,7 @@ id PluginUtilsIOS::callRetFunctionWithParam(PluginProtocol* pPlugin, const char*
             outputLog("Can't find function '%s' in class '%s'", [strFuncName UTF8String], pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s not right initilized", pPlugin->getPluginName().c_str());
     }
 
     return ret;

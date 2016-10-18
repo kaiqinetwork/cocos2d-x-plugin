@@ -47,7 +47,7 @@ using namespace cocos2d::plugin;
             std::string stdmsg(chMsg);
             callback(ret, stdmsg);
         }else{
-            PluginUtilsIOS::outputLog("Can't find the listener of plugin %s", pPlugin->getPluginName());
+            PluginUtilsIOS::outputLog("Can't find the listener of plugin %s", pPlugin->getPluginName().c_str());
         }
     } else {
         PluginUtilsIOS::outputLog("Can't find the C++ object of the Share plugin");

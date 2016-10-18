@@ -28,7 +28,6 @@ THE SOFTWARE.
 namespace cocos2d { namespace plugin {
 
 ProtocolUser::ProtocolUser()
-: _listener(NULL)
 {
 }
 
@@ -36,56 +35,37 @@ ProtocolUser::~ProtocolUser()
 {
 }
 
-void ProtocolUser::configDeveloperInfo(TUserDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName());
-        return;
-    }
-    else
-    {
-        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-        assert(pData != NULL);
-        
-        id ocObj = pData->obj;
-        if ([ocObj conformsToProtocol:@protocol(InterfaceUser)]) {
-            NSObject<InterfaceUser>* curObj = ocObj;
-            NSMutableDictionary* pDict = PluginUtilsIOS::createDictFromMap(&devInfo);
-            [curObj configDeveloperInfo:pDict];
-        }
-    }
-}
-
 void ProtocolUser::login()
 {
     PluginUtilsIOS::callOCFunctionWithName(this, "login");
-}
-void ProtocolUser::login(ProtocolUserCallback &cb)
-{
-    _callback = cb;
-    ProtocolUser::login();
 }
     
 void ProtocolUser::logout()
 {
     PluginUtilsIOS::callOCFunctionWithName(this, "logout");
 }
-void ProtocolUser::logout(ProtocolUserCallback &cb)
-{
-    _callback = cb;
-    ProtocolUser::logout();
-}
+
 std::string ProtocolUser::getAccessToken(){
     return PluginUtilsIOS::callOCStringFunctionWithName(this, "getAccessToken");
 }
+    
 bool ProtocolUser::isLoggedIn(){
     return PluginUtilsIOS::callOCBoolFunctionWithName(this, "isLoggedIn");
 }
 
-std::string ProtocolUser::getSessionID()
+std::string ProtocolUser::getUserId()
 {
-    return PluginUtilsIOS::callOCStringFunctionWithName(this, "getSessionID");
+    return PluginUtilsIOS::callOCStringFunctionWithName(this, "getUserId");
+}
+    
+void ProtocolUser::showToolbar(int position)
+{
+        
+}
+
+void ProtocolUser::hideToolbar()
+{
+        
 }
 
 }} // namespace cocos2d { namespace plugin {

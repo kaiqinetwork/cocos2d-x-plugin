@@ -36,27 +36,6 @@ ProtocolShare::~ProtocolShare()
 {
 }
 
-void ProtocolShare::configDeveloperInfo(TShareDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName());
-        return;
-    }
-    else
-    {
-        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-        assert(pData != NULL);
-        
-        id ocObj = pData->obj;
-        if ([ocObj conformsToProtocol:@protocol(InterfaceShare)]) {
-            NSObject<InterfaceShare>* curObj = ocObj;
-            NSMutableDictionary* pDict = PluginUtilsIOS::createDictFromMap(&devInfo);
-            [curObj configDeveloperInfo:pDict];
-        }
-    }
-}
-
 void ProtocolShare::share(TShareInfo info)
 {
     if (info.empty())
@@ -65,7 +44,7 @@ void ProtocolShare::share(TShareInfo info)
         {
             onShareResult(kShareFail, "Share info error");
         }
-        PluginUtilsIOS::outputLog("The Share info of %s is empty!", this->getPluginName());
+        PluginUtilsIOS::outputLog("The Share info of %s is empty!", this->getPluginName().c_str());
         return;
     }
     else
@@ -105,9 +84,9 @@ void ProtocolShare::onShareResult(ShareResultCode ret, const char* msg)
     }
     else
     {
-        PluginUtilsIOS::outputLog("Share result listener of %s is null!", this->getPluginName());
+        PluginUtilsIOS::outputLog("Share result listener of %s is null!", this->getPluginName().c_str());
     }
-    PluginUtilsIOS::outputLog("Share result of %s is : %d(%s)", this->getPluginName(), (int) ret, msg);
+    PluginUtilsIOS::outputLog("Share result of %s is : %d(%s)", this->getPluginName().c_str(), (int) ret, msg);
 }
 
 }} // namespace cocos2d { namespace plugin {

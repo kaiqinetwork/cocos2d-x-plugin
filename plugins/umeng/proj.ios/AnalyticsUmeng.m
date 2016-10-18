@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #import "AnalyticsUmeng.h"
-#import "MobClick.h"
+#import <UMMobClick/MobClick.h>
 
 #define OUTPUT_LOG(...)     if (self.debug) NSLog(__VA_ARGS__);
 
@@ -30,11 +30,20 @@ THE SOFTWARE.
 
 @synthesize debug = __debug;
 
+- (void) configDeveloperInfo: (NSMutableDictionary *) devInfo
+{
+    UMConfigInstance.appKey = [devInfo objectForKey: @"UmengAppKey"];
+    UMConfigInstance.channelId = [devInfo objectForKey: @"UmengChannelKey"] == nil ? @"release" : [devInfo objectForKey: @"UmengChannelKey"];
+    UMConfigInstance.eSType = [devInfo objectForKey: @"UmengScenarioType"] == nil ? E_UM_GAME : [[devInfo objectForKey: @"UmengScenarioType"] integerValue];
+    UMConfigInstance.bCrashReportEnabled =[devInfo objectForKey: @"UmengEnableCrashCatch"] == nil ? true : [[devInfo objectForKey: @"UmengEnableCrashCatch"] boolValue];
+    
+    [MobClick startWithConfigure:UMConfigInstance];
+    [MobClick setEncryptEnabled:YES];
+}
+
 - (void) startSession: (NSString*) appKey
 {
-    OUTPUT_LOG(@"Umeng startSession invoked");
-    [[MobClick class] performSelector:@selector(setWrapperType:wrapperVersion:) withObject:@"Cocos2d-x" withObject:@"1.0"];
-    [MobClick startWithAppkey:appKey];
+    OUTPUT_LOG(@"Umeng startSession in umeng not available on iOS");
 }
 
 - (void) stopSession
@@ -95,24 +104,17 @@ THE SOFTWARE.
 
 - (NSString*) getSDKVersion
 {
-    return @"2.2.0";
+    return @"4.1.2";
 }
 
 - (NSString*) getPluginVersion
 {
-    return @"0.2.0";
+    return @"1.0.0";
 }
 
-- (void) updateOnlineConfig
+- (NSString*) getPluginName
 {
-    OUTPUT_LOG(@"Umeng updateOnlineConfig invoked");
-    [MobClick updateOnlineConfig];
-}
-
-- (NSString*) getConfigParams: (NSString*) key
-{
-    OUTPUT_LOG(@"Umeng getConfigParams invoked (%@)", key);
-    return [MobClick getConfigParams:key];
+    return @"Umeng";
 }
 
 - (void) logEventWithLabel: (NSMutableDictionary*) params
@@ -219,22 +221,5 @@ THE SOFTWARE.
     }
 }
 
-- (void) startSessionWithParams: (NSMutableDictionary*) params
-{
-    OUTPUT_LOG(@"Umeng startSessionWithParams invoked(%@)", [params debugDescription]);
-    NSString* appKey = (NSString*) [params objectForKey:@"Param1"];
-    NSNumber* policy = (NSNumber*) [params objectForKey:@"Param2"];
-    NSString* channelId = (NSString*) [params objectForKey:@"Param3"];
-
-    int nPolicy = [policy intValue];
-    [[MobClick class] performSelector:@selector(setWrapperType:wrapperVersion:) withObject:@"Cocos2d-x" withObject:@"1.0"];
-    [MobClick startWithAppkey:appKey reportPolicy:(ReportPolicy)nPolicy channelId:channelId];
-}
-
-- (void) checkUpdate
-{
-    OUTPUT_LOG(@"Umeng checkUpdate invoked");
-    [MobClick checkUpdate];
-}
 
 @end
