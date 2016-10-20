@@ -37,27 +37,6 @@ ProtocolAds::~ProtocolAds()
 {
 }
 
-void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName());
-        return;
-    }
-    else
-    {
-        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-        assert(pData != NULL);
-        
-        id ocObj = pData->obj;
-        if ([ocObj conformsToProtocol:@protocol(InterfaceAds)]) {
-            NSObject<InterfaceAds>* curObj = ocObj;
-            NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&devInfo);
-            [curObj configDeveloperInfo:dict];
-        }
-    }
-}
-
 void ProtocolAds::showAds(TAdsInfo info, AdsPos pos)
 {
     PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);

@@ -32,7 +32,7 @@ THE SOFTWARE.
 namespace cocos2d { namespace plugin {
 
 typedef std::map<std::string, std::string> TAdsInfo;
-
+    
 typedef enum
 {
     kAdsReceived = 0,            // The ad is received

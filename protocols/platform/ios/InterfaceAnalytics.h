@@ -26,6 +26,7 @@ THE SOFTWARE.
 
 @protocol InterfaceAnalytics <NSObject>
 
+- (void) configDeveloperInfo: (NSMutableDictionary*) devInfo;
 - (void) startSession: (NSString*) appKey;
 - (void) stopSession;
 - (void) setSessionContinueMillis: (long) millis;
@@ -38,5 +39,6 @@ THE SOFTWARE.
 - (void) logTimedEventEnd: (NSString*) eventId;
 - (NSString*) getSDKVersion;
 - (NSString*) getPluginVersion;
+- (NSString*) getPluginName;
 
 @end

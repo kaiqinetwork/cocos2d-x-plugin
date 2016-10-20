@@ -35,27 +35,6 @@ ProtocolSocial::ProtocolSocial()
 ProtocolSocial::~ProtocolSocial()
 {
 }
-
-void ProtocolSocial::configDeveloperInfo(TSocialDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName());
-        return;
-    }
-    else
-    {
-        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-        assert(pData != NULL);
-        
-        id ocObj = pData->obj;
-        if ([ocObj conformsToProtocol:@protocol(InterfaceSocial)]) {
-            NSObject<InterfaceSocial>* curObj = ocObj;
-            NSMutableDictionary* pDict = PluginUtilsIOS::createDictFromMap(&devInfo);
-            [curObj configDeveloperInfo:pDict];
-        }
-    }
-}
     
 void ProtocolSocial::submitScore(const char* leadboardID, long score)
 {

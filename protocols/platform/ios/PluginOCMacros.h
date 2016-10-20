@@ -54,7 +54,7 @@ return call##retCode##FuncWithParam(funcName, allParams);                       
 retType ret = defaultRet;                                                                       \
 PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);                                    \
 if (NULL == pData) {                                                                            \
-    PluginUtilsIOS::outputLog("Can't find OC data for plugin : %s", this->getPluginName());     \
+    PluginUtilsIOS::outputLog("Can't find OC data for plugin : %s", this->getPluginName().c_str());     \
     return ret;                                                                                 \
 }                                                                                               \
                                                                                                 \

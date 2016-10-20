@@ -29,7 +29,9 @@ THE SOFTWARE.
 @protocol OCPluginProtocol
 @optional
 - (void)setDebugMode:(BOOL)debug;
+- (void) configDeveloperInfo: (NSMutableDictionary*) devInfo;
 - (NSString *)getPluginVersion;
+- (NSString *)getPluginName;
 - (NSString *)getSDKVersion;
 @end
 
@@ -83,12 +85,62 @@ std::string PluginProtocol::getSDKVersion()
             PluginUtilsIOS::outputLog("Can't find function 'getSDKVersion' in class '%s'", pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName().c_str());
     }
 
     return verName;
 }
-
+    
+std::string PluginProtocol::getPluginName()
+{
+    std::string pluginName;
+    
+    PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+    if (pData) {
+        id pOCObj = pData->obj;
+        SEL selector = NSSelectorFromString(@"getPluginName");
+        
+        if ([pOCObj respondsToSelector:selector]) {
+            NSString* strRet = [pOCObj getSDKVersion];
+            if (strRet) {
+                pluginName = [strRet UTF8String];
+            }
+        } else {
+            PluginUtilsIOS::outputLog("Can't find function 'getSDKVersion' in class '%s'", pData->className.c_str());
+        }
+    } else {
+        PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName().c_str());
+    }
+    
+    return pluginName;
+}
+    
+void PluginProtocol::configDeveloperInfo(TPluginDeveloperInfo devInfo)
+{
+    if (devInfo.empty())
+    {
+        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName().c_str());
+        return;
+    }
+    else
+    {
+        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+        if (pData) {
+            id pOCObj = pData->obj;
+            SEL selector = NSSelectorFromString(@"configDeveloperInfo");
+            
+            if ([pOCObj respondsToSelector:selector]) {
+                NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&devInfo);
+                [pOCObj configDeveloperInfo:dict];
+            } else {
+                PluginUtilsIOS::outputLog("Can't find function 'configDeveloperInfo' in class '%s'", pData->className.c_str());
+            }
+        } else {
+            PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName().c_str());
+        }
+    }
+}
+    
 void PluginProtocol::setDebugMode(bool isDebugMode)
 {
     PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
@@ -102,7 +154,7 @@ void PluginProtocol::setDebugMode(bool isDebugMode)
             PluginUtilsIOS::outputLog("Can't find function 'setDebugMode' in class '%s'", pData->className.c_str());
         }
     } else {
-        PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName());
+        PluginUtilsIOS::outputLog("Plugin %s is not initialized", this->getPluginName().c_str());
     }
 }
 
@@ -134,7 +186,7 @@ void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginP
 {
     PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
     if (NULL == pData) {
-        PluginUtilsIOS::outputLog("Can't find OC data for plugin : %s", this->getPluginName());
+        PluginUtilsIOS::outputLog("Can't find OC data for plugin : %s", this->getPluginName().c_str());
         return;
     }
 
@@ -215,6 +267,11 @@ float PluginProtocol::callFloatFuncWithParam(const char* funcName, PluginParam* 
 float PluginProtocol::callFloatFuncWithParam(const char* funcName, std::vector<PluginParam*> params)
 {
     CALL_OC_FUNC(float, 0.0f, Float)
+}
+    
+bool PluginProtocol::isFunctionSupported(const char* funcName)
+{
+    return false;
 }
 
 }} //namespace cocos2d { namespace plugin {

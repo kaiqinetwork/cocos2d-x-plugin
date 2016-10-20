@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72750B061DB4FE0F00BC2ECE /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72750B051DB4FE0F00BC2ECE /* UMMobClick.framework */; };
 		FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA09A304168ADAEC008C1C7B /* Foundation.framework */; };
 		FAB6DFE91756F3B600C90D89 /* AnalyticsUmeng.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB6DFE61756F3B600C90D89 /* AnalyticsUmeng.m */; };
-		FAB6DFEA1756F3B600C90D89 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB6DFE71756F3B600C90D89 /* libMobClickLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,12 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		72750B051DB4FE0F00BC2ECE /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = libs/UMMobClick.framework; sourceTree = "<group>"; };
 		FA09A301168ADAEC008C1C7B /* libPluginUmeng.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginUmeng.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA09A304168ADAEC008C1C7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAB6DFE51756F3B600C90D89 /* AnalyticsUmeng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsUmeng.h; sourceTree = "<group>"; };
 		FAB6DFE61756F3B600C90D89 /* AnalyticsUmeng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsUmeng.m; sourceTree = "<group>"; };
-		FAB6DFE71756F3B600C90D89 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		FAB6DFE81756F3B600C90D89 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,8 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72750B061DB4FE0F00BC2ECE /* UMMobClick.framework in Frameworks */,
 				FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */,
-				FAB6DFEA1756F3B600C90D89 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +50,6 @@
 			children = (
 				FAB6DFE51756F3B600C90D89 /* AnalyticsUmeng.h */,
 				FAB6DFE61756F3B600C90D89 /* AnalyticsUmeng.m */,
-				FAB6DFE71756F3B600C90D89 /* libMobClickLibrary.a */,
-				FAB6DFE81756F3B600C90D89 /* MobClick.h */,
 				FA09A303168ADAEC008C1C7B /* Frameworks */,
 				FA09A302168ADAEC008C1C7B /* Products */,
 			);
@@ -69,6 +66,7 @@
 		FA09A303168ADAEC008C1C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72750B051DB4FE0F00BC2ECE /* UMMobClick.framework */,
 				FA09A304168ADAEC008C1C7B /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -77,9 +75,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA09A300168ADAEC008C1C7B /* PluginUmeng */ = {
+		FA09A300168ADAEC008C1C7B /* PluginUmeng-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginUmeng" */;
+			buildConfigurationList = FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginUmeng-iOS" */;
 			buildPhases = (
 				FA09A2FD168ADAEC008C1C7B /* Sources */,
 				FA09A2FE168ADAEC008C1C7B /* Frameworks */,
@@ -89,7 +87,7 @@
 			);
 			dependencies = (
 			);
-			name = PluginUmeng;
+			name = "PluginUmeng-iOS";
 			productName = libPluginUmeng;
 			productReference = FA09A301168ADAEC008C1C7B /* libPluginUmeng.a */;
 			productType = "com.apple.product-type.library.static";
@@ -115,7 +113,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA09A300168ADAEC008C1C7B /* PluginUmeng */,
+				FA09A300168ADAEC008C1C7B /* PluginUmeng-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +197,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				DSTROOT = /tmp/libPluginUmeng.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginUmeng-Prefix.pch";
@@ -223,6 +225,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				DSTROOT = /tmp/libPluginUmeng.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginUmeng-Prefix.pch";
@@ -252,7 +258,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginUmeng" */ = {
+		FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginUmeng-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA09A310168ADAEC008C1C7B /* Debug */,

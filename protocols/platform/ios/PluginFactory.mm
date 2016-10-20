@@ -113,7 +113,6 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 
 		if (pRet != NULL)
 		{
-			pRet->setPluginName(name);
 			PluginUtilsIOS::initOCPlugin(pRet, obj, name);
 		}
 	} while(0);

@@ -30,28 +30,35 @@
 #include "ProtocolAnalytics.h"
 #include "PluginUtilsIOS.h"
 
+#import "PluginWrapper.h"
+
 namespace cocos2d{ namespace plugin{
 
 static AgentManager* s_AgentManager = nullptr;
 
-AgentManager::AgentManager():pUser(nullptr), pShare(nullptr), pSocial(nullptr), pAds(nullptr), pAnalytics(nullptr), pIAP(nullptr)
+AgentManager::AgentManager(): _pUser(nullptr), _pShare(nullptr), _pSocial(nullptr), _pAds(nullptr), _pAnalytics(nullptr)
 {
 
 }
 
 AgentManager::~AgentManager()
 {
-	this->purge();
+	this->unloadAllPlugins();
 }
 
-void AgentManager::purge()
+void AgentManager::unloadAllPlugins()
 {
-	delete pUser;
-	delete pShare;
-	delete pSocial;
-	delete pAds;
-	delete pAnalytics;
-	delete pIAP;
+    delete _pUser;
+    delete _pShare;
+    delete _pSocial;
+    delete _pAds;
+    delete _pAnalytics;
+    delete _pCrash;
+    for(std::map<std::string, ProtocolIAP*>::iterator iter = _pluginsIAPMap.begin(); iter != _pluginsIAPMap.end(); ++iter)
+    {
+        delete iter->second;
+    }
+    _pluginsIAPMap.clear();
 }
 
 AgentManager* AgentManager::getInstance()
@@ -63,74 +70,118 @@ AgentManager* AgentManager::getInstance()
 	}
 	return s_AgentManager;
 }
-    void AgentManager::destroyInstance()
-    {
-        if(s_AgentManager)
-        {
-            delete s_AgentManager;
-            s_AgentManager = nullptr;
-        }
-    }
-bool AgentManager::initWithConfigureFile()
-{
-	std::map<std::string, std::string> conf = getPluginConfigure();
-    return init(conf);
-}
-
-bool AgentManager::init(std::map<std::string, std::string>& conf)
-{
-	if(conf.empty())
-		return false;
-
-	for(std::map<std::string, std::string>::iterator iter = conf.begin(); iter != conf.end(); ++iter)
-	{
-		std::string pluginName = iter->first;
-		if("PluginUser" == pluginName)
-		{
-			pUser = dynamic_cast<ProtocolUser *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-		else if("PluginShare" == pluginName)
-		{
-			pShare = dynamic_cast<ProtocolShare *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-		else if("PluginSocial" == pluginName)
-		{
-			pSocial = dynamic_cast<ProtocolSocial *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-		else if("PluginAds" == pluginName)
-		{
-			pAds = dynamic_cast<ProtocolAds *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-		else if("PluginAnalytics" == pluginName)
-		{
-			pAnalytics = dynamic_cast<ProtocolAnalytics *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-		else if("PluginIAP" == pluginName)
-		{
-			pIAP = dynamic_cast<ProtocolIAP *>(PluginManager::getInstance()->loadPlugin(iter->second.c_str()));
-		}
-	}
-
-	return true;
-}
-
-static std::vector<std::string> s_plugins = {"PluginUser", "PluginShare", "PluginSocial", "PluginAds", "PluginAnalytics", "PluginIAP"};
-
-std::map<std::string, std::string> AgentManager::getPluginConfigure()
-{
-	std::map<std::string, std::string> configure;
     
-    for(std::vector<std::string>::iterator iter = s_plugins.begin(); iter != s_plugins.end(); ++iter)
+void AgentManager::end()
+{
+    if(s_AgentManager)
     {
-        NSString *key = [NSString stringWithUTF8String:iter->c_str()];
-        NSString *pluginName = [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
-        if (pluginName) {
-            std::string name = [pluginName UTF8String];
-            configure.emplace(*iter, name);
+        delete s_AgentManager;
+        s_AgentManager = nullptr;
+    }
+}
+    
+void AgentManager::init()
+{
+    [PluginWrapper analysisDeveloperInfo];
+}
+    
+bool AgentManager::loadAllPlugins()
+{
+    std::vector<std::string> plugins = getSupportPlugins();
+    return loadPlugins(plugins);
+}
+
+bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
+{
+    PluginProtocol* protocol;
+    ProtocolUser* pUser;
+    ProtocolShare* pShare;
+    ProtocolSocial* pSocial;
+    ProtocolAds* pAds;
+    ProtocolAnalytics* pAnalytics;
+    ProtocolCrash* pCrash;
+    ProtocolIAP* pIAP;
+    for (int i = 0; i < plugins.size(); ++i)
+    {
+        protocol = dynamic_cast<PluginProtocol *>(PluginManager::getInstance()->loadPlugin(plugins[i].c_str()));
+        pUser = dynamic_cast<ProtocolUser *>(protocol);
+        if (pUser)
+        {
+            if (_pUser)
+            {
+                delete _pUser;
+            }
+            _pUser = pUser;
+        }
+        pShare = dynamic_cast<ProtocolShare *>(protocol);
+        if (pShare)
+        {
+            if (_pShare)
+            {
+                delete _pShare;
+            }
+            _pShare = pShare;
+        }
+        pSocial = dynamic_cast<ProtocolSocial *>(protocol);
+        if (pSocial)
+        {
+            if (_pSocial)
+            {
+                delete _pSocial;
+            }
+            _pSocial = pSocial;
+        }
+        pAds = dynamic_cast<ProtocolAds *>(protocol);
+        if (pAds)
+        {
+            if (_pAds)
+            {
+                delete _pAds;
+            }
+            _pAds = pAds;
+        }
+        pAnalytics = dynamic_cast<ProtocolAnalytics *>(protocol);
+        if (pAnalytics)
+        {
+            if (_pAnalytics)
+            {
+                delete _pAnalytics;
+            }
+            _pAnalytics = pAnalytics;
+        }
+        pCrash = dynamic_cast<ProtocolCrash *>(protocol);
+        if (pCrash)
+        {
+            if (pCrash)
+            {
+                delete pCrash;
+            }
+            _pCrash = pCrash;
+        }
+        pIAP = dynamic_cast<ProtocolIAP *>(protocol);
+        if (pIAP)
+        {
+            ProtocolIAP*& dummy = _pluginsIAPMap[pIAP->getPluginName()];
+            if (dummy)
+            {
+                delete dummy;
+            }
+            dummy = pIAP;
         }
     }
+    
+    return true;
+}
 
-	return configure;
+std::vector<std::string> AgentManager::getSupportPlugins()
+{
+    std::vector<std::string> ret;
+    NSMutableArray* plugins = [PluginWrapper getSupportPlugins];
+    for (NSString *name in plugins) {
+        ret.push_back([name UTF8String]);
+    }
+    
+	return ret;
 }
 
 }}

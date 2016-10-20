@@ -39,27 +39,6 @@ ProtocolIAP::~ProtocolIAP()
     PluginUtilsIOS::erasePluginOCData(this);
 }
 
-void ProtocolIAP::configDeveloperInfo(TIAPDeveloperInfo devInfo)
-{
-    if (devInfo.empty())
-    {
-        PluginUtilsIOS::outputLog("The developer info is empty for %s!", this->getPluginName());
-        return;
-    }
-    else
-    {
-        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-        assert(pData != NULL);
-        
-        id ocObj = pData->obj;
-        if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
-            NSObject<InterfaceIAP>* curObj = ocObj;
-            NSMutableDictionary* pDict = PluginUtilsIOS::createDictFromMap(&devInfo);
-            [curObj configDeveloperInfo:pDict];
-        }
-    }
-}
-
 void ProtocolIAP::payForProduct(TProductInfo info)
 {
     if (_paying)
@@ -74,7 +53,7 @@ void ProtocolIAP::payForProduct(TProductInfo info)
         {
             onPayResult(kPayFail, "Product info error");
         }
-        PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName());
+        PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName().c_str());
         return;
     }
     else
@@ -108,7 +87,7 @@ void ProtocolIAP::payForProduct(TProductInfo info)
                 std::string stdstr("Product info error");
                 callback(kPayFail,stdstr);
             }
-            PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName());
+            PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName().c_str());
             return;
         }
         else
@@ -140,11 +119,11 @@ void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
     }
     else
     {
-        PluginUtilsIOS::outputLog("Pay result listener of %s is null!", this->getPluginName());
+        PluginUtilsIOS::outputLog("Pay result listener of %s is null!", this->getPluginName().c_str());
     }
 
     _curInfo.clear();
-    PluginUtilsIOS::outputLog("Pay result of %s is : %d(%s)", this->getPluginName(), (int) ret, msg);
+    PluginUtilsIOS::outputLog("Pay result of %s is : %d(%s)", this->getPluginName().c_str(), (int) ret, msg);
 }
 
 }} //namespace cocos2d { namespace plugin {
