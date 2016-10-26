@@ -21,31 +21,49 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-#import "InterfaceIAP.h"
-#import <Foundation/Foundation.h>
-#import <StoreKit/StoreKit.h>
-#import "IAPWrapper.h"
-@interface IOSIAP : NSObject<InterfaceIAP,SKProductsRequestDelegate,SKPaymentTransactionObserver>
 
-/**
- interface of InterfaceIAP
- **/
-- (void) configDeveloperInfo: (NSMutableDictionary*) cpInfo;
-- (void) payForProduct: (NSMutableDictionary*) profuctInfo;
-- (void) setDebugMode: (BOOL) debug;
-- (NSString*) getSDKVersion;
-- (NSString*) getPluginVersion;
-@property BOOL debug;
-/* ---------iap functions-------*/
--(void) requestProducts:(NSString*) paralist;
--(void) setServerMode;
-// when complete payment whether success or fail call this function
-- (void)finishTransaction:(NSString *)productId;
+#import "ShareSDKShare.h"
 
-//SKProductsRequestDelegate needed
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response;
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
 
-//SKPaymentTransactionObserver needed
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions;
-@property (nonatomic,assign) BOOL _isServerMode;
+//腾讯开放平台（对应QQ和QQ空间）SDK头文件
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+
+//微信SDK头文件
+#import "WXApi.h"
+
+//新浪微博SDK头文件
+#import "WeiboSDK.h"
+
+#define OUTPUT_LOG(...)     if (_debug) NSLog(__VA_ARGS__);
+
+@implementation ShareSDKShare
+
+BOOL _debug;
+
+- (void) configDeveloperInfo: (NSMutableDictionary*) devInfo
+{
+    
+}
+
+- (void) share: (NSMutableDictionary*) shareInfo{
+    
+}
+
+- (void) setDebugMode: (BOOL) debug{
+    _debug = debug;
+}
+- (NSString*) getSDKVersion{
+    return @"3.5.0";
+}
+
+- (NSString*) getPluginVersion{
+    return @"1.0";
+}
+
+- (NSString*) getPluginName{
+    return @"ShareSDK";
+}
 @end

@@ -72,44 +72,47 @@ void ProtocolIAP::payForProduct(TProductInfo info)
         }
     }
 }
-    void ProtocolIAP::payForProduct(TProductInfo info,ProtocolIAPCallback callback)
+    
+void ProtocolIAP::payForProduct(TProductInfo info,ProtocolIAPCallback callback)
+{
+    if (_paying)
     {
-        if (_paying)
+        PluginUtilsIOS::outputLog("Now is paying");
+        return;
+    }
+    
+    if (info.empty())
+    {
+        if (NULL != callback)
         {
-            PluginUtilsIOS::outputLog("Now is paying");
-            return;
+            std::string stdstr("Product info error");
+            callback(kPayFail,stdstr);
         }
+        PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName().c_str());
+        return;
+    }
+    else
+    {
+        _paying = true;
+        _curInfo = info;
+        setCallback(callback);
+        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+        assert(pData != NULL);
         
-        if (info.empty())
-        {
-            if (NULL != callback)
-            {
-                std::string stdstr("Product info error");
-                callback(kPayFail,stdstr);
-            }
-            PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName().c_str());
-            return;
-        }
-        else
-        {
-            _paying = true;
-            _curInfo = info;
-            setCallback(callback);
-            PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
-            assert(pData != NULL);
-            
-            id ocObj = pData->obj;
-            if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
-                NSObject<InterfaceIAP>* curObj = ocObj;
-                NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&info);
-                [curObj payForProduct:dict];
-            }
+        id ocObj = pData->obj;
+        if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
+            NSObject<InterfaceIAP>* curObj = ocObj;
+            NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&info);
+            [curObj payForProduct:dict];
         }
     }
+}
+    
 void ProtocolIAP::setResultListener(PayResultListener* pListener)
 {
     _listener = pListener;
 }
+    
 void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
 {
     _paying = false;

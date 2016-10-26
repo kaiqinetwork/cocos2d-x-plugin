@@ -31,6 +31,7 @@ typedef enum {
     PaymentTransactionStateRestored,
     PaymentTransactionStateTimeout,
 } IAPResult;
+
 typedef enum {
     RequestSuccees=0,
     RequestFail,

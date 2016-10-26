@@ -34,5 +34,6 @@ THE SOFTWARE.
 - (void) setDebugMode: (BOOL) debug;
 - (NSString*) getSDKVersion;
 - (NSString*) getPluginVersion;
+- (NSString*) getPluginName;
 
 @end

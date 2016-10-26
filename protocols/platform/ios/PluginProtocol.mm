@@ -101,7 +101,7 @@ std::string PluginProtocol::getPluginName()
         SEL selector = NSSelectorFromString(@"getPluginName");
         
         if ([pOCObj respondsToSelector:selector]) {
-            NSString* strRet = [pOCObj getSDKVersion];
+            NSString* strRet = [pOCObj getPluginName];
             if (strRet) {
                 pluginName = [strRet UTF8String];
             }

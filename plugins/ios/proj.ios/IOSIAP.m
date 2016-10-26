@@ -23,61 +23,80 @@
  ****************************************************************************/
 
 #import "IOSIAP.h"
-#define OUTPUT_LOG(...)     if (self.debug) NSLog(__VA_ARGS__);
+#define OUTPUT_LOG(...)     if (_debug) NSLog(__VA_ARGS__);
 
 @implementation IOSIAP
-@synthesize debug,_isServerMode;
-NSSet * _productIdentifiers;
-NSArray *_productArray;
-bool _isAddObserver = false;
-//productsRequest;
-SKProductsRequest * _productsRequest;
-//productTransation
-NSArray * _transactionArray;
 
--(void) configDeveloperInfo: (NSMutableDictionary*) cpInfo{
+BOOL _debug;
+NSString *_productId;
+NSString *_notifyURL;
+NSString *_rechargeOrderNo;
+NSArray *_productArray;
+//productsRequest;
+SKProductsRequest *_productsRequest;
+NSMutableArray *_uncommitOrders;
+
+- (void) configDeveloperInfo: (NSMutableDictionary*) devInfo
+{
+    [self loadUncommitOrders];
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 }
+
 - (void) payForProduct: (NSMutableDictionary*) cpInfo{
-    NSString * pid = [cpInfo objectForKey:@"productId"];
-    SKProduct *skProduct = [self getProductById:pid];
-    if(skProduct){
+    if ([SKPaymentQueue canMakePayments] == NO) {
+        return;
+    }
+    
+    NSString* productIds;
+    if ([cpInfo objectForKey:@"ProductId"]) {
+        _productId = [cpInfo objectForKey:@"ProductId"];
+    }
+    else {
+        _productId = [cpInfo objectForKey:@"product_id"];
+    }
+    if ([cpInfo objectForKey:@"ProductIds"]) {
+        productIds = [cpInfo objectForKey:@"ProductIds"];
+    }
+    else {
+        productIds = _productId;
+    }
+    _notifyURL = [cpInfo objectForKey:@"NotifyUrl"];
+    _rechargeOrderNo = [cpInfo objectForKey:@"RechargeOrderNo"];
+    SKProduct *skProduct = [self getProductById:_productId];
+    if (skProduct) {
         SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:skProduct];
         [[SKPaymentQueue defaultQueue] addPayment:payment];
         OUTPUT_LOG(@"add PaymentQueue");
     }
+    else {
+        [self requestProducts:productIds];
+    }
 }
-- (void) setDebugMode: (BOOL) _debug{
-    self.debug = _debug;
+
+- (void) setDebugMode: (BOOL) debug{
+    _debug = debug;
 }
 - (NSString*) getSDKVersion{
-    return @"1.0";
+    return @"10.0";
 }
 
 - (NSString*) getPluginVersion{
     return @"1.0";
 }
 
-/*------------------------IAP functions-------------------------------*/
--(void)setServerMode{
-    _isServerMode = true;
+- (NSString*) getPluginName{
+    return @"iOS";
 }
--(void)requestProducts:(NSString*) paramMap{
-    [self setDebug:true];
-    if(!_isAddObserver){
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        _isAddObserver = true;
-    }
+
+- (void) requestProducts:(NSString*) paramMap {
     NSArray *producIdArray = [paramMap componentsSeparatedByString:@","];
-    _productIdentifiers = [[NSSet alloc] initWithArray:producIdArray];
-    OUTPUT_LOG(@"param is %@",_productIdentifiers);
-    _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
+    NSSet *productIdentifiers = [NSSet setWithArray:producIdArray];
+    OUTPUT_LOG(@"param is %@", productIdentifiers);
+    _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
     _productsRequest.delegate = self;
     [_productsRequest start];
+}
 
-}
--(NSString *)parseProductToString:(NSArray *) products{
-    return @"1";
-}
 -(SKProduct *)getProductById:(NSString *)productid{
     for (SKProduct * skProduct in _productArray) {
         if([skProduct.productIdentifier isEqualToString:productid]){
@@ -94,21 +113,29 @@ NSArray * _transactionArray;
 }
 
 //SKProductsRequestDelegate needed
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+- (void) productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
     _productArray = response.products;
-    NSArray * skProducts = response.products;
-    for (SKProduct * skProduct in skProducts) {
+    for (SKProduct * skProduct in _productArray) {
         OUTPUT_LOG(@"Found product: %@ %@ %0.2f",
               skProduct.productIdentifier,
               skProduct.localizedTitle,
               skProduct.price.floatValue);
     }
-    [IAPWrapper onRequestProduct:self withRet:RequestSuccees withProducts:skProducts];
+    [IAPWrapper onRequestProduct:self withRet:RequestSuccees withProducts:_productArray];
+    _productsRequest = nil;
+    
+    if (_productId != nil) {
+        SKProduct *skProduct = [self getProductById:_productId];
+        if (skProduct) {
+            SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:skProduct];
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            OUTPUT_LOG(@"add PaymentQueue");
+        }
+    }
 }
 
 //SKPaymentTransactionObserver needed
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions{
-    _transactionArray = transactions;
+- (void) paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions{
     for (SKPaymentTransaction * transaction in transactions) {
         switch (transaction.transactionState)
         {
@@ -126,38 +153,62 @@ NSArray * _transactionArray;
     };
 }
 
-- (void)completeTransaction:(SKPaymentTransaction *)transaction {
+- (void) completeTransaction:(SKPaymentTransaction *)transaction {
     NSString *receipt = nil;
-    if(_isServerMode){
+    if (_notifyURL != nil && _rechargeOrderNo != nil) {
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
             // iOS 6.1 or earlier.
             // Use SKPaymentTransaction's transactionReceipt.
             receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes length:transaction.transactionReceipt.length];
-
-        } else {
+            
+        }
+        else {
             // iOS 7 or later.
             NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
-            NSData *recData = [[NSData dataWithContentsOfURL:receiptURL] base64EncodedDataWithOptions:0];
-            receipt = [[NSString alloc] initWithData:recData encoding:NSUTF8StringEncoding];
+            NSData *recData = [NSData dataWithContentsOfURL:receiptURL];
+            receipt = [recData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
             if (!receipt) {
                 receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes length:transaction.transactionReceipt.length];
             }
         }
-        [IAPWrapper onPayResult:self withRet:PaymentTransactionStatePurchased withMsg:receipt];
-    }else{
-        [self finishTransaction: transaction.payment.productIdentifier];
-        [IAPWrapper onPayResult:self withRet:PaymentTransactionStatePurchased withMsg:@""];
+        
+        if (receipt != nil) {
+            NSDictionary *orderInfo = [[NSDictionary alloc] initWithObjects:@[_rechargeOrderNo,_notifyURL,receipt] forKeys:@[@"RechargeOrderNo",@"NotifyUrl",@"Receipt"]];
+            [_uncommitOrders addObject:orderInfo];
+            [self saveUncommitOrders];
+            
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURL *url = [NSURL URLWithString:_notifyURL];
+            
+            // 创建一个请求对象，并这是请求方法为POST，把参数放在请求体中传递
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            request.HTTPMethod = @"POST";
+            NSCharacterSet *URLBase64CharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"/+=\n"] invertedSet];
+            request.HTTPBody = [[NSString stringWithFormat:@"RechargeOrderNo=%@&Receipt=%@", _rechargeOrderNo, [receipt stringByAddingPercentEncodingWithAllowedCharacters:URLBase64CharacterSet]] dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) {
+                // 拿到响应头信息
+                NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+                if ([res statusCode] == 200) {
+                    
+                }
+            }];
+            [dataTask resume];
+        }
     }
+
     
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    [IAPWrapper onPayResult:self withRet:PaymentTransactionStatePurchased withMsg:@""];
 }
 
-- (void)restoreTransaction:(SKPaymentTransaction *)transaction {
+- (void) restoreTransaction:(SKPaymentTransaction *)transaction {
     OUTPUT_LOG(@"restoreTransaction...");
-    [self finishTransaction:transaction.payment.productIdentifier];
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     [IAPWrapper onPayResult:self withRet:PaymentTransactionStateRestored withMsg:@""];
 }
 
-- (void)failedTransaction:(SKPaymentTransaction *)transaction {
+- (void) failedTransaction:(SKPaymentTransaction *)transaction {
     OUTPUT_LOG(@"failedTransaction...");
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
@@ -165,29 +216,16 @@ NSArray * _transactionArray;
         [[[UIAlertView alloc] initWithTitle:@"支付结果" message:transaction.error.localizedDescription delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
     }
     
-    [self finishTransaction:transaction.payment.productIdentifier];
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     [IAPWrapper onPayResult:self withRet:PaymentTransactionStateFailed withMsg:@""];
 }
 
-- (void)restoreCompletedTransactions {
+- (void) restoreCompletedTransactions {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
--(void) finishTransaction:(NSString *)productId{
-    SKPaymentTransaction *transaction = [self getTranscationByProductId:productId];
-    if(transaction){
-        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    }
-}
--(SKPaymentTransaction *) getTranscationByProductId:(NSString *)productId{
-    for(SKPaymentTransaction *tran in _transactionArray){
-        if([tran.payment.productIdentifier isEqualToString:productId]){
-            return tran;
-        }
-    }
-    return NULL;
-}
-- (NSString *)encode:(const uint8_t *)input length:(NSInteger)length {
+- (NSString *) encode:(const uint8_t *)input length:(NSInteger)length
+{
     static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
     
     NSMutableData *data = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
@@ -211,5 +249,24 @@ NSArray * _transactionArray;
     }
     
     return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] ;
+}
+
+- (BOOL) removeUncommitOrder:(NSString *)rechargeOrderNo
+{
+    return NO;
+}
+
+- (void) loadUncommitOrders
+{
+    _uncommitOrders = [NSMutableArray alloc];
+}
+                                       
+- (void) saveUncommitOrders
+{
+    if (_uncommitOrders == nil) {
+        return;
+    }
+    
+    
 }
 @end

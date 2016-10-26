@@ -37,6 +37,7 @@ THE SOFTWARE.
 #import "InterfaceShare.h"
 #import "InterfaceSocial.h"
 #import "InterfaceUser.h"
+#import "PluginWrapper.h"
 
 namespace cocos2d { namespace plugin {
 
@@ -97,6 +98,7 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
             pRet = new ProtocolAnalytics();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceIAP)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolIAP();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceShare)]) {
