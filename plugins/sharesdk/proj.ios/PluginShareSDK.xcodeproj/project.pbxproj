@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7239EE751DC0E1B90084F884 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239EE741DC0E1B90084F884 /* TencentOpenAPI.framework */; };
+		7239EE771DC0E2090084F884 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239EE761DC0E2090084F884 /* ShareSDK.framework */; };
 		724680271DB672EA00BEAED5 /* ShareSDKShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 724680261DB672EA00BEAED5 /* ShareSDKShare.m */; };
 		FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA09A304168ADAEC008C1C7B /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -24,7 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		72201B6A1DBFA8B100666BC4 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShareSDK.framework; path = "../../../../../Project/lib-ios/ShareSDK.framework"; sourceTree = "<group>"; };
+		7239EE741DC0E1B90084F884 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = libs/QQSDK/TencentOpenAPI.framework; sourceTree = "<group>"; };
+		7239EE761DC0E2090084F884 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShareSDK.framework; path = libs/ShareSDK/ShareSDK.framework; sourceTree = "<group>"; };
 		724680251DB672EA00BEAED5 /* ShareSDKShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSDKShare.h; sourceTree = "<group>"; };
 		724680261DB672EA00BEAED5 /* ShareSDKShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSDKShare.m; sourceTree = "<group>"; };
 		FA09A301168ADAEC008C1C7B /* libPluginShareSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginShareSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7239EE771DC0E2090084F884 /* ShareSDK.framework in Frameworks */,
+				7239EE751DC0E1B90084F884 /* TencentOpenAPI.framework in Frameworks */,
 				FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +69,8 @@
 		FA09A303168ADAEC008C1C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				72201B6A1DBFA8B100666BC4 /* ShareSDK.framework */,
+				7239EE761DC0E2090084F884 /* ShareSDK.framework */,
+				7239EE741DC0E1B90084F884 /* TencentOpenAPI.framework */,
 				FA09A304168ADAEC008C1C7B /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -192,6 +198,7 @@
 		FA09A310168ADAEC008C1C7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -199,16 +206,25 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/libs/ShareSDK",
+					"$(PROJECT_DIR)/libs/ShareSDK/PlatformConnector",
+					"$(PROJECT_DIR)/libs/QQSDK",
 				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginShareSDK-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../protocols/platform/ios",
+					"$(PROJECT_DIR)/libs/SinaWeiboSDK",
+					"$(PROJECT_DIR)/libs/WeChatSDK",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../platform/ios\"",
+					"$(PROJECT_DIR)/libs/WeChatSDK",
+					"$(PROJECT_DIR)/libs/SinaWeiboSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -221,6 +237,7 @@
 		FA09A311168ADAEC008C1C7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -228,16 +245,25 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/libs/ShareSDK",
+					"$(PROJECT_DIR)/libs/ShareSDK/PlatformConnector",
+					"$(PROJECT_DIR)/libs/QQSDK",
 				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginShareSDK-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../protocols/platform/ios",
+					"$(PROJECT_DIR)/libs/SinaWeiboSDK",
+					"$(PROJECT_DIR)/libs/WeChatSDK",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../platform/ios\"",
+					"$(PROJECT_DIR)/libs/WeChatSDK",
+					"$(PROJECT_DIR)/libs/SinaWeiboSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PluginShareSDK;
