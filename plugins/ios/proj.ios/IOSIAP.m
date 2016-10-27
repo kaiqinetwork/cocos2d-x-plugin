@@ -34,11 +34,12 @@ NSString *_rechargeOrderNo;
 NSArray *_productArray;
 //productsRequest;
 SKProductsRequest *_productsRequest;
-NSMutableArray *_uncommitOrders;
+NSMutableDictionary *_uncommitOrders;
 
 - (void) configDeveloperInfo: (NSMutableDictionary*) devInfo
 {
     [self loadUncommitOrders];
+    [self recommitOrders];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 }
 
@@ -173,8 +174,8 @@ NSMutableArray *_uncommitOrders;
         }
         
         if (receipt != nil) {
-            NSDictionary *orderInfo = [[NSDictionary alloc] initWithObjects:@[_rechargeOrderNo,_notifyURL,receipt] forKeys:@[@"RechargeOrderNo",@"NotifyUrl",@"Receipt"]];
-            [_uncommitOrders addObject:orderInfo];
+            NSMutableDictionary *orderInfo = [[NSMutableDictionary alloc] initWithObjects:@[_rechargeOrderNo,_notifyURL,receipt] forKeys:@[@"RechargeOrderNo",@"NotifyUrl",@"Receipt"]];
+            [_uncommitOrders setObject:orderInfo forKey:_rechargeOrderNo];
             [self saveUncommitOrders];
             
             NSURLSession *session = [NSURLSession sharedSession];
@@ -190,7 +191,12 @@ NSMutableArray *_uncommitOrders;
                 // 拿到响应头信息
                 NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
                 if ([res statusCode] == 200) {
-                    
+                    NSError *error;
+                    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                    if (result != nil && [result objectForKey:@"RechargeOrderNo"]) {
+                        [_uncommitOrders removeObjectForKey:[result objectForKey:@"RechargeOrderNo"]];
+                        [self saveUncommitOrders];
+                    }
                 }
             }];
             [dataTask resume];
@@ -251,22 +257,85 @@ NSMutableArray *_uncommitOrders;
     return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] ;
 }
 
-- (BOOL) removeUncommitOrder:(NSString *)rechargeOrderNo
-{
-    return NO;
-}
-
 - (void) loadUncommitOrders
 {
-    _uncommitOrders = [NSMutableArray alloc];
+    _uncommitOrders = [NSMutableDictionary dictionaryWithCapacity:10];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDir = [paths objectAtIndex:0];
+    NSString *filePath = [documentDir stringByAppendingPathComponent:@"plugins/ios/UncommitOrders.json"];
+    NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
+    
+    if (data != nil) {
+        NSError *error = nil;
+        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        [_uncommitOrders setDictionary:jsonObject];
+    }
 }
-                                       
+
 - (void) saveUncommitOrders
 {
     if (_uncommitOrders == nil) {
         return;
     }
     
+    if ([NSJSONSerialization isValidJSONObject:_uncommitOrders])
+    {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:_uncommitOrders options:NSJSONWritingPrettyPrinted error:&error];
+        if (data != nil) {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentDir = [paths objectAtIndex:0];
+            NSString *fileDir = [documentDir stringByAppendingPathComponent:@"plugins/ios/"];
+            NSString *filePath = [fileDir stringByAppendingPathComponent:@"UncommitOrders.json"];
+            
+            [[NSFileManager defaultManager] createDirectoryAtPath:fileDir withIntermediateDirectories:YES attributes:nil error:&error];
+            [data writeToFile:filePath atomically:YES];
+        }
+    }
+}
+
+- (void) recommitOrders
+{
+    BOOL resave = NO;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSEnumerator * enumeratorValue = [_uncommitOrders objectEnumerator];
+    for (NSMutableDictionary *object in enumeratorValue) {
+        NSString *rechargeOrderNo = [object objectForKey:@"RechargeOrderNo"];
+        NSString *notifyURL = [object objectForKey:@"NotifyUrl"];
+        NSString *receipt = [object objectForKey:@"Receipt"];
+        
+        if (rechargeOrderNo == nil || notifyURL == nil || receipt == nil) {
+            [_uncommitOrders removeObjectForKey:rechargeOrderNo];
+            resave = YES;
+            continue;
+        }
+        
+        NSURL *url = [NSURL URLWithString:notifyURL];
+        
+        // 创建一个请求对象，并这是请求方法为POST，把参数放在请求体中传递
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        request.HTTPMethod = @"POST";
+        NSCharacterSet *URLBase64CharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"/+=\n"] invertedSet];
+        request.HTTPBody = [[NSString stringWithFormat:@"RechargeOrderNo=%@&Receipt=%@", rechargeOrderNo, [receipt stringByAddingPercentEncodingWithAllowedCharacters:URLBase64CharacterSet]] dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) {
+            // 拿到响应头信息
+            NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+            if ([res statusCode] == 200) {
+                NSError *error;
+                NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                if (result != nil && [result objectForKey:@"RechargeOrderNo"]) {
+                    [_uncommitOrders removeObjectForKey:[result objectForKey:@"RechargeOrderNo"]];
+                    [self saveUncommitOrders];
+                }
+            }
+        }];
+        [dataTask resume];
+    }
     
+    if (resave) {
+        [self saveUncommitOrders];
+    }
 }
 @end
