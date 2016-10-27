@@ -92,9 +92,11 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
         if (obj == nil) break;
 
         if ([obj conformsToProtocol:@protocol(InterfaceAds)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolAds();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceAnalytics)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolAnalytics();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceIAP)]) {
@@ -102,12 +104,15 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
             pRet = new ProtocolIAP();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceShare)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolShare();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceSocial)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolSocial();
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceUser)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolUser();
         } else {
             PluginUtilsIOS::outputLog("Plugin %s not implements a right protocol", name);
