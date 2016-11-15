@@ -61,6 +61,9 @@
     <ClInclude Include="..\include\ProtocolCrash.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ProtocolCustom.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\platform\android\AgentManager.cpp">
@@ -99,6 +102,9 @@
     <ClCompile Include="..\PluginManager.cpp" />
     <ClCompile Include="..\PluginParam.cpp" />
     <ClCompile Include="..\platform\android\ProtocolCrash.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolCustom.cpp">
       <Filter>android</Filter>
     </ClCompile>
   </ItemGroup>

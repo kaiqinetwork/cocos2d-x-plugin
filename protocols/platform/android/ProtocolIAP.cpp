@@ -132,4 +132,21 @@ void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
 	PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolIAP", "Pay result is : %d(%s)", (int)ret, msg);
 }
 
+std::string ProtocolIAP::getOrderInfo()
+{
+	if (!isFunctionSupported("getOrderInfo"))
+		return "";
+
+	return PluginUtils::callJavaStringFuncWithName(this, "getOrderInfo");
+}
+
+std::string ProtocolIAP::getPlatform()
+{
+	if (!isFunctionSupported("getPlatform"))
+		return "";
+
+	return PluginUtils::callJavaStringFuncWithName(this, "getPlatform");
+}
+
+
 }} // namespace cocos2d { namespace plugin {

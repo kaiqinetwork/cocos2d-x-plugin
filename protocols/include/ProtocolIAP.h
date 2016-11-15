@@ -80,6 +80,9 @@ public:
     void payForProduct(TProductInfo info);
     void payForProduct(TProductInfo info, ProtocolIAPCallback cb);
 
+	std::string getOrderInfo();
+	std::string getPlatform();
+
     /**
     @deprecated
     @breif set the result listener

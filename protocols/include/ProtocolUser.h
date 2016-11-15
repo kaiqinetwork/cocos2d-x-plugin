@@ -101,6 +101,8 @@ public:
      */
     std::string getAccessToken();
 
+	std::string getPlatform();
+
 	void enterPlatform();
 
 	void accountSwitch();

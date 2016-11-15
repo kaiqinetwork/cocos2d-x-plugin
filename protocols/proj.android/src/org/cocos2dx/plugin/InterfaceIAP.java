@@ -34,4 +34,5 @@ public interface InterfaceIAP {
 	public String getSDKVersion();
 	public String getPluginVersion();
 	public String getPluginName();
+	public boolean isSupportFunction(String funcName);
 }

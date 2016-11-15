@@ -96,6 +96,8 @@ void PluginProtocol::callFuncWithParam(const char* funcName, PluginParam* param,
             if (pArg == NULL)
                 break;
 			
+			PluginUtils::outputLog(ANDROID_LOG_DEBUG, LOG_TAG, "%s %p 123321", funcName, pArg);
+
             allParams.push_back(pArg);
         }
         va_end(argp);
@@ -111,8 +113,9 @@ void PluginProtocol::callFuncWithParam(const char* funcName, std::vector<PluginP
 		PluginUtils::outputLog(ANDROID_LOG_DEBUG, LOG_TAG, "Can't find java data for plugin : %s", this->getPluginName().c_str());
         return;
     }
-
+	
     int nParamNum = params.size();
+	PluginUtils::outputLog(ANDROID_LOG_DEBUG, LOG_TAG, "xyz: %s %d", funcName, nParamNum);
     if (nParamNum == 0)
     {
         PluginUtils::callJavaFunctionWithName(this, funcName);
@@ -223,7 +226,11 @@ float PluginProtocol::callFloatFuncWithParam(const char* funcName, std::vector<P
 
 bool PluginProtocol::isFunctionSupported(const char* funcName)
 {
-	return PluginUtils::callJavaBoolFuncWithName_oneParam(this, "isFunctionSupported", "(Ljava/lang/String;)Z", funcName);
+	jstring jstr = PluginUtils::getEnv()->NewStringUTF(funcName);
+	bool ret = PluginUtils::callJavaBoolFuncWithName_oneParam(this, "isSupportFunction", "(Ljava/lang/String;)Z", jstr);
+	PluginUtils::getEnv()->DeleteLocalRef(jstr);
+	return ret;
+
 }
 
 

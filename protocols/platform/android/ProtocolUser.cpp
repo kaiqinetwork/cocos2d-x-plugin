@@ -90,6 +90,14 @@ std::string ProtocolUser::getAccessToken()
 	return PluginUtils::callJavaStringFuncWithName(this, "getAccessToken");
 }
 
+std::string ProtocolUser::getPlatform()
+{
+	if (!isFunctionSupported("getPlatform"))
+		return "";
+
+	return PluginUtils::callJavaStringFuncWithName(this, "getPlatform");
+}
+
 void ProtocolUser::showToolbar(int position)
 {
 	if (!isFunctionSupported("showToolbar"))
