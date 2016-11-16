@@ -57,15 +57,54 @@ std::string ProtocolUser::getUserId()
 {
     return PluginUtilsIOS::callOCStringFunctionWithName(this, "getUserId");
 }
+
+std::string ProtocolUser::getPlatform()
+{
+    return PluginUtilsIOS::callOCStringFunctionWithName(this, "getPlatform");
+}
     
+void ProtocolUser::enterPlatform()
+{
+        
+}
+    
+void ProtocolUser::accountSwitch()
+{
+        
+}
+    
+void ProtocolUser::exit()
+{
+        
+}
+
+void ProtocolUser::pause()
+{
+        
+}
+
 void ProtocolUser::showToolbar(int position)
 {
         
 }
-
+    
 void ProtocolUser::hideToolbar()
 {
         
 }
-
+    
+void ProtocolUser::realNameRegister()
+{
+        
+}
+    
+void ProtocolUser::antiAddictionQuery()
+{
+        
+}
+    
+void ProtocolUser::submitLoginGameRole(StringMap *data)
+{
+        
+}
 }} // namespace cocos2d { namespace plugin {

@@ -101,6 +101,7 @@ bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
     ProtocolAnalytics* pAnalytics;
     ProtocolCrash* pCrash;
     ProtocolIAP* pIAP;
+    ProtocolCustom* pCustom;
     for (int i = 0; i < plugins.size(); ++i)
     {
         protocol = dynamic_cast<PluginProtocol *>(PluginManager::getInstance()->loadPlugin(plugins[i].c_str()));
@@ -157,6 +158,15 @@ bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
                 delete pCrash;
             }
             _pCrash = pCrash;
+        }
+        pCustom = dynamic_cast<ProtocolCustom *>(protocol);
+        if (pCustom)
+        {
+            if (pCustom)
+            {
+                delete pCustom;
+            }
+            _pCustom = pCustom;
         }
         pIAP = dynamic_cast<ProtocolIAP *>(protocol);
         if (pIAP)

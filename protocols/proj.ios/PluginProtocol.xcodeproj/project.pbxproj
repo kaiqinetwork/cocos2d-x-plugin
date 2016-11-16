@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		051FF7BC192CE3CC00C43A06 /* IAPWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */; };
 		05AB25181988F62000D00E8E /* ParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB25171988F62000D00E8E /* ParseUtils.m */; };
+		7292FB851DDB56C9004E04D0 /* ProtocolCustom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */; };
+		7292FB891DDB5BE6004E04D0 /* CustomWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7292FB881DDB5BE6004E04D0 /* CustomWrapper.mm */; };
 		72990A341DAE0AE700766198 /* PluginWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72990A331DAE0AE700766198 /* PluginWrapper.mm */; };
 		72990ADB1DAE8EF500766198 /* ProtocolCrash.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72990ADA1DAE8EF500766198 /* ProtocolCrash.mm */; };
 		BA1BF842195A6FC100B47F4E /* AgentManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BA1BF841195A6FC100B47F4E /* AgentManager.mm */; };
@@ -48,10 +50,16 @@
 		051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IAPWrapper.mm; sourceTree = "<group>"; };
 		05AB25161988F62000D00E8E /* ParseUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUtils.h; sourceTree = "<group>"; };
 		05AB25171988F62000D00E8E /* ParseUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUtils.m; sourceTree = "<group>"; };
+		7292FB831DDB5669004E04D0 /* ProtocolCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolCustom.h; sourceTree = "<group>"; };
+		7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProtocolCustom.mm; sourceTree = "<group>"; };
+		7292FB861DDB5A39004E04D0 /* InterfaceCustom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceCustom.h; sourceTree = "<group>"; };
+		7292FB871DDB5ABA004E04D0 /* CustomWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomWrapper.h; sourceTree = "<group>"; };
+		7292FB881DDB5BE6004E04D0 /* CustomWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomWrapper.mm; sourceTree = "<group>"; };
 		72990A321DAE0A4300766198 /* PluginWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginWrapper.h; sourceTree = "<group>"; };
 		72990A331DAE0AE700766198 /* PluginWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PluginWrapper.mm; sourceTree = "<group>"; };
 		72990AD91DAE8EA200766198 /* ProtocolCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolCrash.h; sourceTree = "<group>"; };
 		72990ADA1DAE8EF500766198 /* ProtocolCrash.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProtocolCrash.mm; sourceTree = "<group>"; };
+		72D655FE1DDBFC570000AECC /* InterfaceCrash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceCrash.h; sourceTree = "<group>"; };
 		BA1BF7FE195962C400B47F4E /* AgentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentManager.h; sourceTree = "<group>"; };
 		BA1BF841195A6FC100B47F4E /* AgentManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AgentManager.mm; sourceTree = "<group>"; };
 		FA09A321168ADBC2008C1C7B /* libPluginProtocol.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginProtocol.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +149,7 @@
 		FA09A336168ADC05008C1C7B /* include */ = {
 			isa = PBXGroup;
 			children = (
+				7292FB831DDB5669004E04D0 /* ProtocolCustom.h */,
 				72990AD91DAE8EA200766198 /* ProtocolCrash.h */,
 				BA1BF7FE195962C400B47F4E /* AgentManager.h */,
 				FADBF896179E504B00F59B1D /* ProtocolSocial.h */,
@@ -194,6 +203,11 @@
 				05AB25171988F62000D00E8E /* ParseUtils.m */,
 				72990A321DAE0A4300766198 /* PluginWrapper.h */,
 				72990A331DAE0AE700766198 /* PluginWrapper.mm */,
+				7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */,
+				7292FB861DDB5A39004E04D0 /* InterfaceCustom.h */,
+				7292FB871DDB5ABA004E04D0 /* CustomWrapper.h */,
+				7292FB881DDB5BE6004E04D0 /* CustomWrapper.mm */,
+				72D655FE1DDBFC570000AECC /* InterfaceCrash.h */,
 			);
 			name = ios;
 			path = ../platform/ios;
@@ -254,7 +268,9 @@
 				FA09A33E168ADC1F008C1C7B /* PluginManager.cpp in Sources */,
 				FA8CC1E6173754CF00464206 /* PluginUtilsIOS.mm in Sources */,
 				FA8CC208173894F000464206 /* ProtocolAds.mm in Sources */,
+				7292FB891DDB5BE6004E04D0 /* CustomWrapper.mm in Sources */,
 				FA8CC209173894F000464206 /* ProtocolAnalytics.mm in Sources */,
+				7292FB851DDB56C9004E04D0 /* ProtocolCustom.mm in Sources */,
 				72990A341DAE0AE700766198 /* PluginWrapper.mm in Sources */,
 				FA8CC20A173894F000464206 /* ProtocolIAP.mm in Sources */,
 				FAB6DF961755D7E500C90D89 /* PluginParam.cpp in Sources */,

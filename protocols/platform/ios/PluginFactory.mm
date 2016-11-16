@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "ProtocolShare.h"
 #include "ProtocolSocial.h"
 #include "ProtocolUser.h"
+#include "ProtocolCrash.h"
+#include "ProtocolCustom.h"
 #include "PluginUtilsIOS.h"
 
 #import <Foundation/Foundation.h>
@@ -37,6 +39,8 @@ THE SOFTWARE.
 #import "InterfaceShare.h"
 #import "InterfaceSocial.h"
 #import "InterfaceUser.h"
+#import "InterfaceCrash.h"
+#import "InterfaceCustom.h"
 #import "PluginWrapper.h"
 
 namespace cocos2d { namespace plugin {
@@ -114,6 +118,14 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
         if ([obj conformsToProtocol:@protocol(InterfaceUser)]) {
             [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
             pRet = new ProtocolUser();
+        } else
+        if ([obj conformsToProtocol:@protocol(InterfaceCrash)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
+            pRet = new ProtocolCrash();
+        } else
+        if ([obj conformsToProtocol:@protocol(InterfaceCustom)]) {
+            [obj configDeveloperInfo:[PluginWrapper getPluginParams]];
+            pRet = new ProtocolCustom();
         } else {
             PluginUtilsIOS::outputLog("Plugin %s not implements a right protocol", name);
         }
