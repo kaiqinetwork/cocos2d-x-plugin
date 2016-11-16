@@ -36,14 +36,14 @@ public class LoginChangeActivity extends Activity {
         });
         btnWX.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                LoginChangeActivity.this.LogD("login with wx");
+                LoginChangeActivity.this.logD("login with wx");
                 LoginChangeActivity.this.isClick.put("isClick", Boolean.valueOf(true));
                 LoginChangeActivity.this.finish();
                 YSDKApi.login(ePlatform.WX);
             }
         });
         this.isClick.put("isClick", Boolean.valueOf(false));
-        this.callback = TXYSDKWrapper.getInstance().getLoginCallback();
+        this.callback = SDKWrapper.getInstance().getLoginCallback();
     }
 
     protected void onDestroy() {

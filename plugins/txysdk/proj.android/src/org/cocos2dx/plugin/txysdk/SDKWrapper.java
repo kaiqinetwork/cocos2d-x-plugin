@@ -36,7 +36,7 @@ public class SDKWrapper {
     private Activity mActivity;
     private boolean mDebug;
     private IAPAdapter mIAPAdapter;
-    private boolean mInited;
+    private boolean mInited = false;
     private UserAdapter mUserAdapter;
     private boolean mLoggedIn;
     private String mUid;
@@ -44,6 +44,7 @@ public class SDKWrapper {
     private boolean mMultizone;
     private boolean mChangeMoney;
     private int mRate;
+    private int mPlatform;
     private boolean mShowToast;
 
     public SDKWrapper() {
@@ -89,6 +90,7 @@ public class SDKWrapper {
     }
     
     public boolean initSDK(Activity act, Hashtable<String, String> devInfo, Object adapter, final ILoginCallback listener) {
+    	logD("IsInitedSDK " + mInited);
         if (adapter instanceof InterfaceUser) {
             mUserAdapter = (UserAdapter) adapter;
         } else if (adapter instanceof InterfaceIAP) {
@@ -105,6 +107,7 @@ public class SDKWrapper {
         setShowToast(Boolean.parseBoolean((String) devInfo.get("TXYSDKShowToast")));
         setChangeMoney(Boolean.parseBoolean((String) devInfo.get("TXYSDKChangeMoney")));
         String strRate = (String) devInfo.get("TXYSDKRate");
+        logD("IsDebug: " + mDebug + ", Rate:" + strRate);
         if (!(strRate == null || strRate.isEmpty())) {
             setRate(Integer.parseInt(strRate));
         }
@@ -151,7 +154,16 @@ public class SDKWrapper {
             }
 
             public void OnLoginNotify(com.tencent.ysdk.module.user.UserLoginRet ret) {
-            	
+            	logD("LoginRet:" + ret);
+            	if(ret.flag == 0){
+            		mAccessToken = ret.getAccessToken();
+            		mUid = ret.open_id;
+            		mPlatform = ret.platform;
+            		mLoginCallback.onSuccessed(UserWrapper.ACTION_RET_LOGIN_SUCCESS, ret.msg);
+            	}
+            	else{
+            		mLoginCallback.onFailed(UserWrapper.ACTION_RET_LOGIN_FAIL, ret.msg);
+            	}
             }
         });
     }
@@ -265,6 +277,19 @@ public class SDKWrapper {
     
     public String getChannel() {
         return CHANNEL;
+    }
+    
+    public String getPlatform(){
+    	if(mPlatform == 2){
+    		return "YSDK_WX";
+    	}
+    	else{
+    		return "YSDK_QQ";
+    	}
+    }
+    
+    public ILoginCallback getLoginCallback() {
+        return this.mLoginCallback;
     }
     
     protected void setPluginListener() {

@@ -11,14 +11,6 @@ import org.cocos2dx.plugin.UserWrapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.alipay.mobilesecuritysdk.constant.ConfigConstant;
-import com.alipay.sdk.cons.GlobalDefine;
-import com.alipay.sdk.cons.MiniDefine;
-import com.baidu.gamesdk.BDGameSDK;
-import com.baidu.gamesdk.IResponse;
-import com.baidu.gamesdk.OnGameExitListener;
-import com.baidu.wallet.core.beans.BeanConstants;
-import com.duoku.platform.download.Downloads;
 import com.tencent.ysdk.api.YSDKApi;
 
 import android.app.Activity;
@@ -55,17 +47,21 @@ public class UserAdapter implements InterfaceUser {
 	    PluginWrapper.runOnMainThread(new Runnable() {
 	        public void run() {
 	            if (SDKWrapper.getInstance().isInited()) {
+	            	logD("login() invoked!");
 	            	SDKWrapper.getInstance().userLogin(new ILoginCallback() {
 	                    public void onSuccessed(int code, String msg) {
 	                    	actionResult(UserWrapper.ACTION_RET_LOGIN_SUCCESS, msg);
+	                    	SDKWrapper.getInstance().setLoggedIn(true);
 	                    }
 	
 	                    public void onFailed(int code, String msg) {
 	                    	actionResult(code, msg);
+	                    	SDKWrapper.getInstance().setLoggedIn(false);
 	                    }
 	                });
 	            } else {
 	            	actionResult(UserWrapper.ACTION_RET_LOGIN_FAIL, "initSDK fail!");
+	            	SDKWrapper.getInstance().setLoggedIn(false);
 	            }
 	        }
 	    });
@@ -124,6 +120,10 @@ public class UserAdapter implements InterfaceUser {
 		return SDKWrapper.getInstance().getPluginName();
 	}
 	
+	public String getPlatform(){
+	return SDKWrapper.getInstance().getPlatform();    	
+	}
+
 	protected void logE(String msg, Exception e) {
         if (e == null) {
             PluginHelper.logE(LOG_TAG, msg);
