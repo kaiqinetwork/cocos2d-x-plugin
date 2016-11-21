@@ -45,7 +45,7 @@ public class ShareAdapter implements InterfaceShare {
 	protected static String LOG_TAG = "sharesdk.ShareAdapter";
 	private static final String PLUGIN_NAME = "ShareSDK";
     private static final String PLUGIN_VERSION = "1.0.0";
-    private static final String SDK_VERSION = "2.7.3";
+    private static final String SDK_VERSION = "2.7.10";
     
 	private static boolean mDebug = false;
     private static ShareAdapter mInstance = null;
