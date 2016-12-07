@@ -128,5 +128,15 @@ void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
     _curInfo.clear();
     PluginUtilsIOS::outputLog("Pay result of %s is : %d(%s)", this->getPluginName().c_str(), (int) ret, msg);
 }
-
+    
+std::string ProtocolIAP::getOrderInfo()
+{
+    return "";
+}
+    
+std::string ProtocolIAP::getPlatform()
+{
+    return "";
+}
+    
 }} //namespace cocos2d { namespace plugin {
