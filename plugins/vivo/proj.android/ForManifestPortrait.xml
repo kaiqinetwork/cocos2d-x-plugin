@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifestConfig xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 添加第三方SDK会有要求在AndroidManifest.xml中添加sdk的activity、service、 receiver、权限等 -->
+
+    <applicationCfg keyword="com.duoku.platform.single.ui.DKRecommendActivity" >
+
+        <!-- applicationCfg子节点里面是第三方SDK需要的activity、service、 receiver等所有配置 -->
+        <!-- 基础配置 -->
+        <!-- Activity屏幕方向要同代码中设置一致 -->
+
+        <activity
+            android:name="com.duoku.platform.single.ui.DKRecommendActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/DK.Theme.NoBackGround.NoAnimation" >
+        </activity>
+
+        <activity
+            android:name="com.duoku.platform.single.ui.DKStartDownloadActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/dksdk_theme_dialog" />
+
+        <activity
+            android:name="com.duoku.platform.single.ui.DKLotteryDrawActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/DK.Theme.NoBackGround.NoAnimation" >
+        </activity>
+
+        <receiver android:name="com.duoku.platform.single.receiver.PushMessageReceiver" >
+
+            <intent-filter android:priority="2147483647" >
+
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.baidu.android.pushservice.PushServiceReceiver"
+            android:process=":bdservice_v1" >
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
+
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+
+                <action android:name="android.intent.action.USER_PRESENT" />
+
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+
+                <action android:name="com.baidu.android.pushservice.action.frontia.user" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.baidu.android.pushservice.RegistrationReceiver"
+            android:process=":bdservice_v1" >
+
+            <intent-filter>
+
+                <action android:name="com.baidu.android.pushservice.action.METHOD" />
+
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+            </intent-filter>
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.baidu.android.pushservice.PushService"
+            android:exported="true"
+            android:process=":bdservice_v1" >
+
+            <intent-filter>
+
+                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.baidu.android.pushservice.CommandService"
+            android:exported="true" />
+
+        <service
+            android:name="com.duoku.platform.single.gameplus.service.GPDownloadService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="com.baidu.platform.gameplus.service" >
+
+            <intent-filter>
+
+                <action android:name="com.baidu.platform.gameplus.service" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <service android:name="com.duoku.platform.single.gameplus.install.GPSilentInstallService" />
+
+        <receiver android:name="com.duoku.platform.single.gameplus.broadcast.GPNotificaionReceiver" >
+
+            <intent-filter>
+
+                <action android:name="baidu.platform.gameplus.intent.action.CANCLE_NOTIFICATION" />
+
+                <action android:name="baidu.platform.gameplus.intent.action.DO_NOTIFICATION_CLICK" />
+            </intent-filter>
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 支付模块配置 -->
+        <!-- 注意:支付模块的Activity屏幕方向要同代码中设置一致 -->
+
+        <activity
+            android:name="com.duoku.platform.single.ui.DKContainerActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/DK.Theme.NoBackGround.NoAnimation" >
+        </activity>
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 聚合微信支付 start -->
+
+        <activity
+            android:name="com.ipaynow.plugin.activity.PayMethodActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+
+        <activity
+            android:name="com.ipaynow.plugin.inner_plugin.wechat_plugin.activity.WeChatNotifyActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoDisplay" >
+        </activity>
+        <!-- 聚合微信支付 end -->
+
+
+        <!-- 登陆模块配置 -->
+
+        <activity
+            android:name="com.duoku.platform.single.bdpass.DKAccountContainerActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/DK.Theme.NoBackGround.NoAnimation" >
+        </activity>
+
+        <meta-data android:name="dksdk_appid" android:value="$sdk_appid$" />
+        <meta-data android:name="dksdk_appkey" android:value="$sdk_appkey$" />
+        <meta-data android:name="dksdk_appsecret" android:value="$sdk_appsecret$" />
+		<!-- dksdk_channel表示渠道,百度手机助手13744，百度多酷12999，91（福建博锐）14076，百度贴吧14146 -->
+        <meta-data android:name="dksdk_channel" android:value="13744" />
+        <meta-data android:name="dksdk_ver" android:value="207"/>
+    </applicationCfg>
+
+    <permissionCfg>
+
+        <!-- permissionCfg子节点里面是第三方SDK需要的所有应用权限配置 -->
+
+        <uses-permission android:name="android.permission.READ_LOGS" />
+
+        <uses-permission android:name="android.permission.SEND_SMS" />
+
+        <uses-permission android:name="android.permission.CALL_PHONE" />
+
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+        <uses-permission android:name="android.permission.INTERNET" />
+
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+        <uses-permission android:name="android.permission.VIBRATE" />
+
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+        <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+
+        <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+        <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+        <uses-permission android:name="android.permission.GET_TASKS" />
+
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+        <uses-permission android:name="android.webkit.permission.PLUGIN" />
+
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+        <uses-permission android:name="android.permission.READ_SMS" />
+    </permissionCfg>
+
+</manifestConfig>
