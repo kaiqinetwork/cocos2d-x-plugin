@@ -18,6 +18,7 @@ import com.tencent.ysdk.module.bugly.BuglyListener;
 import com.tencent.ysdk.module.user.UserListener;
 import com.tencent.ysdk.module.user.UserRelationRet;
 import com.tencent.ysdk.module.user.WakeupRet;
+import com.tencent.ysdk.module.user.UserLoginRet;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +31,7 @@ public class SDKWrapper {
     private static final String LOG_TAG = "txysdk.SDKWrapper";
     private static final String PLUGIN_NAME = "TXYSDK";
     private static final String PLUGIN_VERSION = "1.0.0";
-    private static final String SDK_VERSION = "1.2.2";
+    private static final String SDK_VERSION = "1.2.4";
     private static SDKWrapper mInstance;
     private ILoginCallback mLoginCallback;
     private Activity mActivity;
@@ -135,7 +136,7 @@ public class SDKWrapper {
         mLoginCallback = listener;
         PluginWrapper.runOnMainThread(new Runnable() {
             public void run() {
-                showLoginView();
+            	showLoginView();
             }
         });
     }
