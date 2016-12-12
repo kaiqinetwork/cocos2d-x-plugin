@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo>
+    <PluginList>
+		<Plugin className="txysdk/UserAdapter" />
+		<Plugin className="txysdk/IAPAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="TXYSDKIsDebug" value="" />
+        <Param name="TXYSDKIsMultizone" value="" />
+        <Param name="TXYSDKShowToast" value="" />
+        <Param name="TXYSDKRate" value="" />
+    </ParamList>
+</DeveloperInfo>
