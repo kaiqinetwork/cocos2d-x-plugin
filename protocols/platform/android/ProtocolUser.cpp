@@ -107,6 +107,14 @@ void ProtocolUser::showToolbar(int position)
 	callFuncWithParam("showToolbar", &param, NULL);
 }
 
+bool ProtocolUser::canSwitchAccount()
+{
+	if (!isFunctionSupported("canSwitchAccount"))
+		return true;
+
+	PluginUtils::callJavaBoolFuncWithName(this, "canSwitchAccount");
+}
+
 void ProtocolUser::hideToolbar()
 {
 	if (!isFunctionSupported("hideToolbar"))

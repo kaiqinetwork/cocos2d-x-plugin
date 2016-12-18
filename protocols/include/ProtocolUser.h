@@ -121,6 +121,8 @@ public:
 
 	void submitLoginGameRole(StringMap *data);
 
+	bool canSwitchAccount();
+
     /**
      @brief set login callback function
      */
