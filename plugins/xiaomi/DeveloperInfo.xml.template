@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo Orientation="" DebugMode="">
+    <PluginList>
+        <Plugin className="xiaomi/UserAdapter" />
+        <Plugin className="xiaomi/IAPAdapter" />
+    </PluginList>
+    <ParamList>
+	<Param name="XiaomiAppID" value="" />
+        <Param name="XiaomiAppKey" value="" />
+    </ParamList>
+</DeveloperInfo>
