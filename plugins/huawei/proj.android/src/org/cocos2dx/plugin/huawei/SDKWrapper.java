@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import com.huawei.gamebox.buoy.sdk.impl.BuoyOpenSDK;
 import com.huawei.gamebox.buoy.sdk.inter.UserInfo;
+import com.huawei.hwid.openapi.OpenHwID;
 import com.huawei.opensdk.OpenSDK;
 
 import android.app.Activity;
@@ -146,6 +147,7 @@ public class SDKWrapper {
             }
 
             public void onDestroy() {
+            	OpenHwID.releaseResouce();
             	BuoyOpenSDK.getIntance().destroy((Context)mActivity);
             }
 

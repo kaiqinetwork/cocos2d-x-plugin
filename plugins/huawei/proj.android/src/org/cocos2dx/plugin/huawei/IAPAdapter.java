@@ -3,6 +3,7 @@ package org.cocos2dx.plugin.huawei;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 
 import org.cocos2dx.plugin.IAPWrapper;
@@ -198,6 +199,10 @@ public class IAPAdapter implements InterfaceIAP {
             payResult(IAPWrapper.PAYRESULT_FAIL, "payInSDK error");
         }
     }
+	
+	public String getOrderInfo(){
+		return SDKWrapper.getInstance().getAppID();
+	}
 	
 	@Override
 	public void setDebugMode(boolean debug) {
