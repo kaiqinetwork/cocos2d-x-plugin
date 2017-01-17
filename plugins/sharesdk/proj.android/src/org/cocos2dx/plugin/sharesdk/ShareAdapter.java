@@ -119,7 +119,7 @@ public class ShareAdapter implements InterfaceShare {
 						oks.setSiteUrl(cpInfo.get("siteUrl"));
 					}
 					int mShareType;
-					if (cpInfo.containsKey("type"))
+					if (!cpInfo.containsKey("type"))
 						mShareType = Platform.SHARE_WEBPAGE;
 					else
 						mShareType = Integer.parseInt(cpInfo.get("type"));
