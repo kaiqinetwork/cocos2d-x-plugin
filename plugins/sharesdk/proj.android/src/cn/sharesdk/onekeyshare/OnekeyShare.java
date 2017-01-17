@@ -82,6 +82,11 @@ public class OnekeyShare {
 		params.put("url", url);
 	}
 
+	/** 设置分享类型*/
+	public void setShareType(int type) {
+		params.put("shareType", type);
+	}
+	
 	/** filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供 */
 	public void setFilePath(String filePath) {
 		params.put("filePath", filePath);
