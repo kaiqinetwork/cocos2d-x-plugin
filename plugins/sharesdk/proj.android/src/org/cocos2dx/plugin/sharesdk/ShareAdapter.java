@@ -103,7 +103,7 @@ public class ShareAdapter implements InterfaceShare {
 			public void run() {
 				if (cpInfo == null) {
 					shareResult(ShareWrapper.SHARERESULT_FAIL, "share param is null");
-				} else if (cpInfo.containsKey("type") && cpInfo.containsKey("text")) {
+				} else if (cpInfo.containsKey("text")) {
 					OnekeyShare oks = new OnekeyShare();
 					oks.setText(cpInfo.get("text"));
 					if (cpInfo.containsKey("title")) {
@@ -118,7 +118,11 @@ public class ShareAdapter implements InterfaceShare {
 					if (cpInfo.containsKey("siteUrl")) {
 						oks.setSiteUrl(cpInfo.get("siteUrl"));
 					}
-					int mShareType = Integer.parseInt(cpInfo.get("type"));
+					int mShareType;
+					if (cpInfo.containsKey("type"))
+						mShareType = Platform.SHARE_WEBPAGE;
+					else
+						mShareType = Integer.parseInt(cpInfo.get("type"));
 					switch (mShareType) {
 					case Platform.SHARE_TEXT:
 						oks.setShareType(Platform.SHARE_TEXT);
