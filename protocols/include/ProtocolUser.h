@@ -123,6 +123,8 @@ public:
 
 	bool canSwitchAccount();
 
+	void setUserInfo(std::map<std::string, std::string> userInfo);
+
     /**
      @brief set login callback function
      */

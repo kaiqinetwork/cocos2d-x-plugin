@@ -115,6 +115,28 @@ bool ProtocolUser::canSwitchAccount()
 	PluginUtils::callJavaBoolFuncWithName(this, "canSwitchAccount");
 }
 
+void ProtocolUser::setUserInfo(std::map<std::string, std::string> userInfo)
+{
+	if (!isFunctionSupported("setUserInfo"))
+		return;
+
+	PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
+	PluginJniMethodInfo t;
+	if (PluginJniHelper::getMethodInfo(t
+		, pData->jclassName.c_str()
+		, "setUserInfo"
+		, "(Ljava/util/Hashtable;)V"))
+	{
+		// generate the hashtable from map
+		jobject obj_Map = PluginUtils::createJavaMapObject(&userInfo);
+
+		// invoke java method
+		t.env->CallVoidMethod(pData->jobj, t.methodID, obj_Map);
+		t.env->DeleteLocalRef(obj_Map);
+		t.env->DeleteLocalRef(t.classID);
+	}
+}
+
 void ProtocolUser::hideToolbar()
 {
 	if (!isFunctionSupported("hideToolbar"))
