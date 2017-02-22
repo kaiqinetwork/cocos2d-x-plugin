@@ -1,6 +1,7 @@
 package org.cocos2dx.plugin.bdgamesingle;
 
 import java.util.Hashtable;
+import java.lang.reflect.Method;
 
 import org.cocos2dx.plugin.IAPWrapper;
 import org.cocos2dx.plugin.ILoginCallback;
@@ -64,19 +65,7 @@ public class IAPAdapter implements InterfaceIAP {
 		            payResult(IAPWrapper.PAYRESULT_TIMEOUT, "Network not available!");
 		        } else if (productInfo == null) {
 		            payResult(IAPWrapper.PAYRESULT_FAIL, "ProductInfo error!");
-		        } else if (SDKWrapper.getInstance().isLoggedIn()) {
-		        	payInSDK(productInfo);
-		        } else {
-		        	SDKWrapper.getInstance().userLogin(mActivity, new ILoginCallback() {
-		                public void onSuccessed(int code, String msg) {
-		                	logD("UserLoginCallBack");
-		                	payInSDK(productInfo);
-		                }
-		
-		                public void onFailed(int code, String msg) {
-		                    payResult(IAPWrapper.PAYRESULT_FAIL, "Login failed");
-		                }
-		            });
+		        } else {payInSDK(productInfo);
 		        }
             }
 		});
@@ -213,5 +202,16 @@ public class IAPAdapter implements InterfaceIAP {
 		logD("payResult: " + ret + " msg : " + msg);
 		IAPWrapper.onPayResult(mInstance, ret, msg);
     }
+	
+	@Override
+	public boolean isSupportFunction(String funcName) {
+		Method[] methods = IAPAdapter.class.getMethods();
+        for (Method name : methods) {
+            if (name.getName().equals(funcName)) {
+                return true;
+            }
+        }
+        return false;
+	}
 
 }

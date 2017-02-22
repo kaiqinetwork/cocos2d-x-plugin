@@ -155,7 +155,7 @@ public class IAPAdapter implements InterfaceIAP {
 	
 	public void payResult(int ret, String msg) {
 		logD("payResult: " + ret + " msg : " + msg);
-		IAPWrapper.onPayResult(mInstance, ret, msg);
+		IAPWrapper.onPayResult(mInstance, ret, "");
     }
 	
 	@Override

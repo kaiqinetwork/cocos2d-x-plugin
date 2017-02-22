@@ -113,6 +113,9 @@ public class SDKWrapper {
 				case 6001://用户取消支付
 					mIAPAdapter.payResult(IAPWrapper.PAYRESULT_CANCEL, "msg:" + pay_msg);
 					break;
+				default:
+					mIAPAdapter.payResult(IAPWrapper.PAYRESULT_FAIL, "msg" + pay_msg);
+					break;
 				}
 				
 			}

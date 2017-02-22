@@ -24,6 +24,7 @@ THE SOFTWARE.
 package org.cocos2dx.plugin.alipay;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -165,7 +166,7 @@ public class IAPAdapter implements InterfaceIAP {
 				 * 完整的符合支付宝参数规范的订单信息
 				 */
 				final String payInfo = orderInfo + "&sign=\"" + sign + "\"&sign_type=\"" + signType+ "\"";
-				
+				logD("payInfo:" + payInfo);
 				Runnable payRunnable = new Runnable() {
 
 					@Override
@@ -357,5 +358,16 @@ public class IAPAdapter implements InterfaceIAP {
 	@Override
 	public String getPluginName() {
 		return PLUGIN_NAME;
+	}
+	
+	@Override
+	public boolean isSupportFunction(String funcName) {
+		Method[] methods = IAPAdapter.class.getMethods();
+        for (Method name : methods) {
+            if (name.getName().equals(funcName)) {
+                return true;
+            }
+        }
+        return false;
 	}
 }

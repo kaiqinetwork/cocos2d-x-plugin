@@ -91,7 +91,7 @@ public class UserAdapter implements InterfaceUser {
     
     public void actionResult(int code, String msg) {
         logD("actionResult code=" + code + " msg=" + msg);
-        UserWrapper.onActionResult(mInstance, code, msg);
+        UserWrapper.onActionResult(mInstance, code, "");
     }
 
 	@Override

@@ -71,7 +71,7 @@ public class WXEntryBaseActivity extends Activity implements IWXAPIEventHandler 
                 else {
                 	ShareAdapter.shareResult(ShareWrapper.SHARERESULT_SUCCESS, "share success");
                 }
-                Log.d("BaseResp.ErrCode.ERR_OK:", "\u6210\u529f");
+                Log.i("BaseResp.ErrCode.ERR_OK:", "\u6210\u529f");
                 break;
             default:
                 if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {

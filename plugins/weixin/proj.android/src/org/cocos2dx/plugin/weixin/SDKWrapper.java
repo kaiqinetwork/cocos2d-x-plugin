@@ -20,7 +20,7 @@ import android.content.Context;
 public class SDKWrapper {
 	private static final String LOG_TAG = "weixin.SDKWrapper";
     private static final String PLUGIN_NAME = "Weixin";
-    private static final String PLUGIN_VERSION = "1.0.0";
+    private static final String PLUGIN_VERSION = "1.1.0";
     private static final String SDK_VERSION = "3.1.1";
     private static SDKWrapper mInstance;
     private static String mAppId;
@@ -83,12 +83,14 @@ public class SDKWrapper {
     }
     
     public void userLogin(final Activity act, final ILoginCallback callback) {
+    	logD("userLogin");
     	PluginWrapper.runOnMainThread(new Runnable() {
     		public void run() {
 				mLoginCallback = callback;
 				if (!mApi.isWXAppInstalled()) {
 					callback.onFailed(UserWrapper.ACTION_RET_LOGIN_FAIL, "wx app is not installed");
 				} else if (mApi.isWXAppSupportAPI()) {
+					logD("Ready to start wechat");
 				    Req req = new Req();
 				    req.scope = "snsapi_userinfo";
 				    req.state = "wechat_sdk_demo";

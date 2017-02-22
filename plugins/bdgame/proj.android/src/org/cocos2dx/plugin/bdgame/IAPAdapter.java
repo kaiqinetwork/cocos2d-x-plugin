@@ -1,6 +1,7 @@
 package org.cocos2dx.plugin.bdgame;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.Hashtable;
 
@@ -156,5 +157,16 @@ public class IAPAdapter implements InterfaceIAP {
 		logD("payResult: " + ret + " msg : " + msg);
 		IAPWrapper.onPayResult(mInstance, ret, msg);
     }
+	
+	@Override
+	public boolean isSupportFunction(String funcName) {
+		Method[] methods = IAPAdapter.class.getMethods();
+        for (Method name : methods) {
+            if (name.getName().equals(funcName)) {
+                return true;
+            }
+        }
+        return false;
+	}
 
 }

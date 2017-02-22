@@ -23,6 +23,7 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.plugin.weixin;
 
+import java.lang.reflect.Method;
 import java.util.Hashtable;
 
 import org.cocos2dx.plugin.IAPWrapper;
@@ -102,6 +103,7 @@ public class IAPAdapter implements InterfaceIAP {
                     req.packageValue = productInfo.get("Package");
                     req.sign = productInfo.get("Sign");
                     SDKWrapper.getInstance().getApi().sendReq(req);
+                    logD("Package:" + req.packageValue);
 	            } else {
 	                payResult(IAPWrapper.PAYRESULT_FAIL, "Wechat client has not installed");
 	            }
@@ -126,7 +128,7 @@ public class IAPAdapter implements InterfaceIAP {
 
 	public static void payResult(int ret, String msg) {
 		logD("Pay result : " + ret + " msg : " + msg);
-		IAPWrapper.onPayResult(mInstance, ret, msg);		
+		IAPWrapper.onPayResult(mInstance, ret, "");		
 	}
 
 	@Override
@@ -137,5 +139,16 @@ public class IAPAdapter implements InterfaceIAP {
 	@Override
 	public String getPluginName() {
 		return SDKWrapper.getInstance().getPluginName();
+	}
+	
+	@Override
+	public boolean isSupportFunction(String funcName) {
+		Method[] methods = IAPAdapter.class.getMethods();
+        for (Method name : methods) {
+            if (name.getName().equals(funcName)) {
+                return true;
+            }
+        }
+        return false;
 	}
 }

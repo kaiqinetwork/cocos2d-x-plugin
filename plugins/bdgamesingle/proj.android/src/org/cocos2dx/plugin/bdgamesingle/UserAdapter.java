@@ -141,6 +141,10 @@ public class UserAdapter implements InterfaceUser {
             logE("logD error", e);
         }
     }
+    
+    public boolean canSwitchAccount() {
+		return false;
+	}
 
 	@Override
 	public boolean isSupportFunction(String funcName) {
