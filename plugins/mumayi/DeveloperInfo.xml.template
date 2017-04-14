@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeveloperInfo Orientation="landscape" DebugMode="true">
+    <PluginList>
+        <Plugin className="mumayi/UserAdapter" />
+        <Plugin className="mumayi/IAPAdapter" />
+    </PluginList>
+    <ParamList>
+        <Param name="AnzhiAppKey" value="" />
+        <Param name="AnzhiAppSecret" value="" />
+    </ParamList>
+</DeveloperInfo>
