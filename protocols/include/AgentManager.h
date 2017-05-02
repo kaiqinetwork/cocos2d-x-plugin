@@ -37,6 +37,7 @@
 #include "ProtocolAnalytics.h"
 #include "ProtocolCrash.h"
 #include "ProtocolCustom.h"
+#include "ProtocolService.h"
 
 namespace cocos2d{namespace plugin{
 
@@ -84,11 +85,16 @@ public:
 	{
 		return &_pluginsIAPMap;
 	}
-    
-    inline ProtocolCustom* getCustomPlugin()
-    {
-        return _pCustom;
-    }
+
+	inline ProtocolCustom* getCustomPlugin()
+	{
+		return _pCustom;
+	}
+
+	inline ProtocolService* getServicePlugin()
+	{
+		return _pService;
+	}
 
 protected:
 	AgentManager();
@@ -100,7 +106,8 @@ protected:
 	ProtocolAds* _pAds;
 	ProtocolAnalytics* _pAnalytics;
 	ProtocolCrash* _pCrash;
-    ProtocolCustom* _pCustom;
+	ProtocolCustom* _pCustom;
+	ProtocolService* _pService;
 	std::map<std::string, ProtocolIAP*> _pluginsIAPMap;
 };
 }}
