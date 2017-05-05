@@ -23,15 +23,9 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.plugin.umeng;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import org.cocos2dx.plugin.InterfaceAnalytics;
 import org.cocos2dx.plugin.PluginHelper;
@@ -39,16 +33,14 @@ import org.cocos2dx.plugin.PluginListener;
 import org.cocos2dx.plugin.PluginWrapper;
 import org.json.JSONObject;
 
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.MobclickAgent.UMAnalyticsConfig;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.util.Log;
-
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.analytics.MobclickAgent.EScenarioType;
-import com.umeng.analytics.MobclickAgent.UMAnalyticsConfig;
 
 public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
@@ -58,8 +50,8 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 	private static final String SDK_VERSION = "6.0.0";
 
 	private Context mContext = null;
-	private static boolean mDebug = false;
 	private static String sAppUmengChannel = null;
+	private static String sAppChannel = null;
 
 	protected static void logE(String msg, Exception e) {
 		PluginHelper.logE(LOG_TAG, msg, e);
@@ -90,8 +82,10 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 	@Override
 	public void configDeveloperInfo(Hashtable<String, String> devInfo) {
 		String appkey = devInfo.get("UmengAppKey");
-		String channelKey = getUmengChannel() == null
-				? (devInfo.get("UmengChannelKey") == null ? "release" : devInfo.get("UmengChannelKey"))
+		String channelKey = getUmengChannel() == null 
+				? (getAppChannel() == null 
+				    ? (devInfo.get("UmengChannelKey") == null ? "release" : devInfo.get("UmengChannelKey"))
+					: getAppChannel()) 
 				: getUmengChannel();
 		MobclickAgent.EScenarioType scenarioType = devInfo.get("UmengScenarioType") == null
 				? MobclickAgent.EScenarioType.E_UM_GAME
@@ -139,7 +133,6 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
 	@Override
 	public void setDebugMode(boolean debug) {
-		mDebug = debug;
 		MobclickAgent.setDebugMode(debug);
 	}
 
@@ -401,4 +394,29 @@ public class AnalyticsAdapter implements InterfaceAnalytics, PluginListener {
 
 		return sAppUmengChannel;
 	}
+	
+	
+	public String getAppChannel() {
+		if (sAppChannel != null)
+			return sAppChannel;
+
+		ApplicationInfo appInfo = mContext.getApplicationInfo();
+
+		if (sAppChannel == null || sAppChannel.equals("")) {
+			try {
+				appInfo = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(),
+						PackageManager.GET_META_DATA);
+				sAppChannel = appInfo.metaData.getString("APP_CHANNEL");
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (sAppChannel == null || sAppChannel.equals("")) {
+			sAppChannel = "release";
+		}
+
+		return sAppChannel;
+	}
+	
 }
