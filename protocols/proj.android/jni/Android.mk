@@ -21,6 +21,7 @@ $(addprefix ../../platform/android/, \
     ProtocolCrash.cpp \
 	ProtocolCustom.cpp\
 	ProtocolService.cpp\
+	ProtocolVoice.cpp\
     AgentManager.cpp \
 ) \
 ../../PluginManager.cpp \

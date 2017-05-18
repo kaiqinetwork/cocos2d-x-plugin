@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "ProtocolSocial.h"
 #include "ProtocolCustom.h"
 #include "ProtocolService.h"
+#include "ProtocolVoice.h"
 
 namespace cocos2d { namespace plugin {
 
@@ -43,6 +44,7 @@ enum {
 	kPluginUser,
 	kPluginSocial,
 	kPluginService,
+	kPluginVoice,
 	kPluginCustom = 256,
 };
 
@@ -149,6 +151,8 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 		case kPluginCustom:
 			pRet = new ProtocolCustom();
 			break;
+		case kPluginVoice:
+			pRet = new ProtocolVoice();
 		default:
 			break;
 		}

@@ -38,6 +38,7 @@
 #include "ProtocolCrash.h"
 #include "ProtocolCustom.h"
 #include "ProtocolService.h"
+#include "ProtocolVoice.h"
 
 namespace cocos2d{namespace plugin{
 
@@ -96,6 +97,10 @@ public:
 		return _pService;
 	}
 
+	inline ProtocolVoice* getVoicePlugin()
+	{
+		return _pVoice;
+	}
 protected:
 	AgentManager();
 	std::vector<std::string> getSupportPlugins();
@@ -108,6 +113,7 @@ protected:
 	ProtocolCrash* _pCrash;
 	ProtocolCustom* _pCustom;
 	ProtocolService* _pService;
+	ProtocolVoice* _pVoice;
 	std::map<std::string, ProtocolIAP*> _pluginsIAPMap;
 };
 }}

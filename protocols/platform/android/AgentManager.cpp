@@ -32,7 +32,7 @@ namespace cocos2d{ namespace plugin{
 
 static AgentManager* s_AgentManager = nullptr;
 
-AgentManager::AgentManager() : _pUser(nullptr), _pShare(nullptr), _pSocial(nullptr), _pAds(nullptr), _pAnalytics(nullptr), _pCrash(nullptr), _pCustom(nullptr), _pService(nullptr)
+AgentManager::AgentManager() : _pUser(nullptr), _pShare(nullptr), _pSocial(nullptr), _pAds(nullptr), _pAnalytics(nullptr), _pCrash(nullptr), _pCustom(nullptr), _pService(nullptr), _pVoice(nullptr)
 {
 
 }
@@ -52,6 +52,7 @@ void AgentManager::unloadAllPlugins()
 	delete _pCrash;
 	delete _pCustom;
 	delete _pService;
+	delete _pVoice;
 	for(std::map<std::string, ProtocolIAP*>::iterator iter = _pluginsIAPMap.begin(); iter != _pluginsIAPMap.end(); ++iter)
 	{
 		delete iter->second;
@@ -96,6 +97,7 @@ bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
 	ProtocolIAP* pIAP;
 	ProtocolCustom* pCustom;
 	ProtocolService* pService;
+	ProtocolVoice* pVoice;
 	for (int i = 0; i < plugins.size(); ++i)
 	{
 		protocol = dynamic_cast<PluginProtocol *>(PluginManager::getInstance()->loadPlugin(plugins[i].c_str()));
@@ -180,6 +182,15 @@ bool AgentManager::loadPlugins(const std::vector<std::string>& plugins)
 				delete _pService;
 			}
 			_pService = pService;
+		}
+		pVoice = dynamic_cast<ProtocolVoice *>(protocol);
+		if (pVoice)
+		{
+			if (_pVoice)
+			{
+				delete _pVoice;
+			}
+			_pVoice = pVoice;
 		}
 	}
 
