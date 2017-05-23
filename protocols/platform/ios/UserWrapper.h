@@ -25,9 +25,25 @@ THE SOFTWARE.
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    kLoginSucceed = 0,
-    kLoginFailed,
-    kLogoutSucceed,
+    kInitSuccess = 0,/**< enum value is callback of succeeding in initing sdk. */
+    kInitFail,/**< enum  value is callback of failing to init sdk. */
+    kLoginSuccess,/**< enum value is callback of succeeding in login.*/
+    kLoginNetworkError,/**< enum value is callback of network error*/
+    kLoginNoNeed,/**< enum value is callback of no need login.*/
+    kLoginFail,/**< enum value is callback of failing to login. */
+    kLoginCancel,/**< enum value is callback of canceling to login. */
+    kLogoutSuccess,/**< enum value is callback of succeeding in logout. */
+    kLogoutFail,/**< enum value is callback of failing to logout. */
+    kPlatformEnter,/**< enum value is callback after enter platform. */
+    kPlatformBack,/**< enum value is callback after exit antiAddiction. */
+    kPausePage,/**< enum value is callback after exit pause page. */
+    kExitPage,/**< enum value is callback after exit exit page. */
+    kAntiAddictionQuery,/**< enum value is callback after querying antiAddiction. */
+    kRealNameRegister,/**< enum value is callback after registering realname. */
+    kAccountSwitchSuccess,/**< enum value is callback of succeeding in switching account. */
+    kAccountSwitchFail,/**< enum value is callback of failing to switch account. */
+    kOpenShop,/**< enum value is callback of open the shop. */
+    kUserExtension = 50000 /**< enum value is  extension code . */
 } UserActionResult;
 
 @interface UserWrapper : NSObject

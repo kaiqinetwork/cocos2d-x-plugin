@@ -107,4 +107,14 @@ void ProtocolUser::submitLoginGameRole(StringMap *data)
 {
         
 }
+
+bool ProtocolUser::canSwitchAccount()
+{
+    return true;
+}
+    
+void ProtocolUser::setUserInfo(std::map<std::string, std::string> userInfo)
+{
+    
+}
 }} // namespace cocos2d { namespace plugin {
