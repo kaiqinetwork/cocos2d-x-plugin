@@ -1,0 +1,763 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		598ECF101ECD89F3004C261F /* libYvImSDKOCWapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */; };
+		598ECF141ECD8A73004C261F /* YunvaVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 598ECF131ECD8A73004C261F /* YunvaVoice.m */; };
+		FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA09A304168ADAEC008C1C7B /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA09A2FF168ADAEC008C1C7B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		598ECE6B1ECD89F3004C261F /* YVChatManageDelegateAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManageDelegateAll.h; sourceTree = "<group>"; };
+		598ECE6C1ECD89F3004C261F /* YVChatManageDelegateBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManageDelegateBase.h; sourceTree = "<group>"; };
+		598ECE6D1ECD89F3004C261F /* YVChatManagerChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerChannelDelegate.h; sourceTree = "<group>"; };
+		598ECE6E1ECD89F3004C261F /* YVChatManagerChatDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerChatDelegate.h; sourceTree = "<group>"; };
+		598ECE6F1ECD89F3004C261F /* YVChatManagerCloudDeleagte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerCloudDeleagte.h; sourceTree = "<group>"; };
+		598ECE701ECD89F3004C261F /* YVChatManagerFriendDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerFriendDelegate.h; sourceTree = "<group>"; };
+		598ECE711ECD89F3004C261F /* YVChatManagerGroupDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerGroupDelegate.h; sourceTree = "<group>"; };
+		598ECE721ECD89F3004C261F /* YVChatManagerLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerLoginDelegate.h; sourceTree = "<group>"; };
+		598ECE731ECD89F3004C261F /* YVChatManagerTroopsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerTroopsDelegate.h; sourceTree = "<group>"; };
+		598ECE741ECD89F3004C261F /* YVChatManageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManageDelegate.h; sourceTree = "<group>"; };
+		598ECE761ECD89F3004C261F /* YVChatManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerBase.h; sourceTree = "<group>"; };
+		598ECE771ECD89F3004C261F /* YVChatManagerChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerChannel.h; sourceTree = "<group>"; };
+		598ECE781ECD89F3004C261F /* YVChatManagerChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerChat.h; sourceTree = "<group>"; };
+		598ECE791ECD89F3004C261F /* YVChatManagerCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerCloud.h; sourceTree = "<group>"; };
+		598ECE7A1ECD89F3004C261F /* YVChatManagerFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerFriend.h; sourceTree = "<group>"; };
+		598ECE7B1ECD89F3004C261F /* YVChatManagerGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerGroup.h; sourceTree = "<group>"; };
+		598ECE7C1ECD89F3004C261F /* YvChatManagerInitSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvChatManagerInitSdk.h; sourceTree = "<group>"; };
+		598ECE7D1ECD89F3004C261F /* YVChatManagerLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerLogin.h; sourceTree = "<group>"; };
+		598ECE7E1ECD89F3004C261F /* YVChatManagerTroops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManagerTroops.h; sourceTree = "<group>"; };
+		598ECE811ECD89F3004C261F /* YvIMChannelGetHistoryMsgResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChannelGetHistoryMsgResp.h; sourceTree = "<group>"; };
+		598ECE821ECD89F3004C261F /* YvIMChannelGetInfoResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChannelGetInfoResp.h; sourceTree = "<group>"; };
+		598ECE831ECD89F3004C261F /* YvIMChannelMessageNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChannelMessageNotify.h; sourceTree = "<group>"; };
+		598ECE841ECD89F3004C261F /* YvIMChannelModifyResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChannelModifyResp.h; sourceTree = "<group>"; };
+		598ECE851ECD89F3004C261F /* YvIMChannelSendMessageResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChannelSendMessageResp.h; sourceTree = "<group>"; };
+		598ECE861ECD89F3004C261F /* YvXHistoryMsgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXHistoryMsgInfo.h; sourceTree = "<group>"; };
+		598ECE881ECD89F3004C261F /* YvIMChatFriendNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChatFriendNotify.h; sourceTree = "<group>"; };
+		598ECE891ECD89F3004C261F /* YvIMChatFriendResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChatFriendResp.h; sourceTree = "<group>"; };
+		598ECE8A1ECD89F3004C261F /* YvIMChatGroupNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChatGroupNotify.h; sourceTree = "<group>"; };
+		598ECE8B1ECD89F3004C261F /* YvIMChatGroupResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChatGroupResp.h; sourceTree = "<group>"; };
+		598ECE8C1ECD89F3004C261F /* YvIMChatMsgSendPercentNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMChatMsgSendPercentNotify.h; sourceTree = "<group>"; };
+		598ECE8E1ECD89F3004C261F /* YvIMCloudMSGLimitNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMCloudMSGLimitNotify.h; sourceTree = "<group>"; };
+		598ECE8F1ECD89F3004C261F /* YvIMCloudMSGNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMCloudMSGNotify.h; sourceTree = "<group>"; };
+		598ECE901ECD89F3004C261F /* YvXGroupChatMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXGroupChatMsg.h; sourceTree = "<group>"; };
+		598ECE911ECD89F3004C261F /* YvXP2PChatMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXP2PChatMsg.h; sourceTree = "<group>"; };
+		598ECE921ECD89F3004C261F /* YvXPushMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXPushMsg.h; sourceTree = "<group>"; };
+		598ECE941ECD89F3004C261F /* YvIMUploadImageResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMUploadImageResp.h; sourceTree = "<group>"; };
+		598ECE951ECD89F3004C261F /* YvIMUserGetInfoResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMUserGetInfoResp.h; sourceTree = "<group>"; };
+		598ECE971ECD89F3004C261F /* YvIMFriendAcceptResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendAcceptResp.h; sourceTree = "<group>"; };
+		598ECE981ECD89F3004C261F /* YvIMFriendAddNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendAddNotify.h; sourceTree = "<group>"; };
+		598ECE991ECD89F3004C261F /* YvIMFriendAddResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendAddResp.h; sourceTree = "<group>"; };
+		598ECE9A1ECD89F3004C261F /* YvIMFriendAddToSelfResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendAddToSelfResp.h; sourceTree = "<group>"; };
+		598ECE9B1ECD89F3004C261F /* YvIMFriendBlackListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendBlackListNotify.h; sourceTree = "<group>"; };
+		598ECE9C1ECD89F3004C261F /* YvIMFriendBlackListResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendBlackListResp.h; sourceTree = "<group>"; };
+		598ECE9D1ECD89F3004C261F /* YvIMFriendDelNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendDelNotify.h; sourceTree = "<group>"; };
+		598ECE9E1ECD89F3004C261F /* YvIMFriendDelResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendDelResp.h; sourceTree = "<group>"; };
+		598ECE9F1ECD89F3004C261F /* YvIMFriendInfoSetResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendInfoSetResp.h; sourceTree = "<group>"; };
+		598ECEA01ECD89F3004C261F /* YvIMFriendListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendListNotify.h; sourceTree = "<group>"; };
+		598ECEA11ECD89F3004C261F /* YvIMFriendListResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendListResp.h; sourceTree = "<group>"; };
+		598ECEA21ECD89F3004C261F /* YvIMFriendNearListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendNearListNotify.h; sourceTree = "<group>"; };
+		598ECEA31ECD89F3004C261F /* YvIMFriendNearListResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendNearListResp.h; sourceTree = "<group>"; };
+		598ECEA41ECD89F3004C261F /* YvIMFriendOperResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendOperResp.h; sourceTree = "<group>"; };
+		598ECEA51ECD89F3004C261F /* YvIMFriendRecommandResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendRecommandResp.h; sourceTree = "<group>"; };
+		598ECEA61ECD89F3004C261F /* YvIMFriendSearchResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendSearchResp.h; sourceTree = "<group>"; };
+		598ECEA71ECD89F3004C261F /* YvIMFriendStatusNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMFriendStatusNotify.h; sourceTree = "<group>"; };
+		598ECEA81ECD89F3004C261F /* YvIMGetThirdBindInfoResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGetThirdBindInfoResp.h; sourceTree = "<group>"; };
+		598ECEA91ECD89F3004C261F /* YvIMLoginResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMLoginResp.h; sourceTree = "<group>"; };
+		598ECEAA1ECD89F3004C261F /* YvIMNetStateNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMNetStateNotify.h; sourceTree = "<group>"; };
+		598ECEAB1ECD89F3004C261F /* YvIMThirdLoginResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMThirdLoginResp.h; sourceTree = "<group>"; };
+		598ECEAC1ECD89F3004C261F /* YvXNearChatInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXNearChatInfo.h; sourceTree = "<group>"; };
+		598ECEAD1ECD89F3004C261F /* YvXRecentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXRecentUser.h; sourceTree = "<group>"; };
+		598ECEAE1ECD89F3004C261F /* YvXSearchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXSearchInfo.h; sourceTree = "<group>"; };
+		598ECEAF1ECD89F3004C261F /* YvXUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXUserInfo.h; sourceTree = "<group>"; };
+		598ECEB11ECD89F3004C261F /* YvBackBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvBackBase.h; sourceTree = "<group>"; };
+		598ECEB21ECD89F3004C261F /* YvIMGroupAcceptOrRefuseNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupAcceptOrRefuseNotify.h; sourceTree = "<group>"; };
+		598ECEB31ECD89F3004C261F /* YvIMGroupCreateResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupCreateResp.h; sourceTree = "<group>"; };
+		598ECEB41ECD89F3004C261F /* YvIMGroupDissolveResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupDissolveResp.h; sourceTree = "<group>"; };
+		598ECEB51ECD89F3004C261F /* YvIMGroupExitNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupExitNotify.h; sourceTree = "<group>"; };
+		598ECEB61ECD89F3004C261F /* YvIMGroupExitResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupExitResp.h; sourceTree = "<group>"; };
+		598ECEB71ECD89F3004C261F /* YvIMGroupInviteAccesptResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupInviteAccesptResp.h; sourceTree = "<group>"; };
+		598ECEB81ECD89F3004C261F /* YvIMGroupInviteNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupInviteNotify.h; sourceTree = "<group>"; };
+		598ECEB91ECD89F3004C261F /* YvIMGroupInviteResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupInviteResp.h; sourceTree = "<group>"; };
+		598ECEBA1ECD89F3004C261F /* YvIMGroupInviteRespon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupInviteRespon.h; sourceTree = "<group>"; };
+		598ECEBB1ECD89F3004C261F /* YvIMGroupJoinNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupJoinNotify.h; sourceTree = "<group>"; };
+		598ECEBC1ECD89F3004C261F /* YvIMGroupJoinResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupJoinResp.h; sourceTree = "<group>"; };
+		598ECEBD1ECD89F3004C261F /* YvIMGroupKickNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupKickNotify.h; sourceTree = "<group>"; };
+		598ECEBE1ECD89F3004C261F /* YvIMGroupKickResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupKickResp.h; sourceTree = "<group>"; };
+		598ECEBF1ECD89F3004C261F /* YvIMGroupMemberOnline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupMemberOnline.h; sourceTree = "<group>"; };
+		598ECEC01ECD89F3004C261F /* YvIMGroupModifyResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupModifyResp.h; sourceTree = "<group>"; };
+		598ECEC11ECD89F3004C261F /* YvIMGroupPropertyNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupPropertyNotify.h; sourceTree = "<group>"; };
+		598ECEC21ECD89F3004C261F /* YvIMGroupSearchResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupSearchResp.h; sourceTree = "<group>"; };
+		598ECEC31ECD89F3004C261F /* YvIMGroupSetOtherNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupSetOtherNotify.h; sourceTree = "<group>"; };
+		598ECEC41ECD89F3004C261F /* YvIMGroupSetOtherResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupSetOtherResp.h; sourceTree = "<group>"; };
+		598ECEC51ECD89F3004C261F /* YvIMGroupSetRoleNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupSetRoleNotify.h; sourceTree = "<group>"; };
+		598ECEC61ECD89F3004C261F /* YvIMGroupSetRoleResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupSetRoleResp.h; sourceTree = "<group>"; };
+		598ECEC71ECD89F3004C261F /* YvIMGroupShiftToWnerNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupShiftToWnerNotify.h; sourceTree = "<group>"; };
+		598ECEC81ECD89F3004C261F /* YvIMGroupShiftToWnerResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupShiftToWnerResp.h; sourceTree = "<group>"; };
+		598ECEC91ECD89F3004C261F /* YvIMGroupUserJoinNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupUserJoinNotify.h; sourceTree = "<group>"; };
+		598ECECA1ECD89F3004C261F /* YvIMGroupUserListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupUserListNotify.h; sourceTree = "<group>"; };
+		598ECECB1ECD89F3004C261F /* YvIMGroupUserMDYNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGroupUserMDYNotify.h; sourceTree = "<group>"; };
+		598ECECC1ECD89F3004C261F /* YvXGroupUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXGroupUser.h; sourceTree = "<group>"; };
+		598ECECE1ECD89F3004C261F /* YvNotifyNewsmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvNotifyNewsmodel.h; sourceTree = "<group>"; };
+		598ECED01ECD89F3004C261F /* YvIMTroopsAddWheatTimeResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsAddWheatTimeResp.h; sourceTree = "<group>"; };
+		598ECED11ECD89F3004C261F /* YvIMTroopsAppointNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsAppointNotify.h; sourceTree = "<group>"; };
+		598ECED21ECD89F3004C261F /* YvIMTroopsAppointResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsAppointResp.h; sourceTree = "<group>"; };
+		598ECED31ECD89F3004C261F /* YvIMTroopsChangeModeNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsChangeModeNotify.h; sourceTree = "<group>"; };
+		598ECED41ECD89F3004C261F /* YvIMTroopsChangeModeResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsChangeModeResp.h; sourceTree = "<group>"; };
+		598ECED51ECD89F3004C261F /* YvIMTroopsChatMsgNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsChatMsgNotify.h; sourceTree = "<group>"; };
+		598ECED61ECD89F3004C261F /* YvIMTroopsClearWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsClearWheatResp.h; sourceTree = "<group>"; };
+		598ECED71ECD89F3004C261F /* YvIMTroopsControlWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsControlWheatResp.h; sourceTree = "<group>"; };
+		598ECED81ECD89F3004C261F /* YvIMTroopsCreateResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsCreateResp.h; sourceTree = "<group>"; };
+		598ECED91ECD89F3004C261F /* YvIMTroopsDelWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsDelWheatResp.h; sourceTree = "<group>"; };
+		598ECEDA1ECD89F3004C261F /* YvIMTroopsDisableWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsDisableWheatResp.h; sourceTree = "<group>"; };
+		598ECEDB1ECD89F3004C261F /* YvIMTroopsGagNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsGagNotify.h; sourceTree = "<group>"; };
+		598ECEDC1ECD89F3004C261F /* YvIMTroopsGagResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsGagResp.h; sourceTree = "<group>"; };
+		598ECEDD1ECD89F3004C261F /* YvIMTroopsKickNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsKickNotify.h; sourceTree = "<group>"; };
+		598ECEDE1ECD89F3004C261F /* YvIMTroopsKickResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsKickResp.h; sourceTree = "<group>"; };
+		598ECEDF1ECD89F3004C261F /* YvIMTroopsLoginResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsLoginResp.h; sourceTree = "<group>"; };
+		598ECEE01ECD89F3004C261F /* YvIMTroopsLogoutResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsLogoutResp.h; sourceTree = "<group>"; };
+		598ECEE11ECD89F3004C261F /* YvIMTroopsOpenAudioResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsOpenAudioResp.h; sourceTree = "<group>"; };
+		598ECEE21ECD89F3004C261F /* YvIMTroopsParamNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsParamNotify.h; sourceTree = "<group>"; };
+		598ECEE31ECD89F3004C261F /* YvIMTroopsPutWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsPutWheatResp.h; sourceTree = "<group>"; };
+		598ECEE41ECD89F3004C261F /* YvIMTroopsRobWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsRobWheatResp.h; sourceTree = "<group>"; };
+		598ECEE51ECD89F3004C261F /* YvIMTroopsSendChatMsgResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsSendChatMsgResp.h; sourceTree = "<group>"; };
+		598ECEE61ECD89F3004C261F /* YvIMTroopsSetParamResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsSetParamResp.h; sourceTree = "<group>"; };
+		598ECEE71ECD89F3004C261F /* YvIMTroopsSpeakListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsSpeakListNotify.h; sourceTree = "<group>"; };
+		598ECEE81ECD89F3004C261F /* YvIMTroopsTopWheatResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsTopWheatResp.h; sourceTree = "<group>"; };
+		598ECEE91ECD89F3004C261F /* YvIMTroopsUserListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsUserListNotify.h; sourceTree = "<group>"; };
+		598ECEEA1ECD89F3004C261F /* YvIMTroopsUserLoginNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsUserLoginNotify.h; sourceTree = "<group>"; };
+		598ECEEB1ECD89F3004C261F /* YvIMTroopsUserLogoutNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsUserLogoutNotify.h; sourceTree = "<group>"; };
+		598ECEEC1ECD89F3004C261F /* YvIMTroopsWheatListNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMTroopsWheatListNotify.h; sourceTree = "<group>"; };
+		598ECEED1ECD89F3004C261F /* YvXUserMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXUserMember.h; sourceTree = "<group>"; };
+		598ECEEE1ECD89F3004C261F /* YvXWheatInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvXWheatInfo.h; sourceTree = "<group>"; };
+		598ECEEF1ECD89F3004C261F /* YvIMCMDDefHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMCMDDefHeaders.h; sourceTree = "<group>"; };
+		598ECEF01ECD89F3004C261F /* YvMessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvMessageCache.h; sourceTree = "<group>"; };
+		598ECEF11ECD89F3004C261F /* YVChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVChatManager.h; sourceTree = "<group>"; };
+		598ECEF51ECD89F3004C261F /* YVDeviceManagerDelegateBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManagerDelegateBase.h; sourceTree = "<group>"; };
+		598ECEF61ECD89F3004C261F /* YVDeviceManagerMediaDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManagerMediaDelegate.h; sourceTree = "<group>"; };
+		598ECEF71ECD89F3004C261F /* YVDeviceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManagerDelegate.h; sourceTree = "<group>"; };
+		598ECEF91ECD89F3004C261F /* YVDeviceManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManagerBase.h; sourceTree = "<group>"; };
+		598ECEFA1ECD89F3004C261F /* YVDeviceManagerMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManagerMedia.h; sourceTree = "<group>"; };
+		598ECEFD1ECD89F3004C261F /* YvIMDownloadFileResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMDownloadFileResp.h; sourceTree = "<group>"; };
+		598ECEFE1ECD89F3004C261F /* YvIMGetCacheFileResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGetCacheFileResp.h; sourceTree = "<group>"; };
+		598ECEFF1ECD89F3004C261F /* YvIMGetLocationResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGetLocationResp.h; sourceTree = "<group>"; };
+		598ECF001ECD89F3004C261F /* YvIMGetSdkInfoResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMGetSdkInfoResp.h; sourceTree = "<group>"; };
+		598ECF011ECD89F3004C261F /* YvIMRecordFinishPlayResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMRecordFinishPlayResp.h; sourceTree = "<group>"; };
+		598ECF021ECD89F3004C261F /* YvIMRecordPlayPercentNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMRecordPlayPercentNotify.h; sourceTree = "<group>"; };
+		598ECF031ECD89F3004C261F /* YvIMRecordStopResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMRecordStopResp.h; sourceTree = "<group>"; };
+		598ECF041ECD89F3004C261F /* YvIMRecordVolumeNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMRecordVolumeNotify.h; sourceTree = "<group>"; };
+		598ECF051ECD89F3004C261F /* YvIMSearchAroundResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMSearchAroundResp.h; sourceTree = "<group>"; };
+		598ECF061ECD89F3004C261F /* YvIMSpeechStopResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMSpeechStopResp.h; sourceTree = "<group>"; };
+		598ECF071ECD89F3004C261F /* YvIMUploadFileResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMUploadFileResp.h; sourceTree = "<group>"; };
+		598ECF081ECD89F3004C261F /* YvIMUploadLocationResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvIMUploadLocationResp.h; sourceTree = "<group>"; };
+		598ECF091ECD89F3004C261F /* YvxAroundUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvxAroundUser.h; sourceTree = "<group>"; };
+		598ECF0A1ECD89F3004C261F /* YvxLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvxLocation.h; sourceTree = "<group>"; };
+		598ECF0B1ECD89F3004C261F /* YVDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManager.h; sourceTree = "<group>"; };
+		598ECF0D1ECD89F3004C261F /* YVIMSDK_Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVIMSDK_Manage.h; sourceTree = "<group>"; };
+		598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYvImSDKOCWapper.a; sourceTree = "<group>"; };
+		598ECF111ECD8A73004C261F /* PluginYunva-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PluginYunva-Prefix.pch"; sourceTree = "<group>"; };
+		598ECF121ECD8A73004C261F /* YunvaVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YunvaVoice.h; sourceTree = "<group>"; };
+		598ECF131ECD8A73004C261F /* YunvaVoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YunvaVoice.m; sourceTree = "<group>"; };
+		FA09A301168ADAEC008C1C7B /* libPluginYunva.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginYunva.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA09A304168ADAEC008C1C7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA09A2FE168ADAEC008C1C7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				598ECF101ECD89F3004C261F /* libYvImSDKOCWapper.a in Frameworks */,
+				FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		598ECE661ECD89F3004C261F /* YVIMSDK */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE671ECD89F3004C261F /* Header */,
+				598ECF0E1ECD89F3004C261F /* Lib */,
+			);
+			path = YVIMSDK;
+			sourceTree = "<group>";
+		};
+		598ECE671ECD89F3004C261F /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE681ECD89F3004C261F /* YVChatManager */,
+				598ECEF21ECD89F3004C261F /* YVDeviceManager */,
+				598ECF0C1ECD89F3004C261F /* YVIMSDKLite */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		598ECE681ECD89F3004C261F /* YVChatManager */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE691ECD89F3004C261F /* delegates */,
+				598ECE751ECD89F3004C261F /* internal */,
+				598ECE7F1ECD89F3004C261F /* models */,
+				598ECEF11ECD89F3004C261F /* YVChatManager.h */,
+			);
+			path = YVChatManager;
+			sourceTree = "<group>";
+		};
+		598ECE691ECD89F3004C261F /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE6A1ECD89F3004C261F /* internal */,
+				598ECE741ECD89F3004C261F /* YVChatManageDelegate.h */,
+			);
+			path = delegates;
+			sourceTree = "<group>";
+		};
+		598ECE6A1ECD89F3004C261F /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE6B1ECD89F3004C261F /* YVChatManageDelegateAll.h */,
+				598ECE6C1ECD89F3004C261F /* YVChatManageDelegateBase.h */,
+				598ECE6D1ECD89F3004C261F /* YVChatManagerChannelDelegate.h */,
+				598ECE6E1ECD89F3004C261F /* YVChatManagerChatDelegate.h */,
+				598ECE6F1ECD89F3004C261F /* YVChatManagerCloudDeleagte.h */,
+				598ECE701ECD89F3004C261F /* YVChatManagerFriendDelegate.h */,
+				598ECE711ECD89F3004C261F /* YVChatManagerGroupDelegate.h */,
+				598ECE721ECD89F3004C261F /* YVChatManagerLoginDelegate.h */,
+				598ECE731ECD89F3004C261F /* YVChatManagerTroopsDelegate.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		598ECE751ECD89F3004C261F /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE761ECD89F3004C261F /* YVChatManagerBase.h */,
+				598ECE771ECD89F3004C261F /* YVChatManagerChannel.h */,
+				598ECE781ECD89F3004C261F /* YVChatManagerChat.h */,
+				598ECE791ECD89F3004C261F /* YVChatManagerCloud.h */,
+				598ECE7A1ECD89F3004C261F /* YVChatManagerFriend.h */,
+				598ECE7B1ECD89F3004C261F /* YVChatManagerGroup.h */,
+				598ECE7C1ECD89F3004C261F /* YvChatManagerInitSdk.h */,
+				598ECE7D1ECD89F3004C261F /* YVChatManagerLogin.h */,
+				598ECE7E1ECD89F3004C261F /* YVChatManagerTroops.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		598ECE7F1ECD89F3004C261F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE801ECD89F3004C261F /* Channel */,
+				598ECE871ECD89F3004C261F /* Chat */,
+				598ECE8D1ECD89F3004C261F /* CloudMSG */,
+				598ECE931ECD89F3004C261F /* Common */,
+				598ECE961ECD89F3004C261F /* Friends */,
+				598ECEB01ECD89F3004C261F /* Group */,
+				598ECECD1ECD89F3004C261F /* News */,
+				598ECECF1ECD89F3004C261F /* Troop */,
+				598ECEEF1ECD89F3004C261F /* YvIMCMDDefHeaders.h */,
+				598ECEF01ECD89F3004C261F /* YvMessageCache.h */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		598ECE801ECD89F3004C261F /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE811ECD89F3004C261F /* YvIMChannelGetHistoryMsgResp.h */,
+				598ECE821ECD89F3004C261F /* YvIMChannelGetInfoResp.h */,
+				598ECE831ECD89F3004C261F /* YvIMChannelMessageNotify.h */,
+				598ECE841ECD89F3004C261F /* YvIMChannelModifyResp.h */,
+				598ECE851ECD89F3004C261F /* YvIMChannelSendMessageResp.h */,
+				598ECE861ECD89F3004C261F /* YvXHistoryMsgInfo.h */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		598ECE871ECD89F3004C261F /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE881ECD89F3004C261F /* YvIMChatFriendNotify.h */,
+				598ECE891ECD89F3004C261F /* YvIMChatFriendResp.h */,
+				598ECE8A1ECD89F3004C261F /* YvIMChatGroupNotify.h */,
+				598ECE8B1ECD89F3004C261F /* YvIMChatGroupResp.h */,
+				598ECE8C1ECD89F3004C261F /* YvIMChatMsgSendPercentNotify.h */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		598ECE8D1ECD89F3004C261F /* CloudMSG */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE8E1ECD89F3004C261F /* YvIMCloudMSGLimitNotify.h */,
+				598ECE8F1ECD89F3004C261F /* YvIMCloudMSGNotify.h */,
+				598ECE901ECD89F3004C261F /* YvXGroupChatMsg.h */,
+				598ECE911ECD89F3004C261F /* YvXP2PChatMsg.h */,
+				598ECE921ECD89F3004C261F /* YvXPushMsg.h */,
+			);
+			path = CloudMSG;
+			sourceTree = "<group>";
+		};
+		598ECE931ECD89F3004C261F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE941ECD89F3004C261F /* YvIMUploadImageResp.h */,
+				598ECE951ECD89F3004C261F /* YvIMUserGetInfoResp.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		598ECE961ECD89F3004C261F /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				598ECE971ECD89F3004C261F /* YvIMFriendAcceptResp.h */,
+				598ECE981ECD89F3004C261F /* YvIMFriendAddNotify.h */,
+				598ECE991ECD89F3004C261F /* YvIMFriendAddResp.h */,
+				598ECE9A1ECD89F3004C261F /* YvIMFriendAddToSelfResp.h */,
+				598ECE9B1ECD89F3004C261F /* YvIMFriendBlackListNotify.h */,
+				598ECE9C1ECD89F3004C261F /* YvIMFriendBlackListResp.h */,
+				598ECE9D1ECD89F3004C261F /* YvIMFriendDelNotify.h */,
+				598ECE9E1ECD89F3004C261F /* YvIMFriendDelResp.h */,
+				598ECE9F1ECD89F3004C261F /* YvIMFriendInfoSetResp.h */,
+				598ECEA01ECD89F3004C261F /* YvIMFriendListNotify.h */,
+				598ECEA11ECD89F3004C261F /* YvIMFriendListResp.h */,
+				598ECEA21ECD89F3004C261F /* YvIMFriendNearListNotify.h */,
+				598ECEA31ECD89F3004C261F /* YvIMFriendNearListResp.h */,
+				598ECEA41ECD89F3004C261F /* YvIMFriendOperResp.h */,
+				598ECEA51ECD89F3004C261F /* YvIMFriendRecommandResp.h */,
+				598ECEA61ECD89F3004C261F /* YvIMFriendSearchResp.h */,
+				598ECEA71ECD89F3004C261F /* YvIMFriendStatusNotify.h */,
+				598ECEA81ECD89F3004C261F /* YvIMGetThirdBindInfoResp.h */,
+				598ECEA91ECD89F3004C261F /* YvIMLoginResp.h */,
+				598ECEAA1ECD89F3004C261F /* YvIMNetStateNotify.h */,
+				598ECEAB1ECD89F3004C261F /* YvIMThirdLoginResp.h */,
+				598ECEAC1ECD89F3004C261F /* YvXNearChatInfo.h */,
+				598ECEAD1ECD89F3004C261F /* YvXRecentUser.h */,
+				598ECEAE1ECD89F3004C261F /* YvXSearchInfo.h */,
+				598ECEAF1ECD89F3004C261F /* YvXUserInfo.h */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		598ECEB01ECD89F3004C261F /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEB11ECD89F3004C261F /* YvBackBase.h */,
+				598ECEB21ECD89F3004C261F /* YvIMGroupAcceptOrRefuseNotify.h */,
+				598ECEB31ECD89F3004C261F /* YvIMGroupCreateResp.h */,
+				598ECEB41ECD89F3004C261F /* YvIMGroupDissolveResp.h */,
+				598ECEB51ECD89F3004C261F /* YvIMGroupExitNotify.h */,
+				598ECEB61ECD89F3004C261F /* YvIMGroupExitResp.h */,
+				598ECEB71ECD89F3004C261F /* YvIMGroupInviteAccesptResp.h */,
+				598ECEB81ECD89F3004C261F /* YvIMGroupInviteNotify.h */,
+				598ECEB91ECD89F3004C261F /* YvIMGroupInviteResp.h */,
+				598ECEBA1ECD89F3004C261F /* YvIMGroupInviteRespon.h */,
+				598ECEBB1ECD89F3004C261F /* YvIMGroupJoinNotify.h */,
+				598ECEBC1ECD89F3004C261F /* YvIMGroupJoinResp.h */,
+				598ECEBD1ECD89F3004C261F /* YvIMGroupKickNotify.h */,
+				598ECEBE1ECD89F3004C261F /* YvIMGroupKickResp.h */,
+				598ECEBF1ECD89F3004C261F /* YvIMGroupMemberOnline.h */,
+				598ECEC01ECD89F3004C261F /* YvIMGroupModifyResp.h */,
+				598ECEC11ECD89F3004C261F /* YvIMGroupPropertyNotify.h */,
+				598ECEC21ECD89F3004C261F /* YvIMGroupSearchResp.h */,
+				598ECEC31ECD89F3004C261F /* YvIMGroupSetOtherNotify.h */,
+				598ECEC41ECD89F3004C261F /* YvIMGroupSetOtherResp.h */,
+				598ECEC51ECD89F3004C261F /* YvIMGroupSetRoleNotify.h */,
+				598ECEC61ECD89F3004C261F /* YvIMGroupSetRoleResp.h */,
+				598ECEC71ECD89F3004C261F /* YvIMGroupShiftToWnerNotify.h */,
+				598ECEC81ECD89F3004C261F /* YvIMGroupShiftToWnerResp.h */,
+				598ECEC91ECD89F3004C261F /* YvIMGroupUserJoinNotify.h */,
+				598ECECA1ECD89F3004C261F /* YvIMGroupUserListNotify.h */,
+				598ECECB1ECD89F3004C261F /* YvIMGroupUserMDYNotify.h */,
+				598ECECC1ECD89F3004C261F /* YvXGroupUser.h */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		598ECECD1ECD89F3004C261F /* News */ = {
+			isa = PBXGroup;
+			children = (
+				598ECECE1ECD89F3004C261F /* YvNotifyNewsmodel.h */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		598ECECF1ECD89F3004C261F /* Troop */ = {
+			isa = PBXGroup;
+			children = (
+				598ECED01ECD89F3004C261F /* YvIMTroopsAddWheatTimeResp.h */,
+				598ECED11ECD89F3004C261F /* YvIMTroopsAppointNotify.h */,
+				598ECED21ECD89F3004C261F /* YvIMTroopsAppointResp.h */,
+				598ECED31ECD89F3004C261F /* YvIMTroopsChangeModeNotify.h */,
+				598ECED41ECD89F3004C261F /* YvIMTroopsChangeModeResp.h */,
+				598ECED51ECD89F3004C261F /* YvIMTroopsChatMsgNotify.h */,
+				598ECED61ECD89F3004C261F /* YvIMTroopsClearWheatResp.h */,
+				598ECED71ECD89F3004C261F /* YvIMTroopsControlWheatResp.h */,
+				598ECED81ECD89F3004C261F /* YvIMTroopsCreateResp.h */,
+				598ECED91ECD89F3004C261F /* YvIMTroopsDelWheatResp.h */,
+				598ECEDA1ECD89F3004C261F /* YvIMTroopsDisableWheatResp.h */,
+				598ECEDB1ECD89F3004C261F /* YvIMTroopsGagNotify.h */,
+				598ECEDC1ECD89F3004C261F /* YvIMTroopsGagResp.h */,
+				598ECEDD1ECD89F3004C261F /* YvIMTroopsKickNotify.h */,
+				598ECEDE1ECD89F3004C261F /* YvIMTroopsKickResp.h */,
+				598ECEDF1ECD89F3004C261F /* YvIMTroopsLoginResp.h */,
+				598ECEE01ECD89F3004C261F /* YvIMTroopsLogoutResp.h */,
+				598ECEE11ECD89F3004C261F /* YvIMTroopsOpenAudioResp.h */,
+				598ECEE21ECD89F3004C261F /* YvIMTroopsParamNotify.h */,
+				598ECEE31ECD89F3004C261F /* YvIMTroopsPutWheatResp.h */,
+				598ECEE41ECD89F3004C261F /* YvIMTroopsRobWheatResp.h */,
+				598ECEE51ECD89F3004C261F /* YvIMTroopsSendChatMsgResp.h */,
+				598ECEE61ECD89F3004C261F /* YvIMTroopsSetParamResp.h */,
+				598ECEE71ECD89F3004C261F /* YvIMTroopsSpeakListNotify.h */,
+				598ECEE81ECD89F3004C261F /* YvIMTroopsTopWheatResp.h */,
+				598ECEE91ECD89F3004C261F /* YvIMTroopsUserListNotify.h */,
+				598ECEEA1ECD89F3004C261F /* YvIMTroopsUserLoginNotify.h */,
+				598ECEEB1ECD89F3004C261F /* YvIMTroopsUserLogoutNotify.h */,
+				598ECEEC1ECD89F3004C261F /* YvIMTroopsWheatListNotify.h */,
+				598ECEED1ECD89F3004C261F /* YvXUserMember.h */,
+				598ECEEE1ECD89F3004C261F /* YvXWheatInfo.h */,
+			);
+			path = Troop;
+			sourceTree = "<group>";
+		};
+		598ECEF21ECD89F3004C261F /* YVDeviceManager */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEF31ECD89F3004C261F /* delegates */,
+				598ECEF81ECD89F3004C261F /* internal */,
+				598ECEFB1ECD89F3004C261F /* models */,
+				598ECF0B1ECD89F3004C261F /* YVDeviceManager.h */,
+			);
+			path = YVDeviceManager;
+			sourceTree = "<group>";
+		};
+		598ECEF31ECD89F3004C261F /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEF41ECD89F3004C261F /* internal */,
+				598ECEF71ECD89F3004C261F /* YVDeviceManagerDelegate.h */,
+			);
+			path = delegates;
+			sourceTree = "<group>";
+		};
+		598ECEF41ECD89F3004C261F /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEF51ECD89F3004C261F /* YVDeviceManagerDelegateBase.h */,
+				598ECEF61ECD89F3004C261F /* YVDeviceManagerMediaDelegate.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		598ECEF81ECD89F3004C261F /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEF91ECD89F3004C261F /* YVDeviceManagerBase.h */,
+				598ECEFA1ECD89F3004C261F /* YVDeviceManagerMedia.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		598ECEFB1ECD89F3004C261F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEFC1ECD89F3004C261F /* Tool */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		598ECEFC1ECD89F3004C261F /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				598ECEFD1ECD89F3004C261F /* YvIMDownloadFileResp.h */,
+				598ECEFE1ECD89F3004C261F /* YvIMGetCacheFileResp.h */,
+				598ECEFF1ECD89F3004C261F /* YvIMGetLocationResp.h */,
+				598ECF001ECD89F3004C261F /* YvIMGetSdkInfoResp.h */,
+				598ECF011ECD89F3004C261F /* YvIMRecordFinishPlayResp.h */,
+				598ECF021ECD89F3004C261F /* YvIMRecordPlayPercentNotify.h */,
+				598ECF031ECD89F3004C261F /* YvIMRecordStopResp.h */,
+				598ECF041ECD89F3004C261F /* YvIMRecordVolumeNotify.h */,
+				598ECF051ECD89F3004C261F /* YvIMSearchAroundResp.h */,
+				598ECF061ECD89F3004C261F /* YvIMSpeechStopResp.h */,
+				598ECF071ECD89F3004C261F /* YvIMUploadFileResp.h */,
+				598ECF081ECD89F3004C261F /* YvIMUploadLocationResp.h */,
+				598ECF091ECD89F3004C261F /* YvxAroundUser.h */,
+				598ECF0A1ECD89F3004C261F /* YvxLocation.h */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		598ECF0C1ECD89F3004C261F /* YVIMSDKLite */ = {
+			isa = PBXGroup;
+			children = (
+				598ECF0D1ECD89F3004C261F /* YVIMSDK_Manage.h */,
+			);
+			path = YVIMSDKLite;
+			sourceTree = "<group>";
+		};
+		598ECF0E1ECD89F3004C261F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		FA09A2F6168ADAEC008C1C7B = {
+			isa = PBXGroup;
+			children = (
+				598ECF111ECD8A73004C261F /* PluginYunva-Prefix.pch */,
+				598ECF121ECD8A73004C261F /* YunvaVoice.h */,
+				598ECF131ECD8A73004C261F /* YunvaVoice.m */,
+				598ECE661ECD89F3004C261F /* YVIMSDK */,
+				FA09A303168ADAEC008C1C7B /* Frameworks */,
+				FA09A302168ADAEC008C1C7B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA09A302168ADAEC008C1C7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA09A301168ADAEC008C1C7B /* libPluginYunva.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA09A303168ADAEC008C1C7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA09A304168ADAEC008C1C7B /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA09A300168ADAEC008C1C7B /* PluginYunva-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginYunva-ios" */;
+			buildPhases = (
+				FA09A2FD168ADAEC008C1C7B /* Sources */,
+				FA09A2FE168ADAEC008C1C7B /* Frameworks */,
+				FA09A2FF168ADAEC008C1C7B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PluginYunva-ios";
+			productName = libPluginShareSDK;
+			productReference = FA09A301168ADAEC008C1C7B /* libPluginYunva.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA09A2F8168ADAEC008C1C7B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = zhangbin;
+			};
+			buildConfigurationList = FA09A2FB168ADAEC008C1C7B /* Build configuration list for PBXProject "PluginYunva" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FA09A2F6168ADAEC008C1C7B;
+			productRefGroup = FA09A302168ADAEC008C1C7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA09A300168ADAEC008C1C7B /* PluginYunva-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA09A2FD168ADAEC008C1C7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				598ECF141ECD8A73004C261F /* YunvaVoice.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FA09A30D168ADAEC008C1C7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FA09A30E168ADAEC008C1C7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA09A310168ADAEC008C1C7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/libPluginYunva.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YVIMSDK",
+				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PluginYunva-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../protocols/platform/ios",
+					"$(PROJECT_DIR)/YVIMSDK",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"\"$(SRCROOT)/../platform/ios\"",
+					"$(PROJECT_DIR)/YVIMSDK/Lib",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = PluginYunva;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		FA09A311168ADAEC008C1C7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/libPluginYunva.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YVIMSDK",
+				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PluginYunva-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../protocols/platform/ios",
+					"$(PROJECT_DIR)/YVIMSDK",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					"\"$(SRCROOT)/../platform/ios\"",
+					"$(PROJECT_DIR)/YVIMSDK/Lib",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = PluginYunva;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA09A2FB168ADAEC008C1C7B /* Build configuration list for PBXProject "PluginYunva" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA09A30D168ADAEC008C1C7B /* Debug */,
+				FA09A30E168ADAEC008C1C7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA09A30F168ADAEC008C1C7B /* Build configuration list for PBXNativeTarget "PluginYunva-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA09A310168ADAEC008C1C7B /* Debug */,
+				FA09A311168ADAEC008C1C7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA09A2F8168ADAEC008C1C7B /* Project object */;
+}
