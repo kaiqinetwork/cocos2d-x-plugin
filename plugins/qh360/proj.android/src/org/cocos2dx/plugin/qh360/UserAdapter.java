@@ -83,8 +83,8 @@ public class UserAdapter implements InterfaceUser {
 			public void run() {
 				if (SDKWrapper.getInstance().isInited()) {
 					Intent intent = new Intent();
-			        intent.putExtra(ProtocolKeys.FUNCTION_CODE, ProtocolConfigs.FUNC_CODE_LOGOUT);
-					
+					intent.putExtra(ProtocolKeys.FUNCTION_CODE, ProtocolConfigs.FUNC_CODE_LOGOUT);
+
 					Matrix.execute(mActivity, intent, new IDispatcherCallback() {
 						@Override
 						public void onFinished(String data) {
@@ -98,30 +98,31 @@ public class UserAdapter implements InterfaceUser {
 			}
 		});
 	}
-	
-	public void setUserInfo(Hashtable<String, String> userinfo){
+
+	public void setUserInfo(Hashtable<String, String> userinfo) {
 		logD("setUserInfo() invoked!");
 		final Hashtable<String, String> info = userinfo;
 		PluginWrapper.runOnMainThread(new Runnable() {
 			public void run() {
-				
-				String userId;
-				if (info.get("userId") != null) {
-					userId = (String) info.get("userId");
-				} else {
-					userId = "1";
-				}
-				SDKWrapper.getInstance().setUserId(userId);
+				if (SDKWrapper.getInstance().isLoggedIn()) {
+					String userId;
+					if (info.get("userId") != null) {
+						userId = (String) info.get("userId");
+					} else {
+						userId = "1";
+					}
+					SDKWrapper.getInstance().setUserId(userId);
 
-				String userName;
-				if (info.get("nickName") != null) {
-					userName = (String) info.get("nickName");
-				} else {
-					userName = "nickName";
+					String userName;
+					if (info.get("nickName") != null) {
+						userName = (String) info.get("nickName");
+					} else {
+						userName = "nickName";
+					}
+					SDKWrapper.getInstance().setUserName(userName);
+
+					SDKWrapper.getInstance().onGotUserInfo("enterServer");
 				}
-				SDKWrapper.getInstance().setUserName(userName);
-				
-				SDKWrapper.getInstance().onGotUserInfo("enterServer");
 			}
 		});
 	}
@@ -130,48 +131,50 @@ public class UserAdapter implements InterfaceUser {
 		logD("exit() invoked!");
 		PluginWrapper.runOnMainThread(new Runnable() {
 			public void run() {
-				Bundle bundle = new Bundle();
-		        bundle.putBoolean(ProtocolKeys.IS_SCREEN_ORIENTATION_LANDSCAPE, true);
-		        bundle.putInt(ProtocolKeys.FUNCTION_CODE, ProtocolConfigs.FUNC_CODE_QUIT);
-		        Intent intent = new Intent(mActivity, ContainerActivity.class);
-		        intent.putExtras(bundle);
+				if (SDKWrapper.getInstance().isLoggedIn()) {
+					Bundle bundle = new Bundle();
+					bundle.putBoolean(ProtocolKeys.IS_SCREEN_ORIENTATION_LANDSCAPE, true);
+					bundle.putInt(ProtocolKeys.FUNCTION_CODE, ProtocolConfigs.FUNC_CODE_QUIT);
+					Intent intent = new Intent(mActivity, ContainerActivity.class);
+					intent.putExtras(bundle);
 
-		        Matrix.invokeActivity(mActivity, intent, new IDispatcherCallback() {
-		            @Override
-		            public void onFinished(String data) {
-		                JSONObject json;
-		                try {
-		                    json = new JSONObject(data);
-		                    int which = json.optInt("which", -1);
-		                    String label = json.optString("label");
-		                    logD("exit     " + label);
-		                    switch (which) {
-		                        case 0: // 用户关闭退出界面
-		                            break;
-		                        case 1:
-		                        	break;
-		                        case 2:
-		                        	SDKWrapper.getInstance().onGotUserInfo("exitServer");
-		                        	actionResult(UserWrapper.ACTION_RET_EXIT_PAGE, "exit");
-		                        	break;
-		                        default:// 退出游戏
-		                        	mActivity.finish();
-		                        	break;
-		                    }
-		                } catch (Exception e) {
-		                    e.printStackTrace();
-		                }
-		            }
-		        });
+					Matrix.invokeActivity(mActivity, intent, new IDispatcherCallback() {
+						@Override
+						public void onFinished(String data) {
+							JSONObject json;
+							try {
+								json = new JSONObject(data);
+								int which = json.optInt("which", -1);
+								String label = json.optString("label");
+								logD("exit     " + label);
+								switch (which) {
+								case 0: // 用户关闭退出界面
+									break;
+								case 1:
+									break;
+								case 2:
+									SDKWrapper.getInstance().onGotUserInfo("exitServer");
+									actionResult(UserWrapper.ACTION_RET_EXIT_PAGE, "exit");
+									break;
+								default:// 退出游戏
+									mActivity.finish();
+									break;
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
 			}
 		});
 	}
-	
+
 	public void getUserInfoByCP(String type) {
 		logD("getUserInfoByCP()  invoked!");
 		PluginWrapper.runOnGLThread(new Runnable() {
 			public void run() {
-				
+
 			}
 		});
 	}
@@ -215,15 +218,15 @@ public class UserAdapter implements InterfaceUser {
 	public String getPluginName() {
 		return SDKWrapper.getInstance().getPluginName();
 	}
-	
-//	public boolean canSwitchAccount() {
-//		return false;
-//	}
-	
+
+	// public boolean canSwitchAccount() {
+	// return false;
+	// }
+
 	public boolean canKillAppProcess() {
 		return true;
 	}
-	
+
 	protected void logE(String msg, Exception e) {
 		if (e == null) {
 			PluginHelper.logE(LOG_TAG, msg);
