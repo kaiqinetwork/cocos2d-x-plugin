@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		051FF7BC192CE3CC00C43A06 /* IAPWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */; };
 		05AB25181988F62000D00E8E /* ParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB25171988F62000D00E8E /* ParseUtils.m */; };
+		59D3A2C01ED97B5300049E76 /* ProtocolVoice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59D3A2BD1ED97B5300049E76 /* ProtocolVoice.mm */; };
+		59D3A2C11ED97B5300049E76 /* VoiceWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59D3A2BF1ED97B5300049E76 /* VoiceWrapper.mm */; };
 		7292FB851DDB56C9004E04D0 /* ProtocolCustom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */; };
 		7292FB891DDB5BE6004E04D0 /* CustomWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7292FB881DDB5BE6004E04D0 /* CustomWrapper.mm */; };
 		72990A341DAE0AE700766198 /* PluginWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72990A331DAE0AE700766198 /* PluginWrapper.mm */; };
@@ -50,6 +52,11 @@
 		051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IAPWrapper.mm; sourceTree = "<group>"; };
 		05AB25161988F62000D00E8E /* ParseUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseUtils.h; sourceTree = "<group>"; };
 		05AB25171988F62000D00E8E /* ParseUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseUtils.m; sourceTree = "<group>"; };
+		59D3A2BB1ED97B3200049E76 /* ProtocolVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolVoice.h; sourceTree = "<group>"; };
+		59D3A2BC1ED97B5300049E76 /* InterfaceVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceVoice.h; sourceTree = "<group>"; };
+		59D3A2BD1ED97B5300049E76 /* ProtocolVoice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProtocolVoice.mm; sourceTree = "<group>"; };
+		59D3A2BE1ED97B5300049E76 /* VoiceWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceWrapper.h; sourceTree = "<group>"; };
+		59D3A2BF1ED97B5300049E76 /* VoiceWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceWrapper.mm; sourceTree = "<group>"; };
 		7292FB831DDB5669004E04D0 /* ProtocolCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolCustom.h; sourceTree = "<group>"; };
 		7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProtocolCustom.mm; sourceTree = "<group>"; };
 		7292FB861DDB5A39004E04D0 /* InterfaceCustom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceCustom.h; sourceTree = "<group>"; };
@@ -120,11 +127,11 @@
 		FA09A316168ADBC2008C1C7B = {
 			isa = PBXGroup;
 			children = (
-				FAB6DF951755D7E500C90D89 /* PluginParam.cpp */,
+				FA09A323168ADBC2008C1C7B /* Frameworks */,
+				FA09A336168ADC05008C1C7B /* include */,
 				FA0CB8B5168D3CC200E36B11 /* ios */,
 				FA09A33C168ADC1F008C1C7B /* PluginManager.cpp */,
-				FA09A336168ADC05008C1C7B /* include */,
-				FA09A323168ADBC2008C1C7B /* Frameworks */,
+				FAB6DF951755D7E500C90D89 /* PluginParam.cpp */,
 				FA09A322168ADBC2008C1C7B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,19 +156,20 @@
 		FA09A336168ADC05008C1C7B /* include */ = {
 			isa = PBXGroup;
 			children = (
-				7292FB831DDB5669004E04D0 /* ProtocolCustom.h */,
-				72990AD91DAE8EA200766198 /* ProtocolCrash.h */,
 				BA1BF7FE195962C400B47F4E /* AgentManager.h */,
-				FADBF896179E504B00F59B1D /* ProtocolSocial.h */,
-				FAD55522177D213F00968F54 /* ProtocolUser.h */,
-				FAC2A7F41777F88700035D22 /* ProtocolShare.h */,
 				FAB6DF931755D7D100C90D89 /* PluginFactory.h */,
-				FAB6DF941755D7D100C90D89 /* PluginParam.h */,
 				FA09A337168ADC05008C1C7B /* PluginManager.h */,
+				FAB6DF941755D7D100C90D89 /* PluginParam.h */,
 				FA09A338168ADC05008C1C7B /* PluginProtocol.h */,
 				FA7C6C971724E4DD008A0ECC /* ProtocolAds.h */,
 				FA09A339168ADC05008C1C7B /* ProtocolAnalytics.h */,
+				72990AD91DAE8EA200766198 /* ProtocolCrash.h */,
+				7292FB831DDB5669004E04D0 /* ProtocolCustom.h */,
 				FA09A33A168ADC05008C1C7B /* ProtocolIAP.h */,
+				FAC2A7F41777F88700035D22 /* ProtocolShare.h */,
+				FADBF896179E504B00F59B1D /* ProtocolSocial.h */,
+				FAD55522177D213F00968F54 /* ProtocolUser.h */,
+				59D3A2BB1ED97B3200049E76 /* ProtocolVoice.h */,
 			);
 			name = include;
 			path = ../include;
@@ -170,44 +178,48 @@
 		FA0CB8B5168D3CC200E36B11 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				72990ADA1DAE8EF500766198 /* ProtocolCrash.mm */,
-				BA1BF841195A6FC100B47F4E /* AgentManager.mm */,
-				051FF7BA192CE3CC00C43A06 /* IAPWrapper.h */,
-				FADBF897179E509500F59B1D /* InterfaceSocial.h */,
-				051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */,
-				FADBF898179E509500F59B1D /* ProtocolSocial.mm */,
-				FADBF899179E509500F59B1D /* SocialWrapper.h */,
-				FADBF89A179E509500F59B1D /* SocialWrapper.mm */,
-				FAD5551D177D1FA900968F54 /* ProtocolUser.mm */,
-				FAD5551C177D1FA900968F54 /* InterfaceUser.h */,
-				FAD5551E177D1FA900968F54 /* UserWrapper.h */,
-				FAD5551F177D1FA900968F54 /* UserWrapper.mm */,
-				FAC2A7F51777F8C200035D22 /* InterfaceShare.h */,
-				FAC2A7F61777F8C200035D22 /* ProtocolShare.mm */,
-				FAC2A7F71777F8C200035D22 /* ShareWrapper.h */,
-				FAC2A7F81777F8C200035D22 /* ShareWrapper.mm */,
 				FADC44C8176EABCF00B2D5ED /* AdsWrapper.h */,
 				FADC44C9176EABCF00B2D5ED /* AdsWrapper.mm */,
-				FAB6DFCD1755EF8E00C90D89 /* PluginOCMacros.h */,
-				FAB6DF991755D93600C90D89 /* PluginProtocol.mm */,
-				FAB6DF971755D82F00C90D89 /* PluginFactory.mm */,
-				FA8CC21B1739E86E00464206 /* InterfaceAds.h */,
-				FA8CC21C1739E86E00464206 /* InterfaceAnalytics.h */,
-				FA8CC21D1739E86E00464206 /* InterfaceIAP.h */,
-				FA8CC205173894F000464206 /* ProtocolAds.mm */,
-				FA8CC206173894F000464206 /* ProtocolAnalytics.mm */,
-				FA8CC207173894F000464206 /* ProtocolIAP.mm */,
-				FA8CC1E4173754CF00464206 /* PluginUtilsIOS.h */,
-				FA8CC1E5173754CF00464206 /* PluginUtilsIOS.mm */,
-				05AB25161988F62000D00E8E /* ParseUtils.h */,
-				05AB25171988F62000D00E8E /* ParseUtils.m */,
-				72990A321DAE0A4300766198 /* PluginWrapper.h */,
-				72990A331DAE0AE700766198 /* PluginWrapper.mm */,
-				7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */,
-				7292FB861DDB5A39004E04D0 /* InterfaceCustom.h */,
+				BA1BF841195A6FC100B47F4E /* AgentManager.mm */,
 				7292FB871DDB5ABA004E04D0 /* CustomWrapper.h */,
 				7292FB881DDB5BE6004E04D0 /* CustomWrapper.mm */,
+				051FF7BA192CE3CC00C43A06 /* IAPWrapper.h */,
+				051FF7BB192CE3CC00C43A06 /* IAPWrapper.mm */,
+				FA8CC21B1739E86E00464206 /* InterfaceAds.h */,
+				FA8CC21C1739E86E00464206 /* InterfaceAnalytics.h */,
 				72D655FE1DDBFC570000AECC /* InterfaceCrash.h */,
+				7292FB861DDB5A39004E04D0 /* InterfaceCustom.h */,
+				FA8CC21D1739E86E00464206 /* InterfaceIAP.h */,
+				FAC2A7F51777F8C200035D22 /* InterfaceShare.h */,
+				FADBF897179E509500F59B1D /* InterfaceSocial.h */,
+				FAD5551C177D1FA900968F54 /* InterfaceUser.h */,
+				59D3A2BC1ED97B5300049E76 /* InterfaceVoice.h */,
+				05AB25161988F62000D00E8E /* ParseUtils.h */,
+				05AB25171988F62000D00E8E /* ParseUtils.m */,
+				FAB6DF971755D82F00C90D89 /* PluginFactory.mm */,
+				FAB6DFCD1755EF8E00C90D89 /* PluginOCMacros.h */,
+				FAB6DF991755D93600C90D89 /* PluginProtocol.mm */,
+				FA8CC1E4173754CF00464206 /* PluginUtilsIOS.h */,
+				FA8CC1E5173754CF00464206 /* PluginUtilsIOS.mm */,
+				72990A321DAE0A4300766198 /* PluginWrapper.h */,
+				72990A331DAE0AE700766198 /* PluginWrapper.mm */,
+				FA8CC205173894F000464206 /* ProtocolAds.mm */,
+				FA8CC206173894F000464206 /* ProtocolAnalytics.mm */,
+				72990ADA1DAE8EF500766198 /* ProtocolCrash.mm */,
+				7292FB841DDB56C9004E04D0 /* ProtocolCustom.mm */,
+				FA8CC207173894F000464206 /* ProtocolIAP.mm */,
+				FAC2A7F61777F8C200035D22 /* ProtocolShare.mm */,
+				FADBF898179E509500F59B1D /* ProtocolSocial.mm */,
+				FAD5551D177D1FA900968F54 /* ProtocolUser.mm */,
+				59D3A2BD1ED97B5300049E76 /* ProtocolVoice.mm */,
+				FAC2A7F71777F8C200035D22 /* ShareWrapper.h */,
+				FAC2A7F81777F8C200035D22 /* ShareWrapper.mm */,
+				FADBF899179E509500F59B1D /* SocialWrapper.h */,
+				FADBF89A179E509500F59B1D /* SocialWrapper.mm */,
+				FAD5551E177D1FA900968F54 /* UserWrapper.h */,
+				FAD5551F177D1FA900968F54 /* UserWrapper.mm */,
+				59D3A2BE1ED97B5300049E76 /* VoiceWrapper.h */,
+				59D3A2BF1ED97B5300049E76 /* VoiceWrapper.mm */,
 			);
 			name = ios;
 			path = ../platform/ios;
@@ -273,6 +285,7 @@
 				7292FB851DDB56C9004E04D0 /* ProtocolCustom.mm in Sources */,
 				72990A341DAE0AE700766198 /* PluginWrapper.mm in Sources */,
 				FA8CC20A173894F000464206 /* ProtocolIAP.mm in Sources */,
+				59D3A2C01ED97B5300049E76 /* ProtocolVoice.mm in Sources */,
 				FAB6DF961755D7E500C90D89 /* PluginParam.cpp in Sources */,
 				FAB6DF981755D82F00C90D89 /* PluginFactory.mm in Sources */,
 				FAB6DF9A1755D93600C90D89 /* PluginProtocol.mm in Sources */,
@@ -285,6 +298,7 @@
 				BA1BF842195A6FC100B47F4E /* AgentManager.mm in Sources */,
 				FADBF89B179E509500F59B1D /* ProtocolSocial.mm in Sources */,
 				05AB25181988F62000D00E8E /* ParseUtils.m in Sources */,
+				59D3A2C11ED97B5300049E76 /* VoiceWrapper.mm in Sources */,
 				FADBF89C179E509500F59B1D /* SocialWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
