@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
+typedef std::map<std::string, std::string> TSocialDeveloperInfo;
 typedef std::map<std::string, std::string> TAchievementInfo;
 
 typedef enum

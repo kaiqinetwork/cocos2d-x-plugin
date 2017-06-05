@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="auto">
+      <UniqueIdentifier>{2294a1a7-fdd0-43b9-8c97-ffa20ddab884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="manual">
+      <UniqueIdentifier>{204f9dc2-d7b0-4469-9b62-57ad2c43e6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{5f210908-4d7c-4a8d-bbdb-cd2067f0886d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="android">
+      <UniqueIdentifier>{aa5a7f6f-dd46-4285-bee8-c97214aec41c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\auto\lua_cocos2dx_pluginx_auto.cpp">
+      <Filter>auto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\manual\lua_pluginx_basic_conversions.cpp">
+      <Filter>manual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\manual\lua_pluginx_manual_callback.cpp">
+      <Filter>manual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\manual\lua_pluginx_manual_protocols.cpp">
+      <Filter>manual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\AgentManager.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\PluginFactory.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\PluginJniHelper.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\PluginProtocol.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\PluginUtils.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolAds.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolAnalytics.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolCrash.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolCustom.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolIAP.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolService.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolShare.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolSocial.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolUser.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\protocols\platform\android\ProtocolVoice.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\auto\lua_cocos2dx_pluginx_auto.hpp">
+      <Filter>auto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\manual\lua_pluginx_basic_conversions.h">
+      <Filter>manual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\manual\lua_pluginx_manual_callback.h">
+      <Filter>manual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\manual\lua_pluginx_manual_protocols.h">
+      <Filter>manual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\AgentManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\PluginFactory.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\PluginManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\PluginParam.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\PluginProtocol.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolAds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolAnalytics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolCrash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolCustom.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolIAP.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolService.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolShare.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolSocial.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolUser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\include\ProtocolVoice.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\platform\android\PluginJavaData.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\platform\android\PluginJniHelper.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\platform\android\PluginJniMacros.h">
+      <Filter>android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\protocols\platform\android\PluginUtils.h">
+      <Filter>android</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

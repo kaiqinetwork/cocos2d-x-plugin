@@ -6,6 +6,9 @@
 #include "ProtocolShare.h"
 #include "ProtocolSocial.h"
 #include "ProtocolUser.h"
+#include "ProtocolCustom.h"
+#include "ProtocolService.h"
+#include "ProtocolVoice.h"
 #include "tolua_fix.h"
 #include "LuaBasicConversions.h"
 #include "CCLuaValue.h"
@@ -62,7 +65,11 @@ int lua_pluginx_protocols_PluginProtocol_setCallback(lua_State* tolua_S)
             dynamic_cast<ProtocolSocial*>(cobj)->setCallback(arg0);
         } else if (dynamic_cast<ProtocolUser*>(cobj)) {
             dynamic_cast<ProtocolUser*>(cobj)->setCallback(arg0);
-        } else {
+		} else if (dynamic_cast<ProtocolService*>(cobj)) {
+			dynamic_cast<ProtocolService*>(cobj)->setCallback(arg0);
+		} else if (dynamic_cast<ProtocolVoice*>(cobj)) {
+			dynamic_cast<ProtocolVoice*>(cobj)->setCallback(arg0);
+		} else {
             return 0;
         }
         if (callbacks.count(cobj) != 0) {
@@ -462,7 +469,7 @@ int lua_pluginx_protocols_ProtocolUser_login(lua_State* tolua_S)
             };
             
             if (!ok) { break; }
-            cobj->login(arg0);
+            // cobj->login(arg0);
             return 0;
         }
     }while(0);
@@ -518,7 +525,7 @@ int lua_pluginx_protocols_ProtocolUser_logout(lua_State* tolua_S)
             };
             
             if (!ok) { break; }
-            cobj->logout(arg0);
+            // cobj->logout(arg0);
             return 0;
         }
     }while(0);
@@ -553,6 +560,73 @@ static void extendProtocolUser(lua_State* tolua_S)
     lua_pop(tolua_S, 1);
 }
 
+int lua_pluginx_protocols_ProtocolCustom_setCallback(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolCustom* cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolCustom", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolCustom*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolCustom_setCallback'", nullptr);
+		return 0;
+	}
+#endif
+
+	argc = lua_gettop(tolua_S) - 1;
+	if (argc == 1)
+	{
+		LUA_FUNCTION callback = toluafix_ref_function(tolua_S, 2, 0);
+		if (!callback)
+			return 0;
+		std::function<void(std::basic_string<char> &, std::basic_string<char> &)> arg0 = 
+			[=](std::string& ret, std::string& productInfo) {
+			tolua_pushstring(tolua_S, ret.c_str());
+			tolua_pushstring(tolua_S, productInfo.c_str());
+			LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(callback, 2);
+		};
+		cobj->setCallback(arg0);
+		
+		if (callbacks.count(cobj) != 0) {
+			LuaEngine::getInstance()->removeScriptHandler(callbacks[cobj]);
+		}
+		callbacks[cobj] = callback;
+		return 0;
+	}
+	CCLOG("%s has wrong number of arguments: %d, was expecting %d \n", "setCallback", argc, 1);
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolCustom_setCallback'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+static void extendProtocolCustom(lua_State* tolua_S)
+{
+	lua_pushstring(tolua_S, "plugin.ProtocolCustom");
+	lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+	if (lua_istable(tolua_S, -1))
+	{
+		tolua_function(tolua_S, "setCallback", lua_pluginx_protocols_ProtocolCustom_setCallback);
+	}
+	lua_pop(tolua_S, 1);
+}
+
+/*
 int lua_pluginx_protocols_FacebookAgent_api(lua_State* tolua_S)
 {
     int argc = 0;
@@ -1207,7 +1281,7 @@ static void extendFacebookAgent(lua_State* tolua_S)
     }
     lua_pop(tolua_S, 1);
 }
-
+*/
 int register_all_pluginx_manual_callback(lua_State* tolua_S)
 {
     if (NULL == tolua_S)
@@ -1217,6 +1291,7 @@ int register_all_pluginx_manual_callback(lua_State* tolua_S)
     extendProtocolShare(tolua_S);
     extendProtocolSocial(tolua_S);
     extendProtocolUser(tolua_S);
-    extendFacebookAgent(tolua_S);
+	extendProtocolCustom(tolua_S);
+    // extendFacebookAgent(tolua_S);
     return 0;
 }

@@ -67,6 +67,9 @@
     <ClInclude Include="..\include\ProtocolService.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ProtocolVoice.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\platform\android\AgentManager.cpp">
@@ -111,6 +114,9 @@
       <Filter>android</Filter>
     </ClCompile>
     <ClCompile Include="..\platform\android\ProtocolService.cpp">
+      <Filter>android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\android\ProtocolVoice.cpp">
       <Filter>android</Filter>
     </ClCompile>
   </ItemGroup>

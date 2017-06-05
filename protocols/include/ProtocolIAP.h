@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
+typedef std::map<std::string, std::string> TIAPDeveloperInfo;
 typedef std::map<std::string, std::string> TProductInfo;
 typedef std::vector<TProductInfo> TProductList;
 typedef enum 

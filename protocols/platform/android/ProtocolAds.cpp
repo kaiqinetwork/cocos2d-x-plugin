@@ -87,6 +87,33 @@ ProtocolAds::~ProtocolAds()
 {
 }
 
+void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo)
+{
+	if (devInfo.empty())
+	{
+		PluginUtils::outputLog(ANDROID_LOG_DEBUG, "ProtocolAds", "The application info is empty!");
+		return;
+	}
+	else
+	{
+		PluginJavaData* pData = PluginUtils::getPluginJavaData(this);
+		PluginJniMethodInfo t;
+		if (PluginJniHelper::getMethodInfo(t
+			, pData->jclassName.c_str()
+			, "configDeveloperInfo"
+			, "(Ljava/util/Hashtable;)V"))
+		{
+			// generate the hashtable from map
+			jobject obj_Map = PluginUtils::createJavaMapObject(&devInfo);
+
+			// invoke java method
+			t.env->CallVoidMethod(pData->jobj, t.methodID, obj_Map);
+			t.env->DeleteLocalRef(obj_Map);
+			t.env->DeleteLocalRef(t.classID);
+		}
+	}
+}
+
 void ProtocolAds::showAds(TAdsInfo info, AdsPos pos)
 {
 	PluginJavaData* pData = PluginUtils::getPluginJavaData(this);

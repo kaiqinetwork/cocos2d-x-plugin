@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 namespace cocos2d { namespace plugin {
 
+typedef std::map<std::string, std::string> TAdsDeveloperInfo;
 typedef std::map<std::string, std::string> TAdsInfo;
     
 typedef enum
@@ -80,7 +81,16 @@ public:
         kPosBottomRight,
     } AdsPos;
 
-    typedef std::function<void(int, std::string&)> ProtocolAdsCallback;
+	typedef std::function<void(int, std::string&)> ProtocolAdsCallback;
+
+	/**
+	@brief config the application info
+	@param devInfo This parameter is the info of aplication,
+	different plugin have different format
+	@warning Must invoke this interface before other interfaces.
+	And invoked only once.
+	*/
+	void configDeveloperInfo(TAdsDeveloperInfo devInfo);
 
     /**
     @brief show adview

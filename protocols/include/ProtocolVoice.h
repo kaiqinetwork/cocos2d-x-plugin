@@ -10,6 +10,9 @@
 
 namespace cocos2d {
 	namespace plugin {
+		
+typedef	std::map<std::string, std::string> TVoiceInfo;
+
 typedef enum 
 {
 	kVoiceInitSuccess = 0,/**< enum value is callback of succeeding in initing sdk. */
