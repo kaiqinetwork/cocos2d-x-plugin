@@ -179,7 +179,7 @@ int lua_pluginx_protocols_ProtocolIAP_payForProduct(lua_State* tolua_S)
                 LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(callback, 2);
                 LuaEngine::getInstance()->removeScriptHandler(callback);
             });
-            return 0;
+            return 1;
         }
     }while(0);
     ok  = true;
@@ -190,7 +190,7 @@ int lua_pluginx_protocols_ProtocolIAP_payForProduct(lua_State* tolua_S)
             
             if (!ok) { break; }
             cobj->payForProduct(arg0);
-            return 0;
+            return 1;
         }
     }while(0);
     ok  = true;

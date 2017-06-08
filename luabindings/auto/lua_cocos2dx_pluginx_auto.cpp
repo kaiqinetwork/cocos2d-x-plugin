@@ -7,6 +7,7 @@
 #include "ProtocolSocial.h"
 #include "ProtocolUser.h"
 #include "AgentManager.h"
+#include "ProtocolService.h"
 // #include "FacebookAgent.h"
 #include "tolua_fix.h"
 #include "LuaBasicConversions.h"
@@ -47,8 +48,8 @@ int lua_pluginx_protocols_PluginProtocol_getPluginName(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_pluginx_protocols_PluginProtocol_getPluginName'", nullptr);
             return 0;
         }
-        const char* ret = cobj->getPluginName().c_str();
-        tolua_pushstring(tolua_S,(const char*)ret);
+		std::string ret = cobj->getPluginName();
+        tolua_pushcppstring(tolua_S, ret);
         return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "plugin.PluginProtocol:getPluginName",argc, 0);
@@ -204,6 +205,56 @@ int lua_pluginx_protocols_PluginProtocol_setDebugMode(lua_State* tolua_S)
 
     return 0;
 }
+int lua_pluginx_protocols_PluginProtocol_isFunctionSupported(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::PluginProtocol* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.PluginProtocol", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::PluginProtocol*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_PluginProtocol_isFunctionSupported'", nullptr);
+		return 0;
+	}
+#endif
+
+	argc = lua_gettop(tolua_S) - 1;
+	if (argc == 1)
+	{
+		std::string arg0;
+
+		ok &= luaval_to_std_string(tolua_S, 2, &arg0, "plugin.PluginProtocol:isFunctionSupported");
+		if (!ok)
+		{
+			tolua_error(tolua_S, "invalid arguments in function 'lua_pluginx_protocols_PluginProtocol_isFunctionSupported'", nullptr);
+			return 0;
+		}
+		bool ret = cobj->isFunctionSupported(arg0.c_str());
+		tolua_pushboolean(tolua_S, (bool)ret);
+		return 1;
+	}
+	luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "plugin.PluginProtocol:isFunctionSupported", argc, 1);
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_PluginProtocol_isFunctionSupported'.", &tolua_err);
+#endif
+
+	return 0;
+}
 static int lua_pluginx_protocols_PluginProtocol_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (PluginProtocol)");
@@ -220,6 +271,7 @@ int lua_register_pluginx_protocols_PluginProtocol(lua_State* tolua_S)
         tolua_function(tolua_S,"getPluginVersion",lua_pluginx_protocols_PluginProtocol_getPluginVersion);
         tolua_function(tolua_S,"getSDKVersion",lua_pluginx_protocols_PluginProtocol_getSDKVersion);
         tolua_function(tolua_S,"setDebugMode",lua_pluginx_protocols_PluginProtocol_setDebugMode);
+		tolua_function(tolua_S, "isFunctionSupported", lua_pluginx_protocols_PluginProtocol_isFunctionSupported);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::plugin::PluginProtocol).name();
     g_luaType[typeName] = "plugin.PluginProtocol";
@@ -952,6 +1004,117 @@ int lua_pluginx_protocols_ProtocolIAP_configDeveloperInfo(lua_State* tolua_S)
 
     return 0;
 }
+
+static int lua_pluginx_protocols_ProtocolIAP_resetPayState(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolIAP* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolIAP", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolIAP*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolIAP_resetPayState'", nullptr);
+		return 0;
+	}
+#endif
+
+	cobj->resetPayState();
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolIAP_resetPayState'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+int lua_pluginx_protocols_ProtocolIAP_getOrderInfo(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolIAP* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolIAP", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolIAP*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolIAP_getOrderInfo'", nullptr);
+		return 0;
+	}
+#endif
+
+	std::string ret = cobj->getOrderInfo();
+	tolua_pushcppstring(tolua_S, ret);
+	return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolIAP_getOrderInfo'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+int lua_pluginx_protocols_ProtocolIAP_getPlatform(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolIAP* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolIAP", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolIAP*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolIAP_getPlatform'", nullptr);
+		return 0;
+	}
+#endif
+
+	std::string ret = cobj->getPlatform();
+	tolua_pushcppstring(tolua_S, ret);
+	return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolIAP_getPlatform'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
 static int lua_pluginx_protocols_ProtocolIAP_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (ProtocolIAP)");
@@ -966,6 +1129,9 @@ int lua_register_pluginx_protocols_ProtocolIAP(lua_State* tolua_S)
     tolua_beginmodule(tolua_S,"ProtocolIAP");
         tolua_function(tolua_S,"onPayResult",lua_pluginx_protocols_ProtocolIAP_onPayResult);
         tolua_function(tolua_S,"configDeveloperInfo",lua_pluginx_protocols_ProtocolIAP_configDeveloperInfo);
+		tolua_function(tolua_S, "resetPayState", lua_pluginx_protocols_ProtocolIAP_resetPayState);
+		tolua_function(tolua_S, "getOrderInfo", lua_pluginx_protocols_ProtocolIAP_getOrderInfo);
+		tolua_function(tolua_S, "getPlatform", lua_pluginx_protocols_ProtocolIAP_getPlatform);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::plugin::ProtocolIAP).name();
     g_luaType[typeName] = "plugin.ProtocolIAP";
@@ -1588,6 +1754,136 @@ int lua_register_pluginx_protocols_ProtocolVoice(lua_State* tolua_S)
     g_luaType[typeName] = "plugin.ProtocolVoice";
     g_typeCast["ProtocolVoice"] = "plugin.ProtocolVoice";
     return 1;
+}
+
+int lua_pluginx_protocols_ProtocolService_exit(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolService* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolService", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolService*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolService_exit'", nullptr);
+		return 0;
+	}
+#endif
+
+	cobj->exit();
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolService_exit'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+int lua_pluginx_protocols_ProtocolService_start(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolService* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolService", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolService*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolService_start'", nullptr);
+		return 0;
+	}
+#endif
+
+	cobj->start();
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolService_start'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+int lua_pluginx_protocols_ProtocolService_getUnreadMsg(lua_State* tolua_S)
+{
+	int argc = 0;
+	cocos2d::plugin::ProtocolService* cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "plugin.ProtocolService", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (cocos2d::plugin::ProtocolService*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'lua_pluginx_protocols_ProtocolService_getUnreadMsg'", nullptr);
+		return 0;
+	}
+#endif
+
+	int ret = cobj->getUnreadMsg();
+	tolua_pushnumber(tolua_S, (lua_Number)ret); 
+	return 1;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'lua_pluginx_protocols_ProtocolService_getUnreadMsg'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
+static int lua_pluginx_protocols_ProtocolService_finalize(lua_State* tolua_S)
+{
+	printf("luabindings: finalizing LUA object (ProtocolService)");
+	return 0;
+}
+int lua_register_pluginx_protocols_ProtocolService(lua_State* tolua_S)
+{
+	tolua_usertype(tolua_S, "plugin.ProtocolService");
+	tolua_cclass(tolua_S, "ProtocolService", "plugin.ProtocolService", "plugin.PluginProtocol", nullptr);
+
+	tolua_beginmodule(tolua_S, "ProtocolService");
+	tolua_function(tolua_S, "start", lua_pluginx_protocols_ProtocolService_start);
+	tolua_function(tolua_S, "exit", lua_pluginx_protocols_ProtocolService_exit);
+	tolua_function(tolua_S, "getUnreadMsg", lua_pluginx_protocols_ProtocolService_getUnreadMsg);
+	tolua_endmodule(tolua_S);
+	std::string typeName = typeid(cocos2d::plugin::ProtocolService).name();
+	g_luaType[typeName] = "plugin.ProtocolService";
+	g_typeCast["ProtocolService"] = "plugin.ProtocolService";
+	return 1;
 }
 
 int lua_pluginx_protocols_ProtocolShare_onShareResult(lua_State* tolua_S)
@@ -2641,6 +2937,7 @@ int lua_pluginx_protocols_AgentManager_getInstance(lua_State* tolua_S)
 #endif
     return 0;
 }
+
 static int lua_pluginx_protocols_AgentManager_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (AgentManager)");
@@ -3076,6 +3373,7 @@ TOLUA_API int register_all_pluginx_protocols(lua_State* tolua_S)
 	lua_register_pluginx_protocols_ProtocolAds(tolua_S);
 	lua_register_pluginx_protocols_ProtocolVoice(tolua_S);
 	lua_register_pluginx_protocols_PluginManager(tolua_S);
+	lua_register_pluginx_protocols_ProtocolService(tolua_S);
 
 	tolua_endmodule(tolua_S);
 	return 1;
