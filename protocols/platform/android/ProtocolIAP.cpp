@@ -42,13 +42,17 @@ extern "C" {
 			ProtocolIAP* pIAP = dynamic_cast<ProtocolIAP*>(pPlugin);
 			if (pIAP != NULL)
 			{
-				pIAP->onPayResult((PayResultCode) ret, strMsg.c_str());
-			}
-			else
-			{
+				pIAP->onPayResult((PayResultCode)ret, strMsg.c_str());
+
 				ProtocolIAP::ProtocolIAPCallback callback = pIAP->getCallback();
-				if(callback)
+				if (callback)
+				{
 					callback(ret, strMsg);
+				}
+				else
+				{
+					PluginUtils::outputLog(ANDROID_LOG_DEBUG, "Listener of plugin %s not set correctly", pIAP->getPluginName().c_str());
+				}
 			}
 		}
 	}
