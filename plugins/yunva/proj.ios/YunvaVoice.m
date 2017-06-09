@@ -173,8 +173,8 @@ BOOL _debug;
 
 - (void)onIMUploadFileResp:(YvIMUploadFileResp *)uploadFileResp{
     if (uploadFileResp.result == 0) {
-        [VoiceWrapper onVoiceResult:self withRet:kVoiceUploadSuccess withMsg:@""];
         _voicePath = uploadFileResp.fileurl;
+        [VoiceWrapper onVoiceResult:self withRet:kVoiceUploadSuccess withMsg:@""];
     }else{
         [VoiceWrapper onVoiceResult:self withRet:kVoiceUploadFail withMsg:@""];
     }

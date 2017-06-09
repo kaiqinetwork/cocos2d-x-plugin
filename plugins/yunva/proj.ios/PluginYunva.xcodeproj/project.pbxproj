@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		598ECF101ECD89F3004C261F /* libYvImSDKOCWapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */; };
 		598ECF141ECD8A73004C261F /* YunvaVoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 598ECF131ECD8A73004C261F /* YunvaVoice.m */; };
+		59F948E11EEA44B700D6DBC1 /* libYvImSDKOCWapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F948E01EEA44B700D6DBC1 /* libYvImSDKOCWapper.a */; };
 		FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA09A304168ADAEC008C1C7B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -171,10 +171,10 @@
 		598ECF0A1ECD89F3004C261F /* YvxLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YvxLocation.h; sourceTree = "<group>"; };
 		598ECF0B1ECD89F3004C261F /* YVDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVDeviceManager.h; sourceTree = "<group>"; };
 		598ECF0D1ECD89F3004C261F /* YVIMSDK_Manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVIMSDK_Manage.h; sourceTree = "<group>"; };
-		598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYvImSDKOCWapper.a; sourceTree = "<group>"; };
 		598ECF111ECD8A73004C261F /* PluginYunva-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PluginYunva-Prefix.pch"; sourceTree = "<group>"; };
 		598ECF121ECD8A73004C261F /* YunvaVoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YunvaVoice.h; sourceTree = "<group>"; };
 		598ECF131ECD8A73004C261F /* YunvaVoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YunvaVoice.m; sourceTree = "<group>"; };
+		59F948E01EEA44B700D6DBC1 /* libYvImSDKOCWapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYvImSDKOCWapper.a; sourceTree = "<group>"; };
 		FA09A301168ADAEC008C1C7B /* libPluginYunva.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginYunva.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA09A304168ADAEC008C1C7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -184,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				598ECF101ECD89F3004C261F /* libYvImSDKOCWapper.a in Frameworks */,
+				59F948E11EEA44B700D6DBC1 /* libYvImSDKOCWapper.a in Frameworks */,
 				FA09A305168ADAEC008C1C7B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,8 +195,8 @@
 		598ECE661ECD89F3004C261F /* YVIMSDK */ = {
 			isa = PBXGroup;
 			children = (
+				59F948DF1EEA44B700D6DBC1 /* Lib */,
 				598ECE671ECD89F3004C261F /* Header */,
-				598ECF0E1ECD89F3004C261F /* Lib */,
 			);
 			path = YVIMSDK;
 			sourceTree = "<group>";
@@ -514,10 +514,10 @@
 			path = YVIMSDKLite;
 			sourceTree = "<group>";
 		};
-		598ECF0E1ECD89F3004C261F /* Lib */ = {
+		59F948DF1EEA44B700D6DBC1 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				598ECF0F1ECD89F3004C261F /* libYvImSDKOCWapper.a */,
+				59F948E01EEA44B700D6DBC1 /* libYvImSDKOCWapper.a */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
