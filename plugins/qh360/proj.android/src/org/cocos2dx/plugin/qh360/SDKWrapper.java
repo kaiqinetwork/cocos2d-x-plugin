@@ -28,7 +28,7 @@ public class SDKWrapper {
 	private static final String LOG_TAG = "QH360.SDKWrapper";
 	private static final String PLUGIN_NAME = "qh360";
 	private static final String PLUGIN_VERSION = "1.0.0";
-	private static final String SDK_VERSION = "1.5.0";
+	private static final String SDK_VERSION = "1.8.0";
 	private static SDKWrapper mInstance;
 	private Activity mActivity;
 	@SuppressWarnings("unused")
@@ -76,8 +76,8 @@ public class SDKWrapper {
 		mInited = false;
 		mDebug = PluginHelper.getDebugMode();
 
-		Matrix.init(mActivity, new MatrixCallBack() {
-			@Override
+		Matrix.setActivity(mActivity, new MatrixCallBack() {
+
 			public void execute(Context context, int funtionCode, String funtionParams) {
 				if (funtionCode == ProtocolConfigs.FUNC_CODE_SWITCH_ACCOUNT) {
 					doSdkSwitchAccount(); 
@@ -86,7 +86,9 @@ public class SDKWrapper {
 					mInited = true;
 				}
 			}
+
 		});
+		
 		Matrix.setKillAppTag(true);
 
 		setPluginListener();
@@ -226,20 +228,20 @@ public class SDKWrapper {
 		    	HashMap eventParams=new HashMap();
 				eventParams.put("type",mQH360UserinfoType);
 				eventParams.put("zoneid",0);
-				eventParams.put("zonename","无");
+				eventParams.put("zonename","\u65e0");
 				eventParams.put("roleid",mUid);
 				eventParams.put("rolename",mUname);
 				eventParams.put("professionid",0);
-				eventParams.put("profession","无");
-				eventParams.put("gender","无");
+				eventParams.put("profession","\u65e0");
+				eventParams.put("gender","\u65e0");
 				eventParams.put("rolelevel",0);
 				eventParams.put("power",0);
 				eventParams.put("vip",0);
 				eventParams.put("partyid",0);
-				eventParams.put("partyname","无");
+				eventParams.put("partyname","\u65e0");
 				eventParams.put("partyroleid",0);
-				eventParams.put("partyrolename","无");
-				eventParams.put("friendlist","无");		
+				eventParams.put("partyrolename","\u65e0");
+				eventParams.put("friendlist","\u65e0");		
 				
 				Matrix.statEventInfo(mActivity, eventParams);
 				logD("Matrix.statEventInfo");

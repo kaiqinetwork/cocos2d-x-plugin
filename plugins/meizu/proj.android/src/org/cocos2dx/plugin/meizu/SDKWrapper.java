@@ -21,7 +21,7 @@ public class SDKWrapper {
 	private static final String LOG_TAG = "meizu.SDKWrapper";
 	private static final String PLUGIN_NAME = "meizu";
 	private static final String PLUGIN_VERSION = "1.0.0";
-	private static final String SDK_VERSION = "3.0.1.";
+	private static final String SDK_VERSION = "3.3.2.";
 	private static SDKWrapper mInstance;
 	private String mMeizuAppId;
 	private String mMeizuAppKey;
@@ -104,7 +104,6 @@ public class SDKWrapper {
 			public void onDestroy() {
 				logD("onDestroy");
 				mMzGameBarPlatform.onActivityDestroy();
-				MzGameCenterPlatform.logout(mActivity);
 			}
 
 			public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -150,7 +149,7 @@ public class SDKWrapper {
 			}
 		});
 	}
-
+	
 	public void setLoggedIn(boolean value) {
 		mLoggedIn = value;
 	}

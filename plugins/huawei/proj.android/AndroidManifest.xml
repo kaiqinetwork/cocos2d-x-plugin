@@ -27,25 +27,7 @@
 	<uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.huawei.gb.huawei.MainActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.huawei.gb.huawei.GameActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_game">
-        </activity>
+        android:allowBackup="false" >
 
         <!-- 账号依赖的Activity声明 -->
         <activity

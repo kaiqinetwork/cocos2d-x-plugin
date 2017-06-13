@@ -87,7 +87,7 @@ public class UserAdapter implements InterfaceUser {
     
     public void actionResult(int code, String msg) {
         logD("actionResult code=" + code + " msg=" + msg);
-        UserWrapper.onActionResult(mInstance, code, msg);
+        UserWrapper.onActionResult(mInstance, code, "");
     }
 
 	@Override
@@ -126,6 +126,14 @@ public class UserAdapter implements InterfaceUser {
 		return SDKWrapper.getInstance().getPluginName();
 	}
 	
+	public boolean canSwitchAccount() {
+		return false;
+	}
+	
+	public boolean canKillAppProcess() {
+		return true;
+	}
+	
 	protected void logE(String msg, Exception e) {
         if (e == null) {
             PluginHelper.logE(LOG_TAG, msg);
@@ -141,10 +149,6 @@ public class UserAdapter implements InterfaceUser {
             logE("logD error", e);
         }
     }
-    
-    public boolean canSwitchAccount() {
-		return false;
-	}
 
 	@Override
 	public boolean isSupportFunction(String funcName) {
